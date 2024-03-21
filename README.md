@@ -1,6 +1,6 @@
 # hansungcapstone_bugiweather
 
-A new Flutter project.
+2024년도 1학기 캡스톤디자인 부기날씨
 
 ## Getting Started
 
