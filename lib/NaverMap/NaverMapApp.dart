@@ -94,115 +94,115 @@ class _NaverMapAppState extends State<NaverMapApp> {
         }
         _showBackDialog();
       },
-      child: MaterialApp(
-        home: Scaffold(
+      child: Center(
+        child: Scaffold(
           appBar: AppBar(
-            title: Text('Seoul Weather', style: new TextStyle(fontFamily: 'Poppins', fontSize: 36.0, fontWeight: FontWeight.w600, color: Colors.white),),
+            elevation: 4,
+            centerTitle: true,
+            automaticallyImplyLeading: false,
             leading: IconButton(
-              onPressed: () { },
-              icon: Icon(Icons.list),
-            ),
-            flexibleSpace: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: <Color>[
-                    Color(0xff74d5ff),
-                    Color(0xffbfd5ff),
-                  ]
-                )
-              ),
-            ),
-          ),
-          body: Center(
-            child: Container(
-              color: Colors.blue,
-              //height: 500,
-              //margin: EdgeInsets.fromLTRB(10, 20, 10, 20),
-              child: NaverMap(
-                onMapTapped: (point, latLng) {
-                  print(latLng);
-                },
-                options: const NaverMapViewOptions(
-                  initialCameraPosition: NCameraPosition(target: NLatLng(37.5665, 126.9780), zoom:10.0),
-                  indoorEnable: true,             // 실내 맵 사용 가능 여부 설정
-                  locationButtonEnable: true,   //  위치 버튼 표시 여부 설정
-                  consumeSymbolTapEvents: false,  // 심볼 탭 이벤트 소비 여부 설정
-                  extent: NLatLngBounds(
-                    southWest: NLatLng(31.43, 122.37),
-                    northEast: NLatLng(44.35, 132.0),
-                  ),
-                  minZoom: 6,
-                  maxZoom: 8,
-                  tiltGesturesEnable: false,
-                  rotationGesturesEnable: false,
-                ),
-                onMapReady: (controller) async {                // 지도 준비 완료 시 호출되는 콜백 함수
-                  final markerJungrang = NMarker(id: 'jungrang', position: NLatLng(37.5978,127.0929));
-                  markerJungrang
-                  ..setMinZoom(7.5)
-                  ..setMaxZoom(10)
-                  ..setIsMinZoomInclusive(true)
-                  ..setIsMaxZoomInclusive(true);
-                  /*markerJungrang.setMinZoom(8);
-                  markerJungrang.setMaxZoom(10);
-                  markerJungrang.setIsMaxZoomInclusive(true);
-                  markerJungrang.setIsMinZoomInclusive(true);*/
-                  final markerDongdaemun = NMarker(id: 'Dongdaemun', position: NLatLng(37.5820,127.0548));
-                  final markerSeongbuk = NMarker(id: 'Seongbuk', position: NLatLng(37.6057,127.0176));
-                  final markerJongno = NMarker(id: 'Jongno', position: NLatLng(37.5949,126.9773));
-                  final markerSeodaemun = NMarker(id: 'Seodaemun', position: NLatLng(37.5778,126.9391));
-                  controller.addOverlay(markerJungrang);
-                  //controller.addOverlayAll({markerJungrang, markerSeodaemun, markerDongdaemun, markerSeongbuk, markerJongno});
-
-                  setState(() {
-                    final onMarkerInfoWindowJungrang = NInfoWindow.onMarker(id: markerJungrang.info.id, text: '중랑구 ${temp[0]} °C');
-                    final onMarkerInfoWindowDongdaemun = NInfoWindow.onMarker(id: markerDongdaemun.info.id, text: '동대문구 ${temp[1]} °C');
-                    final onMarkerInfoWindowSeongbuk = NInfoWindow.onMarker(id: markerSeongbuk.info.id, text: '성북구 ${temp[2]} °C');
-                    final onMarkerInfoWindowJongno = NInfoWindow.onMarker(id: markerJongno.info.id, text: '종로구 ${temp[3]} °C');
-                    final onMarkerInfoWindowSeodaemun = NInfoWindow.onMarker(id: markerSeodaemun.info.id, text: '서대문구 ${temp[4]} °C');
-                    markerJungrang.openInfoWindow(onMarkerInfoWindowJungrang);
-                    //markerDongdaemun.openInfoWindow(onMarkerInfoWindowDongdaemun);
-                    //markerSeongbuk.openInfoWindow(onMarkerInfoWindowSeongbuk);
-                    //markerJongno.openInfoWindow(onMarkerInfoWindowJongno);
-                    //markerSeodaemun.openInfoWindow(onMarkerInfoWindowSeodaemun);
-                  });
-
-                  final locationOverlay = await controller.getLocationOverlay();
-                  locationOverlay.setIsVisible(true);
-
-                  mapControllerCompleter.complete(controller);  // Completer에 지도 컨트롤러 완료 신호 전송\
-                  log("onMapReady", name: "onMapReady");
-                },
-              ),
+              icon: const Icon(Icons.menu),
+              onPressed: () {},
+              iconSize: 30.0,
             ),
           ),
           bottomNavigationBar: BottomAppBar(
-            color: Color(0xA9C0FFFF),
-            child: Container(
-              /*decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: <Color>[
-                        Colors.blue,
-                        Color(0xC1E6F3FF),
-                      ]
-                  )
-              ),*/
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.star),
-                    onPressed:(){} ,
-                  ),
-                  Icon(Icons.add_chart),
-                  Icon(Icons.key),
-                ],
-              ),
+            child: TextButton(
+              child: Text("뒤로가기"),
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
+          ),
+          body: NaverMap(
+            onMapTapped: (point, latLng) {
+              print(latLng);
+            },
+            options: const NaverMapViewOptions(
+              initialCameraPosition: NCameraPosition(target: NLatLng(37.5665, 126.9780), zoom:10.0),
+              indoorEnable: true,             // 실내 맵 사용 가능 여부 설정
+              locationButtonEnable: true,   //  위치 버튼 표시 여부 설정
+              consumeSymbolTapEvents: false,  // 심볼 탭 이벤트 소비 여부 설정
+              extent: NLatLngBounds(
+                southWest: NLatLng(31.43, 122.37),
+                northEast: NLatLng(44.35, 132.0),
+              ),
+              minZoom: 6,
+              maxZoom: 13,
+              tiltGesturesEnable: false,
+              rotationGesturesEnable: false,
+            ),
+            onMapReady: (controller) async {                // 지도 준비 완료 시 호출되는 콜백 함수
+              final markerJungrang = NMarker(id: 'jungrang', position: NLatLng(37.5978,127.0929));
+              markerJungrang
+                ..setMinZoom(10)
+                ..setMaxZoom(13)
+                ..setIsMinZoomInclusive(false)
+                ..setIsMaxZoomInclusive(true);
+
+              //서울 시내
+              final markerDongdaemun = NMarker(id: 'Dongdaemun', position: NLatLng(37.5820,127.0548));
+              markerDongdaemun
+                ..setMinZoom(10)
+                ..setMaxZoom(13)
+                ..setIsMinZoomInclusive(false)
+                ..setIsMaxZoomInclusive(true);
+              final markerSeongbuk = NMarker(id: 'Seongbuk', position: NLatLng(37.6057,127.0176));
+              markerSeongbuk
+                ..setMinZoom(10)
+                ..setMaxZoom(13)
+                ..setIsMinZoomInclusive(false)
+                ..setIsMaxZoomInclusive(true);
+              final markerJongno = NMarker(id: 'Jongno', position: NLatLng(37.5949,126.9773));
+              markerJongno
+                ..setMinZoom(10)
+                ..setMaxZoom(13)
+                ..setIsMinZoomInclusive(false)
+                ..setIsMaxZoomInclusive(true);
+              final markerSeodaemun = NMarker(id: 'Seodaemun', position: NLatLng(37.5778,126.9391));
+              markerSeodaemun
+                ..setMinZoom(10)
+                ..setMaxZoom(13)
+                ..setIsMinZoomInclusive(false)
+                ..setIsMaxZoomInclusive(true);
+
+              // 광역시
+              final markerSeoul = NMarker(id: 'seoul', position: NLatLng(37.5519, 126.9918)); // 서울
+              markerSeoul
+                ..setMinZoom(6)
+                ..setMaxZoom(10);
+              final markerSeongnam = NMarker(id: 'seongnam', position: NLatLng(37.4074, 127.1162)); // 성남
+              final markerGwangmyeong = NMarker(id: 'gwangmyeong', position: NLatLng(37.4452, 126.8647)); // 광명
+              final markerIncheon = NMarker(id: 'incheon', position: NLatLng(37.4563, 126.7052)); // 인천
+              final markerSuwon = NMarker(id: 'suwon', position: NLatLng(37.2804, 127.0078)); // 수원
+              final markerHanam = NMarker(id: 'hanam', position: NLatLng(37.5229, 127.2060)); // 하남
+              //controller.addOverlay(markerJungrang);
+              controller.addOverlayAll({markerJungrang, markerSeodaemun, markerDongdaemun, markerSeongbuk, markerJongno});
+              controller.addOverlayAll({markerSeoul, markerSeongnam, markerGwangmyeong, markerIncheon, markerSuwon, markerHanam});
+
+              setState(() {
+                final onMarkerInfoWindowJungrang = NInfoWindow.onMarker(id: markerJungrang.info.id, text: '중랑구 ${temp[0]} °C');
+                final onMarkerInfoWindowDongdaemun = NInfoWindow.onMarker(id: markerDongdaemun.info.id, text: '동대문구 ${temp[1]} °C');
+                final onMarkerInfoWindowSeongbuk = NInfoWindow.onMarker(id: markerSeongbuk.info.id, text: '성북구 ${temp[2]} °C');
+                final onMarkerInfoWindowJongno = NInfoWindow.onMarker(id: markerJongno.info.id, text: '종로구 ${temp[3]} °C');
+                final onMarkerInfoWindowSeodaemun = NInfoWindow.onMarker(id: markerSeodaemun.info.id, text: '서대문구 ${temp[4]} °C');
+
+                final onMarkerInfoWindowSeoul = NInfoWindow.onMarker(id: markerSeoul.info.id, text: '서울');
+                markerJungrang.openInfoWindow(onMarkerInfoWindowJungrang);
+                markerDongdaemun.openInfoWindow(onMarkerInfoWindowDongdaemun);
+                markerSeongbuk.openInfoWindow(onMarkerInfoWindowSeongbuk);
+                markerJongno.openInfoWindow(onMarkerInfoWindowJongno);
+                markerSeodaemun.openInfoWindow(onMarkerInfoWindowSeodaemun);
+
+                markerSeoul.openInfoWindow(onMarkerInfoWindowSeoul);
+              });
+
+              final locationOverlay = await controller.getLocationOverlay();
+              locationOverlay.setIsVisible(true);
+
+              mapControllerCompleter.complete(controller);  // Completer에 지도 컨트롤러 완료 신호 전송\
+              log("onMapReady", name: "onMapReady");
+            },
           ),
         ),
       ),

@@ -56,6 +56,7 @@ class _LoadingState extends State<LoadingMap> {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return NaverMapApp(parseWeatherData: weatherDataList,);
     }));
+    //NaverMapApp(parseWeatherData: weatherDataList,);
   }
 
   // void fetchData() async{
