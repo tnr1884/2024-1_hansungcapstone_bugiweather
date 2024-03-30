@@ -133,6 +133,9 @@ class _NaverMapAppState extends State<NaverMapApp> {
               rotationGesturesEnable: false,
             ),
             onMapReady: (controller) async {                // 지도 준비 완료 시 호출되는 콜백 함수
+              final hansungLogo = NOverlayImage.fromAssetImage('assets/hansung.png');
+              final markerHansung = NMarker(id: 'hansung', position: NLatLng(37.5828, 127.0106), icon: hansungLogo); // 한성대학교
+              controller.addOverlay(markerHansung);
               final markerJungrang = NMarker(id: 'jungrang', position: NLatLng(37.5978,127.0929));
               markerJungrang
                 ..setMinZoom(10)
