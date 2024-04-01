@@ -11,7 +11,7 @@ class _screen2State extends State<screen2> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Weathr app',
+      title: 'Weather app',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -69,7 +69,7 @@ class Page2 extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 50),
+              SizedBox(height: 30),
               Row(children: [
                 SizedBox(width: 50),
                 Text(
@@ -219,7 +219,7 @@ class Page2 extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(height: 50),
+              SizedBox(height: 5),
 
             ]))
     );
