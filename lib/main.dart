@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+// OpenWeather API Key = " d85c3f5894dd01de3ea4d4a81f3a73b0 "
+
 void main() {
   runApp(const MyApp());
 }
@@ -23,6 +25,29 @@ class SomeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xffffff),
+      appBar: AppBar(
+        elevation: 4,
+        centerTitle: true,
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: const Icon(Icons.menu),
+          onPressed: (){
+            //
+          },
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0)
+        ),
+        backgroundColor: Colors.lightBlue,
+        onPressed: (){
+          //onPressed Actions
+        },
+        child: Icon(Icons.add, color: Colors.white),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       body: Container(
         clipBehavior: Clip.antiAlias,
         decoration: const BoxDecoration(
@@ -32,7 +57,7 @@ class SomeWidget extends StatelessWidget {
             colors: [Color(0xff73d5ff), Color(0xffbed5de)]
           )
         ),
-        padding: const EdgeInsets.symmetric(vertical: 100.0, horizontal: 30.0),
+        padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0),
         child: Stack(
           children: <Widget>[
             Container(
@@ -49,7 +74,7 @@ class SomeWidget extends StatelessWidget {
                 color: Colors.black.withOpacity(0.3)
               ),),
             ),
-            const Padding(padding: EdgeInsets.fromLTRB(0, 80, 200, 450),
+            const Padding(padding: EdgeInsets.fromLTRB(0, 80, 200, 500),
               child: Text(
                 "즐겨찾는 위치",
                 style: TextStyle(
@@ -138,3 +163,4 @@ class SomeWidget extends StatelessWidget {
     );
   }
 }
+
