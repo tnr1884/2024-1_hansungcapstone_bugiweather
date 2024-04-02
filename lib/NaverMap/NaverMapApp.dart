@@ -24,6 +24,8 @@ class NaverMapApp extends StatefulWidget {
 class _NaverMapAppState extends State<NaverMapApp> {
   List<String> cityName=[];
   List<double> temp=[];
+  List<double> feelsLikeList=[];
+  List<double> humidityList=[];
   DateTime? currentBackPressTime;
   @override
   void initState() {
@@ -38,9 +40,13 @@ class _NaverMapAppState extends State<NaverMapApp> {
     for(int i=0; i<weatherData.length; i++) {
       double temp2=weatherData[i]['main']['temp'].toDouble();
       String cityName2=weatherData[i]['name'];
+      double feelsLike=weatherData[i]['main']['feels_like'].toDouble();
+      double humidity=weatherData[i]['main']['humidity'].toDouble();
 
       temp.add(temp2);
       cityName.add(cityName2);
+      feelsLikeList.add(feelsLike);
+      humidityList.add(humidity);
       print(temp);
       print(temp2);
     }
@@ -268,13 +274,22 @@ class _NaverMapAppState extends State<NaverMapApp> {
               // 광역시
               final markerSeoul = NMarker(id: 'seoul', position: NLatLng(37.5519, 126.9918)) // 서울
                 ..setMinZoom(6)
-                ..setMaxZoom(10);
+                ..setMaxZoom(10)
+                ..setOnTapListener((overlay) =>
+                    myBottom(cityName: "서울특별시", temp: temp[25], feelsLike: feelsLikeList[25], humidity: humidityList[25] )
+                );
               final markerBusan = NMarker(id: 'busan', position: NLatLng(35.2100,129.0689)) // 부산
                 ..setMinZoom(6)
-                ..setMaxZoom(10);
+                ..setMaxZoom(10)
+                ..setOnTapListener((overlay) =>
+                    myBottom(cityName: "부산광역시", temp: temp[26], feelsLike: feelsLikeList[26], humidity: humidityList[26] )
+                );
               final markerGwangju = NMarker(id: 'gwangju', position: NLatLng(35.1557,126.8354)) // 광주
                 ..setMinZoom(6)
-                ..setMaxZoom(10);
+                ..setMaxZoom(10)
+                ..setOnTapListener((overlay) =>
+                    myBottom(cityName: "광주광역시", temp: temp[27], feelsLike: feelsLikeList[27], humidity: humidityList[27] )
+                );
               final markerIncheon = NMarker(id: 'incheon', position: NLatLng(37.4563, 126.7052)) // 인천
                 ..setMinZoom(8);
                 //..setMaxZoom(10);
@@ -427,10 +442,12 @@ class _NaverMapAppState extends State<NaverMapApp> {
                 markerGimcheon.openInfoWindow(onMarkerInfoWindowGimcheon); // 김천
                 markerPyeongtaek.openInfoWindow(onMarkerInfoWindowPyeongtaek); // 평택
 
+                
+
               });
 
-              final locationOverlay = await controller.getLocationOverlay();
-              locationOverlay.setIsVisible(true);
+              /*final locationOverlay = await controller.getLocationOverlay();
+              locationOverlay.setIsVisible(true);*/
 
               mapControllerCompleter.complete(controller);  // Completer에 지도 컨트롤러 완료 신호 전송\
               log("onMapReady", name: "onMapReady");
@@ -440,4 +457,39 @@ class _NaverMapAppState extends State<NaverMapApp> {
       ),
     );
   }
+  Future<void> myBottom({required String cityName, required double temp, required double feelsLike, required double humidity}) {
+    return showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Container(
+            height: 300,
+            width: double.infinity,
+            margin: EdgeInsets.all(20),
+            color: Colors.blue,
+            child: Center(
+              child: Column(
+                children: [
+                  Text(
+                    cityName,
+                    style: testStyle(),
+                  ),
+                  Text('현재 온도 : ${temp}'),
+                  Text('체감 온도 : ${feelsLike}'),
+                  Text('습도 : ${humidity}'),
+                ],
+              ),
+            )
+        );
+      },
+    );
+  }
+}
+class testStyle extends TextStyle {
+  @override
+  // TODO: implement fontSize
+  double? get fontSize => 22;
+  @override
+  // TODO: implement fontFamily
+  String? get fontFamily => 'Arial';
+
 }
