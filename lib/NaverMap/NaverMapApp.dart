@@ -8,6 +8,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:hansungcapstone_bugiweather/NaverMap/mylocation.dart';
 import 'package:hansungcapstone_bugiweather/NaverMap/network.dart';
@@ -462,34 +463,163 @@ class _NaverMapAppState extends State<NaverMapApp> {
       context: context,
       builder: (context) {
         return Container(
-            height: 300,
-            width: double.infinity,
-            margin: EdgeInsets.all(20),
-            color: Colors.blue,
-            child: Center(
-              child: Column(
+          height: 330,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xff74d5ff), Color(0xffbfd5ff)], // 그라데이션에 사용될 색상 리스트
+              begin: Alignment.topCenter, // 그라데이션 시작 위치
+              end: Alignment.bottomCenter, // 그라데이션 종료 위치
+            ),
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(20), // 위쪽 둥근 모서리 설정
+            ),
+          ),
+          child: Material(
+            //height: 300,
+            //width: double.infinity,
+            //margin: EdgeInsets.all(20),
+            color: Colors.transparent,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(20), // 위쪽 둥근 모서리 설정
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    cityName,
-                    style: testStyle(),
+                  Container(
+                    width: 190,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("서울특별시", style: TitleStyle(),),
+                        Text("2024-12-12", style: DateStyle(),),
+                        Text("일요일, 오후 3:51", style: DateStyle(),),
+                        Container(
+                          height: 160,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              //Icon(Icons.sunny, size: 130, color: Colors.white,),
+                              SunIcon(),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                  Text('현재 온도 : ${temp}'),
-                  Text('체감 온도 : ${feelsLike}'),
-                  Text('습도 : ${humidity}'),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        children: [
+                          Text("20°", style: MinTempStyle(),),
+                          Text("/", style: SubStyle(),),
+                          Text("33°", style: MaxTempStyle(),),
+                        ],
+                      ),
+                      Text("체감온도 : 32°", style: SubStyle(),),
+                      Row(
+                        children: [
+                          Icon(Icons.water_drop, color: Colors.lightBlueAccent,),
+                          Text(": 54%", style: SubStyle(),),
+                        ],
+                      )
+                    ],
+                  )
                 ],
               ),
-            )
+            ),
+          ),
         );
       },
     );
   }
 }
-class testStyle extends TextStyle {
+class TitleStyle extends TextStyle {
   @override
   // TODO: implement fontSize
-  double? get fontSize => 22;
+  double? get fontSize => 40;
   @override
   // TODO: implement fontFamily
-  String? get fontFamily => 'Arial';
+  String? get fontFamily => 'NanumSquareRoundB';
+  @override
+  // TODO: implement color
+  Color? get color => Colors.white;
+}
+class SubStyle extends TextStyle {
+  @override
+  // TODO: implement fontSize
+  double? get fontSize => 26;
 
+  @override
+  // TODO: implement fontFamily
+  String? get fontFamily => 'NanumSquareRoundB';
+
+  @override
+  // TODO: implement color
+  Color? get color => Colors.white;
+}
+class DateStyle extends TextStyle {
+  @override
+  // TODO: implement fontSize
+  double? get fontSize => 20;
+
+  @override
+  // TODO: implement fontFamily
+  String? get fontFamily => 'NanumSquareRoundL';
+
+  @override
+  // TODO: implement color
+  Color? get color => Colors.white;
+}
+class MinTempStyle extends TextStyle {
+  @override
+  // TODO: implement fontSize
+  double? get fontSize => 26;
+
+  @override
+  // TODO: implement fontFamily
+  String? get fontFamily => 'NanumSquareRoundB';
+
+  @override
+  // TODO: implement color
+  Color? get color => Colors.blueAccent;
+}
+class MaxTempStyle extends TextStyle {
+  @override
+  // TODO: implement fontSize
+  double? get fontSize => 26;
+
+  @override
+  // TODO: implement fontFamily
+  String? get fontFamily => 'NanumSquareRoundB';
+
+  @override
+  // TODO: implement color
+  Color? get color => Colors.redAccent;
+}
+
+class SunIcon extends StatelessWidget {
+  const SunIcon({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ShaderMask(
+      shaderCallback: (Rect bounds) {
+        return LinearGradient(
+          colors: [Colors.orangeAccent, Colors.redAccent],
+        ).createShader(bounds);
+      },
+      child: Icon(
+        Icons.sunny,
+        color: Colors.white, // 아이콘의 기본 색상을 흰색으로 설정
+        size: 130, // 아이콘 크기 지정 (원하는 크기로 변경 가능)
+      ),
+    );
+  }
 }
