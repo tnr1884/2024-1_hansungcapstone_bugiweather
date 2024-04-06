@@ -23,11 +23,13 @@ class NaverMapApp extends StatefulWidget {
   State<NaverMapApp> createState() => _NaverMapAppState();
 }
 class _NaverMapAppState extends State<NaverMapApp> {
-  List<String> cityName=[];
-  List<double> temp=[];
+  List<String> cityNameList=[];
+  List<double> tempList=[];
   List<double> feelsLikeList=[];
   List<double> humidityList=[];
-  DateTime? currentBackPressTime;
+  List<double> minTempList=[];
+  List<double> maxTempList=[];
+  List<String> conditionList=[];
   @override
   void initState() {
     // TODO: implement initState
@@ -39,51 +41,25 @@ class _NaverMapAppState extends State<NaverMapApp> {
     cityName = weatherData[0]['name'];*/
 
     for(int i=0; i<weatherData.length; i++) {
-      double temp2=weatherData[i]['main']['temp'].toDouble();
-      String cityName2=weatherData[i]['name'];
+      double temp=weatherData[i]['main']['temp'].toDouble();
+      String cityName=weatherData[i]['name'];
       double feelsLike=weatherData[i]['main']['feels_like'].toDouble();
       double humidity=weatherData[i]['main']['humidity'].toDouble();
+      double minTemp=weatherData[i]['main']['temp_min'].toDouble();
+      double maxTemp=weatherData[i]['main']['temp_max'].toDouble();
+      String condition=weatherData[i]['weather'][0]['main'];
 
-      temp.add(temp2);
-      cityName.add(cityName2);
+      tempList.add(temp);
+      cityNameList.add(cityName);
       feelsLikeList.add(feelsLike);
       humidityList.add(humidity);
+      minTempList.add(minTemp);
+      maxTempList.add(maxTemp);
+      conditionList.add(condition);
       print(temp);
-      print(temp2);
+      print(condition);
+      //print(temp2);
     }
-  }
-  void _showBackDialog() {
-    showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('정말 뒤로 가시겠습니까?'),
-          content: const Text(
-            '현재 페이지를 나가시겠습니까?',
-          ),
-          actions: <Widget>[
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: Theme.of(context).textTheme.labelLarge,
-              ),
-              child: const Text('아니오'),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: Theme.of(context).textTheme.labelLarge,
-              ),
-              child: const Text('네'),
-              onPressed: () {
-                exit(0);
-              },
-            ),
-          ],
-        );
-      },
-    );
   }
   @override
   Widget build(BuildContext context) {
@@ -99,7 +75,6 @@ class _NaverMapAppState extends State<NaverMapApp> {
           print('didPop호출');
           return;
         }
-        _showBackDialog();
       },
       child: Center(
         child: Scaffold(
@@ -143,7 +118,9 @@ class _NaverMapAppState extends State<NaverMapApp> {
 
               // 한성대학교
               final hansungLogo = NOverlayImage.fromAssetImage('assets/hansung.png');
-              final markerHansung = NMarker(id: 'hansung', position: NLatLng(37.5828, 127.0106), icon: hansungLogo); // 한성대학교
+              final markerHansung = NMarker(id: 'hansung', position: NLatLng(37.5828, 127.0106), icon: hansungLogo) // 한성대학교
+                ..setMinZoom(10)
+                ..setMaxZoom(13);
               controller.addOverlay(markerHansung);
 
               //서울 시내
@@ -277,19 +254,22 @@ class _NaverMapAppState extends State<NaverMapApp> {
                 ..setMinZoom(6)
                 ..setMaxZoom(10)
                 ..setOnTapListener((overlay) =>
-                    myBottom(cityName: "서울특별시", temp: temp[25], feelsLike: feelsLikeList[25], humidity: humidityList[25] )
+                    myBottom(cityName: "서울특별시", temp: tempList[25], feelsLike: feelsLikeList[25], humidity: humidityList[25],
+                        minTemp: minTempList[25], maxTemp: maxTempList[25], condition: conditionList[25] )
                 );
               final markerBusan = NMarker(id: 'busan', position: NLatLng(35.2100,129.0689)) // 부산
                 ..setMinZoom(6)
                 ..setMaxZoom(10)
                 ..setOnTapListener((overlay) =>
-                    myBottom(cityName: "부산광역시", temp: temp[26], feelsLike: feelsLikeList[26], humidity: humidityList[26] )
+                    myBottom(cityName: "부산광역시", temp: tempList[26], feelsLike: feelsLikeList[26], humidity: humidityList[26],
+                        minTemp: minTempList[26], maxTemp: maxTempList[26], condition: conditionList[26] )
                 );
               final markerGwangju = NMarker(id: 'gwangju', position: NLatLng(35.1557,126.8354)) // 광주
                 ..setMinZoom(6)
                 ..setMaxZoom(10)
                 ..setOnTapListener((overlay) =>
-                    myBottom(cityName: "광주광역시", temp: temp[27], feelsLike: feelsLikeList[27], humidity: humidityList[27] )
+                    myBottom(cityName: "광주광역시", temp: tempList[27], feelsLike: feelsLikeList[27], humidity: humidityList[27],
+                        minTemp: minTempList[27], maxTemp: maxTempList[27], condition: conditionList[27] )
                 );
               final markerIncheon = NMarker(id: 'incheon', position: NLatLng(37.4563, 126.7052)) // 인천
                 ..setMinZoom(8);
@@ -349,55 +329,58 @@ class _NaverMapAppState extends State<NaverMapApp> {
               //controller.addOverlayAll({markerSeoul, markerSeongnam, markerGwangmyeong, markerIncheon, markerSuwon, markerHanam});
 
               setState(() {
+                final onMarkerInfoWindowHansung = NInfoWindow.onMarker(id: markerHansung.info.id, text: '한성대학교');
                 // 서울 25개 구
-                final onMarkerInfoWindowGangnam = NInfoWindow.onMarker(id: markerGangnam.info.id, text: '강남구 ${temp[0]} °C');
-                final onMarkerInfoWindowGangdong = NInfoWindow.onMarker(id: markerGangdong.info.id, text: '강동구 ${temp[1]} °C');
-                final onMarkerInfoWindowGangbuk = NInfoWindow.onMarker(id: markerGangbuk.info.id, text: '강북구 ${temp[2]} °C');
-                final onMarkerInfoWindowGangseo = NInfoWindow.onMarker(id: markerGangseo.info.id, text: '강서구 ${temp[3]} °C');
-                final onMarkerInfoWindowGwanak = NInfoWindow.onMarker(id: markerGwanak.info.id, text: '관악구 ${temp[4]} °C');
-                final onMarkerInfoWindowGwangjin = NInfoWindow.onMarker(id: markerGwangjin.info.id, text: '광진구 ${temp[5]} °C');
-                final onMarkerInfoWindowGuro = NInfoWindow.onMarker(id: markerGuro.info.id, text: '구로구 ${temp[6]} °C');
-                final onMarkerInfoWindowGeumcheon = NInfoWindow.onMarker(id: markerGeumcheon.info.id, text: '금천구 ${temp[7]} °C');
-                final onMarkerInfoWindowNowon = NInfoWindow.onMarker(id: markerNowon.info.id, text: '노원구 ${temp[8]} °C');
-                final onMarkerInfoWindowDobong = NInfoWindow.onMarker(id: markerDobong.info.id, text: '도봉구 ${temp[9]} °C');
-                final onMarkerInfoWindowDongdaemun = NInfoWindow.onMarker(id: markerDongdaemun.info.id, text: '동대문구 ${temp[10]} °C');
-                final onMarkerInfoWindowDongjak = NInfoWindow.onMarker(id: markerDongjak.info.id, text: '동작구 ${temp[11]} °C');
-                final onMarkerInfoWindowMapo= NInfoWindow.onMarker(id: markerMapo.info.id, text: '마포구 ${temp[12]} °C');
-                final onMarkerInfoWindowSeodaemun = NInfoWindow.onMarker(id: markerSeodaemun.info.id, text: '서대문구 ${temp[13]} °C');
-                final onMarkerInfoWindowSeocho = NInfoWindow.onMarker(id: markerSeocho.info.id, text: '서초구 ${temp[14]} °C');
-                final onMarkerInfoWindowSeongdong = NInfoWindow.onMarker(id: markerSeongdong.info.id, text: '성동구 ${temp[15]} °C');
-                final onMarkerInfoWindowSeongbuk = NInfoWindow.onMarker(id: markerSeongbuk.info.id, text: '성북구 ${temp[16]} °C');
-                final onMarkerInfoWindowSongpa = NInfoWindow.onMarker(id: markerSongpa.info.id, text: '송파구 ${temp[17]} °C');
-                final onMarkerInfoWindowYangcheon = NInfoWindow.onMarker(id: markerYangcheon.info.id, text: '양천구 ${temp[18]} °C');
-                final onMarkerInfoWindowYeongdeungpo = NInfoWindow.onMarker(id: markerYeongdeungpo.info.id, text: '영등포구 ${temp[19]} °C');
-                final onMarkerInfoWindowYongsan = NInfoWindow.onMarker(id: markerYongsan.info.id, text: '용산구 ${temp[20]} °C');
-                final onMarkerInfoWindowEunpyeong = NInfoWindow.onMarker(id: markerEunpyeong.info.id, text: '은평구 ${temp[21]} °C');
-                final onMarkerInfoWindowJongno = NInfoWindow.onMarker(id: markerJongno.info.id, text: '종로구 ${temp[22]} °C');
-                final onMarkerInfoWindowJung = NInfoWindow.onMarker(id: markerJung.info.id, text: '중구 ${temp[23]} °C');
-                final onMarkerInfoWindowJungrang = NInfoWindow.onMarker(id: markerJungrang.info.id, text: '중랑구 ${temp[24]} °C');
+                final onMarkerInfoWindowGangnam = NInfoWindow.onMarker(id: markerGangnam.info.id, text: '강남구 ${tempList[0]} °C');
+                final onMarkerInfoWindowGangdong = NInfoWindow.onMarker(id: markerGangdong.info.id, text: '강동구 ${tempList[1]} °C');
+                final onMarkerInfoWindowGangbuk = NInfoWindow.onMarker(id: markerGangbuk.info.id, text: '강북구 ${tempList[2]} °C');
+                final onMarkerInfoWindowGangseo = NInfoWindow.onMarker(id: markerGangseo.info.id, text: '강서구 ${tempList[3]} °C');
+                final onMarkerInfoWindowGwanak = NInfoWindow.onMarker(id: markerGwanak.info.id, text: '관악구 ${tempList[4]} °C');
+                final onMarkerInfoWindowGwangjin = NInfoWindow.onMarker(id: markerGwangjin.info.id, text: '광진구 ${tempList[5]} °C');
+                final onMarkerInfoWindowGuro = NInfoWindow.onMarker(id: markerGuro.info.id, text: '구로구 ${tempList[6]} °C');
+                final onMarkerInfoWindowGeumcheon = NInfoWindow.onMarker(id: markerGeumcheon.info.id, text: '금천구 ${tempList[7]} °C');
+                final onMarkerInfoWindowNowon = NInfoWindow.onMarker(id: markerNowon.info.id, text: '노원구 ${tempList[8]} °C');
+                final onMarkerInfoWindowDobong = NInfoWindow.onMarker(id: markerDobong.info.id, text: '도봉구 ${tempList[9]} °C');
+                final onMarkerInfoWindowDongdaemun = NInfoWindow.onMarker(id: markerDongdaemun.info.id, text: '동대문구 ${tempList[10]} °C');
+                final onMarkerInfoWindowDongjak = NInfoWindow.onMarker(id: markerDongjak.info.id, text: '동작구 ${tempList[11]} °C');
+                final onMarkerInfoWindowMapo= NInfoWindow.onMarker(id: markerMapo.info.id, text: '마포구 ${tempList[12]} °C');
+                final onMarkerInfoWindowSeodaemun = NInfoWindow.onMarker(id: markerSeodaemun.info.id, text: '서대문구 ${tempList[13]} °C');
+                final onMarkerInfoWindowSeocho = NInfoWindow.onMarker(id: markerSeocho.info.id, text: '서초구 ${tempList[14]} °C');
+                final onMarkerInfoWindowSeongdong = NInfoWindow.onMarker(id: markerSeongdong.info.id, text: '성동구 ${tempList[15]} °C');
+                final onMarkerInfoWindowSeongbuk = NInfoWindow.onMarker(id: markerSeongbuk.info.id, text: '성북구 ${tempList[16]} °C');
+                final onMarkerInfoWindowSongpa = NInfoWindow.onMarker(id: markerSongpa.info.id, text: '송파구 ${tempList[17]} °C');
+                final onMarkerInfoWindowYangcheon = NInfoWindow.onMarker(id: markerYangcheon.info.id, text: '양천구 ${tempList[18]} °C');
+                final onMarkerInfoWindowYeongdeungpo = NInfoWindow.onMarker(id: markerYeongdeungpo.info.id, text: '영등포구 ${tempList[19]} °C');
+                final onMarkerInfoWindowYongsan = NInfoWindow.onMarker(id: markerYongsan.info.id, text: '용산구 ${tempList[20]} °C');
+                final onMarkerInfoWindowEunpyeong = NInfoWindow.onMarker(id: markerEunpyeong.info.id, text: '은평구 ${tempList[21]} °C');
+                final onMarkerInfoWindowJongno = NInfoWindow.onMarker(id: markerJongno.info.id, text: '종로구 ${tempList[22]} °C');
+                final onMarkerInfoWindowJung = NInfoWindow.onMarker(id: markerJung.info.id, text: '중구 ${tempList[23]} °C');
+                final onMarkerInfoWindowJungrang = NInfoWindow.onMarker(id: markerJungrang.info.id, text: '중랑구 ${tempList[24]} °C');
 
                 // 광역시 설명 추가
-                final onMarkerInfoWindowSeoul = NInfoWindow.onMarker(id: markerSeoul.info.id, text: '서울특별시 ${temp[25]} °C');
-                final onMarkerInfoWindowBusan = NInfoWindow.onMarker(id: markerBusan.info.id, text: '부산광역시 ${temp[26]} °C');
-                final onMarkerInfoWindowGwangju = NInfoWindow.onMarker(id: markerGwangju.info.id, text: '광주광역시 ${temp[27]} °C');
-                final onMarkerInfoWindowIncheon = NInfoWindow.onMarker(id: markerIncheon.info.id, text: '인천광역시 ${temp[28]} °C');
-                final onMarkerInfoWindowUlsan = NInfoWindow.onMarker(id: markerUlsan.info.id, text: '울산광역시 ${temp[29]} °C');
-                final onMarkerInfoWindowDaejeon = NInfoWindow.onMarker(id: markerDaejeon.info.id, text: '대전광역시 ${temp[30]} °C');
-                final onMarkerInfoWindowDaegu = NInfoWindow.onMarker(id: markerDaegu.info.id, text: '대구광역시 ${temp[31]} °C');
+                final onMarkerInfoWindowSeoul = NInfoWindow.onMarker(id: markerSeoul.info.id, text: '서울특별시 ${tempList[25]} °C');
+                final onMarkerInfoWindowBusan = NInfoWindow.onMarker(id: markerBusan.info.id, text: '부산광역시 ${tempList[26]} °C');
+                final onMarkerInfoWindowGwangju = NInfoWindow.onMarker(id: markerGwangju.info.id, text: '광주광역시 ${tempList[27]} °C');
+                final onMarkerInfoWindowIncheon = NInfoWindow.onMarker(id: markerIncheon.info.id, text: '인천광역시 ${tempList[28]} °C');
+                final onMarkerInfoWindowUlsan = NInfoWindow.onMarker(id: markerUlsan.info.id, text: '울산광역시 ${tempList[29]} °C');
+                final onMarkerInfoWindowDaejeon = NInfoWindow.onMarker(id: markerDaejeon.info.id, text: '대전광역시 ${tempList[30]} °C');
+                final onMarkerInfoWindowDaegu = NInfoWindow.onMarker(id: markerDaegu.info.id, text: '대구광역시 ${tempList[31]} °C');
                 //시 설명 추가
-                final onMarkerInfoWindowGangneung = NInfoWindow.onMarker(id: markerGangneung.info.id, text: '강릉시 ${temp[32]} °C');
-                final onMarkerInfoWindowChungju = NInfoWindow.onMarker(id: markerChungju.info.id, text: '충주시 ${temp[33]} °C');
-                final onMarkerInfoWindowChuncheon = NInfoWindow.onMarker(id: markerChuncheon.info.id, text: '춘천시 ${temp[34]} °C');
-                final onMarkerInfoWindowSokcho = NInfoWindow.onMarker(id: markerSokcho.info.id, text: '속초시 ${temp[35]} °C');
-                final onMarkerInfoWindowJeonju = NInfoWindow.onMarker(id: markerJeonju.info.id, text: '전주시 ${temp[36]} °C');
-                final onMarkerInfoWindowYeosu = NInfoWindow.onMarker(id: markerYeosu.info.id, text: '여수시 ${temp[37]} °C');
-                final onMarkerInfoWindowTaebaek = NInfoWindow.onMarker(id: markerTaebaek.info.id, text: '태백시 ${temp[38]} °C');
-                final onMarkerInfoWindowPohang = NInfoWindow.onMarker(id: markerPohang.info.id, text: '포항시 ${temp[39]} °C');
-                final onMarkerInfoWindowAndong = NInfoWindow.onMarker(id: markerAndong.info.id, text: '안동시 ${temp[40]} °C');
-                final onMarkerInfoWindowGimcheon = NInfoWindow.onMarker(id: markerGimcheon.info.id, text: '김천시 ${temp[41]} °C');
-                final onMarkerInfoWindowPyeongtaek = NInfoWindow.onMarker(id: markerPyeongtaek.info.id, text: '평택시 ${temp[42]} °C');
-                
-                markerGangnam.openInfoWindow(onMarkerInfoWindowGangnam);
+                final onMarkerInfoWindowGangneung = NInfoWindow.onMarker(id: markerGangneung.info.id, text: '강릉시 ${tempList[32]} °C');
+                final onMarkerInfoWindowChungju = NInfoWindow.onMarker(id: markerChungju.info.id, text: '충주시 ${tempList[33]} °C');
+                final onMarkerInfoWindowChuncheon = NInfoWindow.onMarker(id: markerChuncheon.info.id, text: '춘천시 ${tempList[34]} °C');
+                final onMarkerInfoWindowSokcho = NInfoWindow.onMarker(id: markerSokcho.info.id, text: '속초시 ${tempList[35]} °C');
+                final onMarkerInfoWindowJeonju = NInfoWindow.onMarker(id: markerJeonju.info.id, text: '전주시 ${tempList[36]} °C');
+                final onMarkerInfoWindowYeosu = NInfoWindow.onMarker(id: markerYeosu.info.id, text: '여수시 ${tempList[37]} °C');
+                final onMarkerInfoWindowTaebaek = NInfoWindow.onMarker(id: markerTaebaek.info.id, text: '태백시 ${tempList[38]} °C');
+                final onMarkerInfoWindowPohang = NInfoWindow.onMarker(id: markerPohang.info.id, text: '포항시 ${tempList[39]} °C');
+                final onMarkerInfoWindowAndong = NInfoWindow.onMarker(id: markerAndong.info.id, text: '안동시 ${tempList[40]} °C');
+                final onMarkerInfoWindowGimcheon = NInfoWindow.onMarker(id: markerGimcheon.info.id, text: '김천시 ${tempList[41]} °C');
+                final onMarkerInfoWindowPyeongtaek = NInfoWindow.onMarker(id: markerPyeongtaek.info.id, text: '평택시 ${tempList[42]} °C');
+
+                markerHansung.openInfoWindow(onMarkerInfoWindowHansung); // 한성대학교
+
+                markerGangnam.openInfoWindow(onMarkerInfoWindowGangnam); // 강남
                 markerGangdong.openInfoWindow(onMarkerInfoWindowGangdong); // 강동
                 markerGangbuk.openInfoWindow(onMarkerInfoWindowGangbuk); // 강북
                 markerGangseo.openInfoWindow(onMarkerInfoWindowGangseo); // 강서
@@ -458,7 +441,9 @@ class _NaverMapAppState extends State<NaverMapApp> {
       ),
     );
   }
-  Future<void> myBottom({required String cityName, required double temp, required double feelsLike, required double humidity}) {
+  Future<void> myBottom({required String cityName, required double temp, required double feelsLike, required double humidity, required double minTemp, required double maxTemp, required String condition}) {
+    DateTime dt = DateTime.now();
+    print(condition);
     return showModalBottomSheet(
       context: context,
       builder: (context) {
@@ -494,9 +479,9 @@ class _NaverMapAppState extends State<NaverMapApp> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("서울특별시", style: TitleStyle(),),
-                        Text("2024-12-12", style: DateStyle(),),
-                        Text("일요일, 오후 3:51", style: DateStyle(),),
+                        Text(cityName, style: TitleStyle(),),
+                        Text("${dt.year}년 ${dt.month}월 ${dt.day}일", style: DateStyle(),),
+                        Text(getWeek() + ", " + hourFormat(), style: DateStyle(),),
                         Container(
                           height: 160,
                           child: Row(
@@ -504,7 +489,7 @@ class _NaverMapAppState extends State<NaverMapApp> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               //Icon(Icons.sunny, size: 130, color: Colors.white,),
-                              SunIcon(),
+                              conditionIcon(condition),
                             ],
                           ),
                         )
@@ -517,16 +502,21 @@ class _NaverMapAppState extends State<NaverMapApp> {
                     children: [
                       Row(
                         children: [
-                          Text("20°", style: MinTempStyle(),),
-                          Text("/", style: SubStyle(),),
-                          Text("33°", style: MaxTempStyle(),),
+                          Text("${temp.round()}°", style: TitleStyle(),),
                         ],
                       ),
-                      Text("체감온도 : 32°", style: SubStyle(),),
+                      Row(
+                        children: [
+                          Text("${minTemp.round()}°", style: MinTempStyle(),),
+                          Text("/", style: SubStyle(),),
+                          Text("${maxTemp.round()}°", style: MaxTempStyle(),),
+                        ],
+                      ),
+                      Text("체감온도 : ${feelsLike.round()}°", style: SubStyle(),),
                       Row(
                         children: [
                           Icon(Icons.water_drop, color: Colors.lightBlueAccent,),
-                          Text(": 54%", style: SubStyle(),),
+                          Text(": ${humidity.truncate()}%", style: SubStyle(),),
                         ],
                       )
                     ],
@@ -538,6 +528,46 @@ class _NaverMapAppState extends State<NaverMapApp> {
         );
       },
     );
+  }
+  String getWeek() {
+    var df = DateTime.now();
+    String weekDay;
+    switch (df.weekday) {
+      case 1 :
+        return "월요일";
+      case 2 :
+        return "화요일";
+      case 3 :
+        return "수요일";
+      case 4 :
+        return "목요일";
+      case 5 :
+        return "금요일";
+      case 6 :
+        return "토요일";
+      case 7 :
+        return "일요일";
+      default :
+        return "요일없음";
+    }
+  }
+  String hourFormat() {
+    var df = DateTime.now();
+    String period;
+    int hour = df.hour;
+    if (df.hour < 12)
+      period = "오전";
+    else {
+      period = "오후";
+      hour-=12;
+    }
+    return period + " ${hour}:${df.minute}";
+  }
+  Widget conditionIcon(String condition) {
+    if (condition == "Clear")
+      return CloudIcon();
+    else
+      return SunIcon();
   }
 }
 class TitleStyle extends TextStyle {
@@ -617,6 +647,25 @@ class SunIcon extends StatelessWidget {
       },
       child: Icon(
         Icons.sunny,
+        color: Colors.white, // 아이콘의 기본 색상을 흰색으로 설정
+        size: 130, // 아이콘 크기 지정 (원하는 크기로 변경 가능)
+      ),
+    );
+  }
+}
+class CloudIcon extends StatelessWidget {
+  const CloudIcon({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ShaderMask(
+      shaderCallback: (Rect bounds) {
+        return LinearGradient(
+          colors: [Colors.blue, Colors.white70],
+        ).createShader(bounds);
+      },
+      child: Icon(
+        Icons.cloud,
         color: Colors.white, // 아이콘의 기본 색상을 흰색으로 설정
         size: 130, // 아이콘 크기 지정 (원하는 크기로 변경 가능)
       ),
