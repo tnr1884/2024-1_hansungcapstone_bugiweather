@@ -43,7 +43,7 @@ class _LocationScreenState extends State<LocationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment(0.0,-1.0),
                 end: Alignment(0,1),
@@ -64,7 +64,7 @@ class _LocationScreenState extends State<LocationScreen> {
                       var weatherData = await weather.getLocationWeather();
                       updateUI(weatherData);
                     },
-                    child: Icon(
+                    child: const Icon(
                       Icons.near_me,
                       size: 50.0,
                     ),
@@ -83,7 +83,7 @@ class _LocationScreenState extends State<LocationScreen> {
                         updateUI(weatherData);
                       }
                     },
-                    child: Icon(
+                    child: const Icon(
                       Icons.location_city,
                       size: 50.0,
                     ),
@@ -91,7 +91,7 @@ class _LocationScreenState extends State<LocationScreen> {
                 ],
               ),
               Padding(
-                padding: EdgeInsets.only(left: 15.0),
+                padding: const EdgeInsets.only(left: 15.0),
                 child: Row(
                   children: <Widget>[
                     Text(
@@ -105,12 +105,8 @@ class _LocationScreenState extends State<LocationScreen> {
                   ],
                 ),
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(right: 15.0),
-                // child: Text(
-                //   textAlign: TextAlign.right,
-                //   style: kMessageTextStyle,
-                // ),
               ),
             ],
           ),
