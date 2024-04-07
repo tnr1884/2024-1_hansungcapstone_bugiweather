@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 const kTempTextStyle = TextStyle(
@@ -13,11 +14,13 @@ const kMessageTextStyle = TextStyle(
 const kButtonTextStyle = TextStyle(
   fontSize: 30.0,
   fontFamily: 'Inter',
+  fontWeight: FontWeight.w700
 );
 
 const kConditionTextStyle = TextStyle(
   fontSize: 100.0,
 );
+
 const kTextFieldInputDecoration = InputDecoration(
   filled: true,
   fillColor: Colors.white,
@@ -25,11 +28,11 @@ const kTextFieldInputDecoration = InputDecoration(
     Icons.location_pin,
     color: Colors.white,
   ),
-  hintText: 'Enter City Name',
+  hintText: '도시 검색...',
   hintStyle: TextStyle(color: Colors.grey),
   border: OutlineInputBorder(
     borderRadius: BorderRadius.all(
-      Radius.circular(30),
+      Radius.circular(35),
     ),
     borderSide: BorderSide.none,
   ),

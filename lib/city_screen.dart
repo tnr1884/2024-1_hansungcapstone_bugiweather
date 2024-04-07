@@ -44,12 +44,12 @@ class _CityScreenState extends State<CityScreen> {
                   },
                 ),
               ),
-              TextButton(
+              ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context, cityName);
                 },
                 child: const Text(
-                  'Get Weather',
+                  '날씨 보기',
                   style: kButtonTextStyle,
                 ),
               ),
