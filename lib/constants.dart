@@ -22,14 +22,14 @@ const kTextFieldInputDecoration = InputDecoration(
   filled: true,
   fillColor: Colors.white,
   icon: Icon(
-    Icons.location_city,
+    Icons.location_pin,
     color: Colors.white,
   ),
   hintText: 'Enter City Name',
   hintStyle: TextStyle(color: Colors.grey),
   border: OutlineInputBorder(
     borderRadius: BorderRadius.all(
-      Radius.circular(10),
+      Radius.circular(30),
     ),
     borderSide: BorderSide.none,
   ),

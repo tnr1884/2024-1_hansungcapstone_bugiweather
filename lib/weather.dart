@@ -3,6 +3,7 @@ import 'package:hansungcapstone_bugiweather/networking.dart';
 
 const apiKey = 'd85c3f5894dd01de3ea4d4a81f3a73b0';
 const openWeatherMapURL = 'https://api.openweathermap.org/data/2.5/weather';
+const lang = "kr";
 
 class WeatherModel {
   Future<dynamic> getCityWeather(String cityName) async {
@@ -17,7 +18,7 @@ class WeatherModel {
     await location.getCurrentLocation();
     NetworkHelper networkHelper = NetworkHelper(
         '$openWeatherMapURL?lat=${location.latitude}&lon=${location
-            .longitude}&appid=$apiKey&units=metric');
+            .longitude}&appid=$apiKey&lang=$lang&units=metric');
     var weatherData = await networkHelper.getData();
     return weatherData;
   }

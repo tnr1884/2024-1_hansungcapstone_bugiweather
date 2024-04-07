@@ -84,7 +84,7 @@ class _LocationScreenState extends State<LocationScreen> {
                       }
                     },
                     child: const Icon(
-                      Icons.location_city,
+                      Icons.search,
                       size: 50.0,
                     ),
                   ),

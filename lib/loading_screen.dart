@@ -30,7 +30,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   Widget build(BuildContext context) {
     return const Scaffold(
         body: Center(
-          child: SpinKitDoubleBounce(
+          child: SpinKitRing(
             color: Colors.white,
             size: 100,
           ),  // SpinKitDoubleBounce
