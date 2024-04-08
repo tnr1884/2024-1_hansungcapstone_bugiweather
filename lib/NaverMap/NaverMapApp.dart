@@ -128,7 +128,11 @@ class _NaverMapAppState extends State<NaverMapApp> {
                 ..setMinZoom(10)
                 ..setMaxZoom(13)
                 ..setIsMinZoomInclusive(false)
-                ..setIsMaxZoomInclusive(true);
+                ..setIsMaxZoomInclusive(true)
+                ..setOnTapListener((overlay) =>
+                    myBottom(cityName: "강남구", temp: tempList[0], feelsLike: feelsLikeList[0], humidity: humidityList[0],
+                        minTemp: minTempList[0], maxTemp: maxTempList[0], condition: conditionList[0] )
+                );
               final markerGangdong = NMarker(id: 'gangdong', position: NLatLng(37.5504, 127.1470)) // 강동
                 ..setMinZoom(10)
                 ..setMaxZoom(13)
@@ -272,51 +276,111 @@ class _NaverMapAppState extends State<NaverMapApp> {
                         minTemp: minTempList[27], maxTemp: maxTempList[27], condition: conditionList[27] )
                 );
               final markerIncheon = NMarker(id: 'incheon', position: NLatLng(37.4563, 126.7052)) // 인천
-                ..setMinZoom(8);
+                ..setMinZoom(8)
+                ..setOnTapListener((overlay) =>
+                    myBottom(cityName: "인천광역시", temp: tempList[28], feelsLike: feelsLikeList[28], humidity: humidityList[28],
+                        minTemp: minTempList[28], maxTemp: maxTempList[28], condition: conditionList[28] )
+                );
                 //..setMaxZoom(10);
               final markerUlsan = NMarker(id: 'ulsan', position: NLatLng(35.5537, 129.2381)) // 울산
                 ..setMinZoom(6)
-                ..setMaxZoom(10);
+                ..setMaxZoom(10)
+                ..setOnTapListener((overlay) =>
+                    myBottom(cityName: "울산광역시", temp: tempList[29], feelsLike: feelsLikeList[29], humidity: humidityList[29],
+                        minTemp: minTempList[29], maxTemp: maxTempList[29], condition: conditionList[29] )
+                );
               final markerDaejeon = NMarker(id: 'daejeon', position: NLatLng(36.3398, 127.3940)) // 대전
                 ..setMinZoom(6)
-                ..setMaxZoom(10);
+                ..setMaxZoom(10)
+                ..setOnTapListener((overlay) =>
+                    myBottom(cityName: "대전광역시", temp: tempList[30], feelsLike: feelsLikeList[30], humidity: humidityList[30],
+                        minTemp: minTempList[30], maxTemp: maxTempList[30], condition: conditionList[30] )
+                );
               final markerDaegu = NMarker(id: 'Daegu', position: NLatLng(35.8294, 128.5655)) // 대구
                 ..setMinZoom(6)
-                ..setMaxZoom(10);
+                ..setMaxZoom(10)
+                ..setOnTapListener((overlay) =>
+                    myBottom(cityName: "대구광역시", temp: tempList[31], feelsLike: feelsLikeList[31], humidity: humidityList[31],
+                        minTemp: minTempList[31], maxTemp: maxTempList[31], condition: conditionList[31] )
+                );
               // 시
               final markerGangneung = NMarker(id: 'gangneung', position: NLatLng(37.7091, 128.8324)) // 강릉
                 ..setMinZoom(6)
-                ..setMaxZoom(10);
+                ..setMaxZoom(10)
+                ..setOnTapListener((overlay) =>
+                    myBottom(cityName: "강릉시", temp: tempList[32], feelsLike: feelsLikeList[32], humidity: humidityList[32],
+                        minTemp: minTempList[32], maxTemp: maxTempList[32], condition: conditionList[32] )
+                );
               final markerChungju = NMarker(id: 'chungju', position: NLatLng(37.0151, 127.8957)) // 충주
                 ..setMinZoom(6)
-                ..setMaxZoom(10);
+                ..setMaxZoom(10)
+                ..setOnTapListener((overlay) =>
+                    myBottom(cityName: "충주시", temp: tempList[33], feelsLike: feelsLikeList[33], humidity: humidityList[33],
+                        minTemp: minTempList[33], maxTemp: maxTempList[33], condition: conditionList[33] )
+                );
               final markerChuncheon = NMarker(id: 'chuncheon', position: NLatLng(37.8898, 127.7399)) // 춘천
                 ..setMinZoom(6)
-                ..setMaxZoom(10);
+                ..setMaxZoom(10)
+                ..setOnTapListener((overlay) =>
+                    myBottom(cityName: "춘천시", temp: tempList[34], feelsLike: feelsLikeList[34], humidity: humidityList[34],
+                        minTemp: minTempList[34], maxTemp: maxTempList[34], condition: conditionList[34] )
+                );
               final markerSokcho = NMarker(id: 'sokcho', position: NLatLng(38.1760, 128.5195)) // 속초
                 ..setMinZoom(6)
-                ..setMaxZoom(10);
+                ..setMaxZoom(10)
+                ..setOnTapListener((overlay) =>
+                    myBottom(cityName: "속초시", temp: tempList[35], feelsLike: feelsLikeList[35], humidity: humidityList[35],
+                        minTemp: minTempList[35], maxTemp: maxTempList[35], condition: conditionList[35] )
+                );
               final markerJeonju = NMarker(id: 'jeonju', position: NLatLng(35.8280, 127.1160)) // 전주
                 ..setMinZoom(6)
-                ..setMaxZoom(10);
+                ..setMaxZoom(10)
+                ..setOnTapListener((overlay) =>
+                    myBottom(cityName: "전주시", temp: tempList[36], feelsLike: feelsLikeList[36], humidity: humidityList[36],
+                        minTemp: minTempList[36], maxTemp: maxTempList[36], condition: conditionList[36] )
+                );
               final markerYeosu = NMarker(id: 'yeosu', position: NLatLng(34.7604, 127.6622)) // 여수
                 ..setMinZoom(6)
-                ..setMaxZoom(10);
+                ..setMaxZoom(10)
+                ..setOnTapListener((overlay) =>
+                    myBottom(cityName: "여수시", temp: tempList[37], feelsLike: feelsLikeList[37], humidity: humidityList[37],
+                        minTemp: minTempList[37], maxTemp: maxTempList[37], condition: conditionList[37] )
+                );
               final markerTaebaek = NMarker(id: 'teabaek', position: NLatLng(37.1723, 128.9800)) // 태백
                 ..setMinZoom(6)
-                ..setMaxZoom(10);
+                ..setMaxZoom(10)
+                ..setOnTapListener((overlay) =>
+                    myBottom(cityName: "태백시", temp: tempList[38], feelsLike: feelsLikeList[38], humidity: humidityList[38],
+                        minTemp: minTempList[38], maxTemp: maxTempList[38], condition: conditionList[38] )
+                );
               final markerPohang = NMarker(id: 'pohang', position: NLatLng(36.0929, 129.3053)) // 포항
                 ..setMinZoom(6)
-                ..setMaxZoom(10);
+                ..setMaxZoom(10)
+                ..setOnTapListener((overlay) =>
+                    myBottom(cityName: "포항시", temp: tempList[39], feelsLike: feelsLikeList[39], humidity: humidityList[39],
+                        minTemp: minTempList[39], maxTemp: maxTempList[39], condition: conditionList[39] )
+                );
               final markerAndong = NMarker(id: 'andong', position: NLatLng(36.5802, 128.7800)) // 안동
                 ..setMinZoom(6)
-                ..setMaxZoom(10);
+                ..setMaxZoom(10)
+                ..setOnTapListener((overlay) =>
+                    myBottom(cityName: "안동시", temp: tempList[40], feelsLike: feelsLikeList[40], humidity: humidityList[40],
+                        minTemp: minTempList[40], maxTemp: maxTempList[40], condition: conditionList[40] )
+                );
               final markerGimcheon = NMarker(id: 'gimcheon', position: NLatLng(36.0604, 128.0777)) // 김천
                 ..setMinZoom(6)
-                ..setMaxZoom(10);
+                ..setMaxZoom(10)
+                ..setOnTapListener((overlay) =>
+                    myBottom(cityName: "김천시", temp: tempList[41], feelsLike: feelsLikeList[41], humidity: humidityList[41],
+                        minTemp: minTempList[41], maxTemp: maxTempList[41], condition: conditionList[41] )
+                );
               final markerPyeongtaek = NMarker(id: 'pyeongtaek', position: NLatLng(37.0160, 126.9942)) // 평택
                 ..setMinZoom(6)
-                ..setMaxZoom(10);
+                ..setMaxZoom(10)
+                ..setOnTapListener((overlay) =>
+                    myBottom(cityName: "평택시", temp: tempList[42], feelsLike: feelsLikeList[42], humidity: humidityList[42],
+                        minTemp: minTempList[42], maxTemp: maxTempList[42], condition: conditionList[42] )
+                );
               final markerSeongnam = NMarker(id: 'seongnam', position: NLatLng(37.4074, 127.1162)); // 성남
               final markerGwangmyeong = NMarker(id: 'gwangmyeong', position: NLatLng(37.4452, 126.8647)); // 광명
               final markerSuwon = NMarker(id: 'suwon', position: NLatLng(37.2804, 127.0078)); // 수원
@@ -564,12 +628,24 @@ class _NaverMapAppState extends State<NaverMapApp> {
     return period + " ${hour}:${df.minute}";
   }
   Widget conditionIcon(String condition) {
-    if (condition == "Clear")
-      return CloudIcon();
-    else
-      return SunIcon();
+    switch (condition) {
+      case "Clear" :
+        return ClearIcon();
+      case "Clouds" :
+        return CloudIcon();
+      case "Rain" :
+        return RainIcon();
+      /*case "Drizzle" :
+        return DrizzleIcon();*/
+      case "Haze" :
+      case "Mist" :
+        return HazeIcon();
+      default :
+        return Icon(Icons.disabled_by_default);
+    }
   }
 }
+
 class TitleStyle extends TextStyle {
   @override
   // TODO: implement fontSize
@@ -634,8 +710,8 @@ class MaxTempStyle extends TextStyle {
   Color? get color => Colors.redAccent;
 }
 
-class SunIcon extends StatelessWidget {
-  const SunIcon({super.key});
+class ClearIcon extends StatelessWidget {
+  const ClearIcon({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -670,5 +746,32 @@ class CloudIcon extends StatelessWidget {
         size: 130, // 아이콘 크기 지정 (원하는 크기로 변경 가능)
       ),
     );
+  }
+}
+class RainIcon extends StatelessWidget {
+  const RainIcon({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ShaderMask(
+      shaderCallback: (Rect bounds) {
+        return LinearGradient(
+          colors: [Colors.blue, Colors.white70],
+        ).createShader(bounds);
+      },
+      child: Icon(
+        Icons.water_drop_sharp,
+        color: Colors.white, // 아이콘의 기본 색상을 흰색으로 설정
+        size: 130, // 아이콘 크기 지정 (원하는 크기로 변경 가능)
+      ),
+    );
+  }
+}
+class HazeIcon extends StatelessWidget {
+  const HazeIcon({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.asset("images/haze.png",fit: BoxFit.contain,);
   }
 }

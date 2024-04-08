@@ -70,7 +70,7 @@ class _LoadingState extends State<LoadingMap> {
       Network('https://api.openweathermap.org/data/2.5/weather?lat=37.5601&lon=126.9960&appid=$apiKey&units=metric'), // 중구23
       Network('https://api.openweathermap.org/data/2.5/weather?lat=37.5978&lon=127.0929&appid=$apiKey&units=metric'), // 중랑구24
       // 광역시
-      Network('https://api.openweathermap.org/data/2.5/weather?lat=37.5519&lon=126.9918&appid=$apiKey&units=metric'), // 서울25
+      Network('https://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=$apiKey&units=metric'), // 서울25
       Network('https://api.openweathermap.org/data/2.5/weather?lat=35.2100&lon=129.0689&appid=$apiKey&units=metric'), // 부산26
       Network('https://api.openweathermap.org/data/2.5/weather?lat=37.1557&lon=126.8354&appid=$apiKey&units=metric'), // 광주27
       Network('https://api.openweathermap.org/data/2.5/weather?lat=37.4563&lon=126.7052&appid=$apiKey&units=metric'), // 인천28

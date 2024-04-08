@@ -37,6 +37,7 @@ dependencies:
   fluttertoast: ^8.2.4
 
 
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
@@ -70,6 +71,7 @@ flutter:
     - family: NamunSquareRoundB
       fonts:
         - asset: fonts/NanumSquareRoundB.ttf
+
 
   # To add assets to your application, add an assets section, like this:
   assets:
