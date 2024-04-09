@@ -47,9 +47,9 @@ class _CityScreenState extends State<CityScreen> {
               ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context, cityName);
-                  },
+                },
                 child: const Text(
-                  'Search',
+                  '날씨 보기',
                   style: kButtonTextStyle,
                 ),
               ),

@@ -13,7 +13,7 @@ const kMessageTextStyle = TextStyle(
 const kButtonTextStyle = TextStyle(
   fontSize: 30.0,
   fontFamily: 'Inter',
-  fontWeight: FontWeight.w600
+  fontWeight: FontWeight.w700
 );
 
 const kConditionTextStyle = TextStyle(
