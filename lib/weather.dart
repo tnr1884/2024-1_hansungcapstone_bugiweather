@@ -7,7 +7,7 @@ const lang = "kr";
 
 class WeatherModel {
   Future<dynamic> getCityWeather(String cityName) async {
-    var url = '$openWeatherMapURL?q=$cityName&appid=$apiKey&units=metric';
+    var url = '$openWeatherMapURL?q=$cityName&appid=$apiKey&units=metric&lang=$lang';
     NetworkHelper networkHelper = NetworkHelper(url);
     var weatherData = await networkHelper.getData();
     return weatherData;

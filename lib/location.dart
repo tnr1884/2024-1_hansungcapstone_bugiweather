@@ -1,8 +1,11 @@
 import 'package:geolocator/geolocator.dart';
 
 class Location {
-  late double latitude;
-  late double longitude;
+  // late double latitude;
+  // late double longitude;
+  // 한성대 좌표 = '37.583350, 127.009536'
+  double latitude = 37.583350;
+  double longitude = 127.009536;
   Future<void> getCurrentLocation() async {
     try {
       LocationPermission permission = await Geolocator.checkPermission();

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hansungcapstone_bugiweather/weather.dart';
 import 'package:hansungcapstone_bugiweather/constants.dart';
@@ -73,7 +74,7 @@ class _LocationScreenState extends State<LocationScreen> {
                     onPressed: () async {
                       var typedName = await Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) {
+                        CupertinoPageRoute(builder: (context) {
                           return CityScreen();
                         }),
                       );
@@ -92,8 +93,12 @@ class _LocationScreenState extends State<LocationScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 15.0),
-                child: Row(
+                child: Column(
                   children: <Widget>[
+                    Text(
+                      '$cityName',
+                      style: kButtonTextStyle,
+                    ),
                     Text(
                       '$temperature°',
                       style: kTempTextStyle,
