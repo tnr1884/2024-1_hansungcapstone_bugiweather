@@ -112,6 +112,7 @@ class _LoadingState extends State<LoadingMap> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Center(
         child: Scaffold(
         /*        appBar: AppBar(

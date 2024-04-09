@@ -35,6 +35,7 @@ dependencies:
   permission_handler: ^11.3.0
   http: ^1.2.1
   fluttertoast: ^8.2.4
+  flutter_svg : ^2.0.9
 
 
 
