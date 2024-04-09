@@ -32,7 +32,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     return const Scaffold(
         body: Center(
           child: SpinKitRing(
-            color: Colors.white,
+            color: Colors.blueAccent,
             size: 100,
           ),  // SpinKitDoubleBounce
         ),

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:hansungcapstone_bugiweather/location.dart';
 import 'package:hansungcapstone_bugiweather/networking.dart';
 
@@ -42,4 +44,5 @@ class WeatherModel {
       return '🤷‍';
     }
   }
+
 }
