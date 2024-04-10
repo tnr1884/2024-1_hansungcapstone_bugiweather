@@ -89,6 +89,8 @@ class _LoadingState extends State<LoadingMap> {
       Network('https://api.openweathermap.org/data/2.5/weather?q=Andong&appid=$apiKey&units=metric'), // 안동40
       Network('https://api.openweathermap.org/data/2.5/weather?q=Gimcheon&appid=$apiKey&units=metric'), // 김천41
       Network('https://api.openweathermap.org/data/2.5/weather?q=Pyeongtaek&appid=$apiKey&units=metric'), // 평택42
+      // 한성대학교
+      Network('https://api.openweathermap.org/data/2.5/weather?lat=37.5828&lon=127.0106&appid=$apiKey&units=metric'), // 한성대학교43
 
 
     ];

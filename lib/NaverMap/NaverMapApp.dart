@@ -117,7 +117,11 @@ class _NaverMapAppState extends State<NaverMapApp> {
               final hansungLogo = NOverlayImage.fromAssetImage('assets/hansung.png');
               final markerHansung = NMarker(id: 'hansung', position: NLatLng(37.5828, 127.0106), icon: hansungLogo) // 한성대학교
                 ..setMinZoom(10)
-                ..setMaxZoom(13);
+                ..setMaxZoom(13)
+                ..setOnTapListener((overlay) =>
+                    myBottom(cityName: "한성대학교", temp: tempList[43], feelsLike: feelsLikeList[43], humidity: humidityList[43],
+                        minTemp: minTempList[43], maxTemp: maxTempList[43], condition: conditionList[43] )
+                );
               controller.addOverlay(markerHansung);
 
               //서울 시내
@@ -633,7 +637,7 @@ class _NaverMapAppState extends State<NaverMapApp> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    width: 250,
+                    width: 200,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -746,13 +750,13 @@ class _NaverMapAppState extends State<NaverMapApp> {
     }
   }
   SvgPicture cityLogo(String cityName) {
-    return SvgPicture.asset("assets/" + cityName + ".svg", height: 32, width: 32,);
+    return SvgPicture.asset("assets/city/" + cityName + ".svg", height: 30, width: 30,);
   }
 }
 class TitleStyle extends TextStyle {
   @override
   // TODO: implement fontSize
-  double? get fontSize => 33;
+  double? get fontSize => 32;
   @override
   // TODO: implement fontFamily
   String? get fontFamily => 'NanumSquareRoundB';
