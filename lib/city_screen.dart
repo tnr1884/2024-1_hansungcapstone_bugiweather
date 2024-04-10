@@ -30,28 +30,39 @@ class _CityScreenState extends State<CityScreen> {
                   },
                   child: const Icon(
                     Icons.arrow_back_ios,
-                    size: 50.0,
+                    size: 40.0,
+                    color: Colors.indigoAccent
                   ),
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.all(20.0),
-                child: TextField(
-                  style: const TextStyle(color: Colors.black),
-                  decoration: kTextFieldInputDecoration,
-                  onChanged: (value) {
-                    cityName = value;
-                  },
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context, cityName);
-                },
-                child: const Text(
-                  '날씨 보기',
-                  style: kButtonTextStyle,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget> [
+                  Flexible(
+                    child:Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: TextField(
+                        style: const TextStyle(color: Colors.black),
+                        decoration: kTextFieldInputDecoration,
+                        onChanged: (value) {
+                          cityName = value;
+                          },
+                      ),
+                    )
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context, cityName);
+                    },
+                      child: const Icon(
+                        Icons.search,
+                        color: Colors.indigoAccent,
+                        size: 40.0,
+                      )
+                  ),
+                ],
               ),
             ],
           ),

@@ -6,25 +6,38 @@ import 'package:hansungcapstone_bugiweather/city_screen.dart';
 
 class LocationScreen extends StatefulWidget {
   final locationWeather;
-  LocationScreen({this.locationWeather});
+  final locationForecast;
+  LocationScreen({this.locationWeather, this.locationForecast});
   @override
   _LocationScreenState createState() => _LocationScreenState();
 }
 
 class _LocationScreenState extends State<LocationScreen> {
-  WeatherModel weather = WeatherModel();
+  WeatherModel weather = WeatherModel(); // 현재 날씨
+  WeatherModel forecast = WeatherModel(); // 일기 예보
 
   late int temperature;
   late String cityName;
-  late String weatherIcon;
+  late String weatherIcon; // 현재 날씨
+
+  late int foreTemp1;
+  late int foreTemp2;
+  //late int foreTemp3; // 예보
+
+  late String forecastIcon1, forecastIcon2; //, forecastIcon3;
+
+  late DateTime stamp1;
+  late DateTime stamp2;
+  late DateTime stamp3; // 기상 예보 발표 시각
 
   @override
   void initState() {
     super.initState();
-    updateUI(widget.locationWeather);
+    updateUIW(widget.locationWeather);
+    updateUIF(widget.locationForecast);
   }
 
-  void updateUI(var weatherData) {
+  void updateUIW(var weatherData) {
     setState(() {
       if (weatherData == null) {
         temperature = 0;
@@ -32,11 +45,42 @@ class _LocationScreenState extends State<LocationScreen> {
         cityName = '';
         return;
       }
+
       double temp = weatherData['main']['temp'];
       temperature = temp.toInt();
       int condition = weatherData['weather'][0]['id'];
       weatherIcon = weather.getWeatherIcon(condition);
       cityName = weatherData['name'];
+    });
+  }
+
+  void updateUIF(var forecastData){
+    setState(() {
+      if(forecastData == null){
+        foreTemp1 = 0;
+        forecastIcon1= "🫧";
+        forecastIcon2 = "🫧";
+        //forecastIcon3 = "🫧";
+      return;
+      }
+
+      double foretemp1= forecastData['list'][0]["main"]["temp"];
+      foreTemp1 = foretemp1.toInt();
+
+      // double foretemp2= forecastData['list'][0]["main"]["temp"];
+      // foreTemp2 = foretemp2.toInt();
+
+
+      int condition1 = forecastData['list'][0]['weather'][0]['id'];
+      forecastIcon1 = forecast.getWeatherIcon(condition1);
+
+      // int condition2 = forecastData['list'][1]['weather'][0]['id'];
+      // forecastIcon2 = forecast.getWeatherIcon(condition2);
+
+
+      cityName = forecastData['city']['name'];
+      //stamp1 = forecastData['list'][0]['dt_txt'].toString() as DateTime;
+      //stamp는 일단 보류...
     });
   }
 
@@ -54,23 +98,26 @@ class _LocationScreenState extends State<LocationScreen> {
 
         child: SafeArea(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.start,
+            //crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  ElevatedButton(
+                  TextButton(
                     onPressed: () async {
                       var weatherData = await weather.getLocationWeather();
-                      updateUI(weatherData);
+                      updateUIW(weatherData);
+                      var forecastData = await forecast.getLocationForecast();
+                      updateUIF(forecastData);
                     },
                     child: const Icon(
                       Icons.near_me,
                       size: 50.0,
+                      color: Colors.indigoAccent,
                     ),
                   ),
-                  ElevatedButton(
+                  TextButton(
                     onPressed: () async {
                       var typedName = await Navigator.push(
                         context,
@@ -81,38 +128,70 @@ class _LocationScreenState extends State<LocationScreen> {
                       if (typedName != null) {
                         var weatherData =
                         await weather.getCityWeather(typedName);
-                        updateUI(weatherData);
+                        updateUIW(weatherData);
+                        var forecastData =
+                        await forecast.getCityForecast(typedName);
+                        updateUIF(forecastData);
                       }
                     },
                     child: const Icon(
                       Icons.search,
                       size: 50.0,
+                      color: Colors.indigoAccent,
                     ),
                   ),
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 15.0),
-                child: Column(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child:
+                Column(
                   children: <Widget>[
                     Text(
-                      '$cityName',
+                      cityName,
                       style: kButtonTextStyle,
                     ),
                     Text(
                       '$temperature°',
-                      style: kTempTextStyle,
+                      style: kTempTextStyleNow,
                     ),
                     Text(
-                      weatherIcon,
-                      style: kConditionTextStyle,
+                      '$weatherIcon',
+                      style: kConditionTextStyleNow,
                     ),
                   ],
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.only(right: 15.0),
-              ),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Column(
+                    children: [
+                      Text(
+                          '$foreTemp1°',
+                        style: kTempTextStyleFore,
+                      ),
+                      Text(
+                          forecastIcon1,
+                        style: kConditionTextStyleFore,
+                      )
+                    ],
+                  ),
+                  // Column(
+                  //   children: [
+                  //     Text(
+                  //       '$foreTemp2°',
+                  //       style: kTempTextStyleFore,
+                  //     ),
+                  //     Text(
+                  //       forecastIcon2,
+                  //       style: kConditionTextStyleFore,
+                  //     )
+                  //   ],
+                  // ),
+
+                ],
+              )
             ],
           ),
         ),

@@ -18,11 +18,12 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   void getLocationData() async {
     var weatherData = await WeatherModel().getLocationWeather();
+    var forecastData = await WeatherModel().getLocationForecast();
 
     Navigator.push(
       context,
       CupertinoPageRoute(builder: (context) {
-        return LocationScreen(locationWeather: weatherData);
+        return LocationScreen(locationWeather: weatherData, locationForecast: forecastData);
       }),  // MaterialPageRoute
     );
   }
@@ -32,7 +33,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     return const Scaffold(
         body: Center(
           child: SpinKitRing(
-            color: Colors.blueAccent,
+            color: Colors.indigoAccent,
             size: 100,
           ),  // SpinKitDoubleBounce
         ),

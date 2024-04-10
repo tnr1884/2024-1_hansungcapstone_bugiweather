@@ -1,23 +1,30 @@
 import 'package:flutter/material.dart';
 
-const kTempTextStyle = TextStyle(
-  fontFamily: 'Inter',
-  fontSize: 100.0,
-);
-
-const kMessageTextStyle = TextStyle(
-  fontFamily: 'Inter',
-  fontSize: 60.0,
-);
-
 const kButtonTextStyle = TextStyle(
   fontSize: 30.0,
   fontFamily: 'Inter',
   fontWeight: FontWeight.w700
 );
 
-const kConditionTextStyle = TextStyle(
-  fontSize: 100.0,
+const kTempTextStyleNow = TextStyle(
+  fontFamily: 'Inter',
+  fontSize: 90.0,
+);
+
+
+const kConditionTextStyleNow = TextStyle(
+  fontSize: 90.0,
+);
+
+const kTempTextStyleFore = TextStyle(
+  fontSize: 30.0,
+  fontFamily: 'Inter',
+  fontWeight: FontWeight.w300
+);
+
+const kConditionTextStyleFore = TextStyle(
+  fontSize: 20.0,
+  fontFamily: 'Inter',
 );
 
 const kTextFieldInputDecoration = InputDecoration(
@@ -26,6 +33,7 @@ const kTextFieldInputDecoration = InputDecoration(
   icon: Icon(
     Icons.location_pin,
     color: Colors.white,
+    size: 30.0,
   ),
   hintText: '도시 검색...',
   hintStyle: TextStyle(color: Colors.grey),
