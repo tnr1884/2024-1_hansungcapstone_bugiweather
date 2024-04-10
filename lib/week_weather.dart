@@ -82,9 +82,9 @@ class Home extends StatelessWidget {
                 alignment: Alignment.center,
                 child: const Icon(Icons.sunny),
               ),
-              SizedBox(width: 10),
+              //SizedBox(width: 10),
               Container(
-                width: 45.5,
+                width: 70,
                 height: 57.0,
                 alignment: Alignment.center,
                 child: Text(
@@ -99,11 +99,9 @@ class Home extends StatelessWidget {
                 alignment: Alignment.center,
                 child: const Icon(Icons.sunny)
               ),
-              SizedBox(
-                width: 10,
-              ),
+              //SizedBox(width: 10,),
               Container(
-                width: 45.5,
+                width: 70,
                 height: 57.0,
                 alignment: Alignment.center,
                 child: Text(
@@ -127,9 +125,9 @@ class Home extends StatelessWidget {
                   alignment: Alignment.center,
                   child: const Icon(Icons.sunny),
                 ),
-                SizedBox(width: 10),
+                //SizedBox(width: 10),
                 Container(
-                  width: 45.5,
+                  width: 70,
                   height: 57.0,
                   alignment: Alignment.center,
                   child: Text(
@@ -144,9 +142,9 @@ class Home extends StatelessWidget {
                   alignment: Alignment.center,
                   child: const Icon(Icons.sunny)
                 ),
-                SizedBox(width: 10),
+                //SizedBox(width: 10),
                 Container(
-                  width: 45.5,
+                  width: 70,
                   height: 57.0,
                   alignment: Alignment.center,
                   child: Text(
@@ -171,9 +169,9 @@ class Home extends StatelessWidget {
                   alignment: Alignment.center,
                   child: const Icon(Icons.sunny),
                 ),
-                SizedBox(width: 10),
+                //SizedBox(width: 10),
                 Container(
-                  width: 45.5,
+                  width: 70,
                   height: 57.0,
                   alignment: Alignment.center,
                   child: Text(
@@ -188,9 +186,9 @@ class Home extends StatelessWidget {
                   alignment: Alignment.center,
                   child: const Icon(Icons.sunny),
                 ),
-                SizedBox(width: 10),
+                //SizedBox(width: 10),
                 Container(
-                  width: 45.5,
+                  width: 70,
                   height: 57.0,
                   alignment: Alignment.center,
                   child: Text(
