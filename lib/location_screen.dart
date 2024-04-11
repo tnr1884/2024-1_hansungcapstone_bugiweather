@@ -58,6 +58,7 @@ class _LocationScreenState extends State<LocationScreen> {
     setState(() {
       if(forecastData == null){
         foreTemp1 = 0;
+        foreTemp2 = 0;
         forecastIcon1= "🫧";
         forecastIcon2 = "🫧";
         //forecastIcon3 = "🫧";
@@ -67,15 +68,15 @@ class _LocationScreenState extends State<LocationScreen> {
       double foretemp1= forecastData['list'][0]["main"]["temp"];
       foreTemp1 = foretemp1.toInt();
 
-      // double foretemp2= forecastData['list'][0]["main"]["temp"];
-      // foreTemp2 = foretemp2.toInt();
+      double foretemp2= forecastData['list'][1]["main"]["temp"];
+      foreTemp2 = foretemp2.toInt();
 
 
       int condition1 = forecastData['list'][0]['weather'][0]['id'];
       forecastIcon1 = forecast.getWeatherIcon(condition1);
 
-      // int condition2 = forecastData['list'][1]['weather'][0]['id'];
-      // forecastIcon2 = forecast.getWeatherIcon(condition2);
+      int condition2 = forecastData['list'][1]['weather'][0]['id'];
+      forecastIcon2 = forecast.getWeatherIcon(condition2);
 
 
       cityName = forecastData['city']['name'];
@@ -177,18 +178,18 @@ class _LocationScreenState extends State<LocationScreen> {
                       )
                     ],
                   ),
-                  // Column(
-                  //   children: [
-                  //     Text(
-                  //       '$foreTemp2°',
-                  //       style: kTempTextStyleFore,
-                  //     ),
-                  //     Text(
-                  //       forecastIcon2,
-                  //       style: kConditionTextStyleFore,
-                  //     )
-                  //   ],
-                  // ),
+                  Column(
+                    children: [
+                      Text(
+                        '$foreTemp2°',
+                        style: kTempTextStyleFore,
+                      ),
+                      Text(
+                        forecastIcon2,
+                        style: kConditionTextStyleFore,
+                      )
+                    ],
+                  ),
 
                 ],
               )

@@ -1,7 +1,8 @@
 import 'dart:async';
-
 import 'package:hansungcapstone_bugiweather/location.dart';
 import 'package:hansungcapstone_bugiweather/networking.dart';
+
+// https://api.openweathermap.org/data/2.5/forecast?q=Seoul&appid=d85c3f5894dd01de3ea4d4a81f3a73b0&units=metric&lang=kr&cnt=3
 
 const apiKey = 'd85c3f5894dd01de3ea4d4a81f3a73b0';
 const openWeatherMapURL = 'https://api.openweathermap.org/data/2.5/weather';
