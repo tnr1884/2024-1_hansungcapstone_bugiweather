@@ -289,7 +289,7 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffffffff),
+      backgroundColor: Colors.blue,
       appBar: AppBar(
         elevation: 4,
         centerTitle: true,
@@ -306,6 +306,18 @@ class HomeScreenState extends State<HomeScreen> {
           },
           iconSize: 30.0,
         ),
+          flexibleSpace: new Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: <Color>[
+                  Color(0xffbfd5ff),
+                  Color(0xff74d5ff),
+                ],
+              ),
+            ),
+          ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
@@ -336,6 +348,7 @@ class HomeScreenState extends State<HomeScreen> {
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.grey,
+        backgroundColor: Colors.redAccent,
         onTap: _onItemTapped,
       ),
       body: SafeArea(

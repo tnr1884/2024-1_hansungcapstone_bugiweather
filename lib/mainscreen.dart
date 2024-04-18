@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hansungcapstone_bugiweather/NaverMap/font.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
