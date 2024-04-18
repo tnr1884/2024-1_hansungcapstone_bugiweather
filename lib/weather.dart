@@ -48,7 +48,7 @@ class WeatherModel {
     if (condition < 300) {
       return '🌩';
     } else if (condition < 400) {
-      return '🌧';
+      return '🌧️';
     } else if (condition < 600) {
       return '☔️';
     } else if (condition < 700) {
