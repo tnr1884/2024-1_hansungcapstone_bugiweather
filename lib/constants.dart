@@ -17,13 +17,13 @@ const kConditionTextStyleNow = TextStyle(
 );
 
 const kTempTextStyleFore = TextStyle(
-  fontSize: 30.0,
+  fontSize: 35.0,
   fontFamily: 'Inter',
-  fontWeight: FontWeight.w300
+  fontWeight: FontWeight.w400
 );
 
 const kConditionTextStyleFore = TextStyle(
-  fontSize: 20.0,
+  fontSize: 40.0,
   fontFamily: 'Inter',
 );
 

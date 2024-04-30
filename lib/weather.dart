@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:ui';
+import 'package:flutter/widgets.dart';
 import 'package:hansungcapstone_bugiweather/location.dart';
 import 'package:hansungcapstone_bugiweather/networking.dart';
 
@@ -28,17 +30,17 @@ class WeatherModel {
   }
 
   Future<dynamic> getCityForecast(String cityName) async {
-    var url = '$openForecastURL?q=$cityName$addons&cnt=3';
+    var url = '$openForecastURL?q=$cityName$addons&cnt=4';
     NetworkHelper networkHelper = NetworkHelper(url);
     var forecastData = await networkHelper.getData();
     return forecastData;
   }
-  // cnt=3 : 3시간 간격 일기예보 데이터 중 맨 앞 3개만 불러오기
+  // cnt=4 : 3시간 간격 일기예보 데이터 중 맨 앞 4개 불러오기, 오류 방지 위해 4개 불러서 3개 보이게
 
   Future<dynamic> getLocationForecast() async{
     Location location = Location();
     await location.getCurrentLocation();
-    var url = '$openForecastURL?lat=${location.latitude}&lon=${location.longitude}$addons&cnt=3';
+    var url = '$openForecastURL?lat=${location.latitude}&lon=${location.longitude}$addons&cnt=4';
     NetworkHelper networkHelper = NetworkHelper(url);
     var forecastData = await networkHelper.getData();
     return forecastData;
@@ -61,6 +63,26 @@ class WeatherModel {
       return '☁️';
     } else {
       return '🤷‍';
+    }
+  }
+
+  Image getWeatherImage(int condition){
+    if (condition < 300) {
+      return Image.asset('assets/weather_icons/storm.png');
+    } else if (condition < 400) {
+      return Image.asset('assets/weather_icons/rain_2x.png');
+    } else if (condition < 600) {
+      return Image.asset('assets/weather_icons/rain_2x.png');
+    } else if (condition < 700) {
+      return Image.asset('assets/weather_icons/snow_2x.png');
+    } else if (condition < 800) {
+      return Image.asset('assets/weather_icons/ptcl_2x.png');
+    } else if (condition == 800) {
+      return Image.asset('assets/weather_icons/sun_2x.png');
+    } else if (condition <= 804) {
+      return Image.asset('assets/weather_icons/cloud_2x.png');
+    } else {
+      return Image.asset('assets/weather_icons/ptcl_2x.png');
     }
   }
 

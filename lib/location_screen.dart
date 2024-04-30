@@ -18,13 +18,16 @@ class _LocationScreenState extends State<LocationScreen> {
 
   late int temperature;
   late String cityName;
-  late String weatherIcon; // 현재 날씨
+  late String weatherIcon;
+  late Image weatherPic;
+  // 현재 날씨
 
   late int foreTemp1;
   late int foreTemp2;
-  //late int foreTemp3; // 예보
+  late int foreTemp3; // 예보
 
-  late String forecastIcon1, forecastIcon2; //, forecastIcon3;
+  late String forecastIcon1, forecastIcon2, forecastIcon3;
+  late Image forecastPic;
 
   late DateTime stamp1;
   late DateTime stamp2;
@@ -61,7 +64,7 @@ class _LocationScreenState extends State<LocationScreen> {
         foreTemp2 = 0;
         forecastIcon1= "🫧";
         forecastIcon2 = "🫧";
-        //forecastIcon3 = "🫧";
+        forecastIcon3 = "🫧";
       return;
       }
 
@@ -71,12 +74,18 @@ class _LocationScreenState extends State<LocationScreen> {
       double foretemp2= forecastData['list'][1]["main"]["temp"];
       foreTemp2 = foretemp2.toInt();
 
+      double foretemp3= forecastData['list'][2]["main"]["temp"];
+      foreTemp3 = foretemp3.toInt();
+
 
       int condition1 = forecastData['list'][0]['weather'][0]['id'];
       forecastIcon1 = forecast.getWeatherIcon(condition1);
 
       int condition2 = forecastData['list'][1]['weather'][0]['id'];
       forecastIcon2 = forecast.getWeatherIcon(condition2);
+
+      int condition3 = forecastData['list'][2]['weather'][0]['id'];
+      forecastIcon3 = forecast.getWeatherIcon(condition3);
 
 
       cityName = forecastData['city']['name'];
@@ -113,7 +122,7 @@ class _LocationScreenState extends State<LocationScreen> {
                       updateUIF(forecastData);
                     },
                     child: const Icon(
-                      Icons.near_me,
+                      Icons.near_me_rounded,
                       size: 50.0,
                       color: Colors.indigoAccent,
                     ),
@@ -136,7 +145,7 @@ class _LocationScreenState extends State<LocationScreen> {
                       }
                     },
                     child: const Icon(
-                      Icons.search,
+                      Icons.search_rounded,
                       size: 50.0,
                       color: Colors.indigoAccent,
                     ),
@@ -163,6 +172,7 @@ class _LocationScreenState extends State<LocationScreen> {
                   ],
                 ),
               ),
+              SizedBox(height: 30),
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -178,6 +188,7 @@ class _LocationScreenState extends State<LocationScreen> {
                       )
                     ],
                   ),
+                  SizedBox(width: 40),
                   Column(
                     children: [
                       Text(
@@ -190,7 +201,19 @@ class _LocationScreenState extends State<LocationScreen> {
                       )
                     ],
                   ),
-
+                  SizedBox(width: 40),
+                  Column(
+                    children: [
+                      Text(
+                        '$foreTemp3°',
+                        style: kTempTextStyleFore,
+                      ),
+                      Text(
+                        forecastIcon3,
+                        style: kConditionTextStyleFore,
+                      )
+                    ],
+                  ),
                 ],
               )
             ],
