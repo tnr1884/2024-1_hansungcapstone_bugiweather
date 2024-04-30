@@ -1,6 +1,7 @@
+
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'model.dart';
+import '/model.dart';
 
 class weekScreen extends StatefulWidget {
   weekScreen({this.parseWeatherData});
@@ -111,12 +112,14 @@ class _backscreen extends State<weekScreen> {
                         ),
                       ),
                     ),
-                    //SizedBox(width: 10,),
+                    SizedBox(width: 10,),
                     Container(
                       alignment: Alignment.center,
                       child: icon[0],
+                      height: 70,
+                      width: 70,
                     ),
-                    SizedBox(width: 40),
+                    SizedBox(width: 30),
                     Container(
                       alignment: Alignment.center,
                       child: Text(
@@ -142,12 +145,14 @@ class _backscreen extends State<weekScreen> {
                         ),
                       ),
                     ),
-                    //SizedBox(width: 10,),
+                    SizedBox(width: 10,),
                     Container(
                       alignment: Alignment.center,
                       child: icon[1],
+                      height: 70,
+                      width: 70,
                     ),
-                    SizedBox(width: 40),
+                    SizedBox(width: 30),
                     Container(
                       alignment: Alignment.center,
                       child: Text(
@@ -173,12 +178,14 @@ class _backscreen extends State<weekScreen> {
                         ),
                       ),
                     ),
-                    //SizedBox(width: 10,),
+                    SizedBox(width: 10,),
                     Container(
                       alignment: Alignment.center,
                       child: icon[2],
+                      height: 70,
+                      width: 70,
                     ),
-                    SizedBox(width: 40),
+                    SizedBox(width: 30),
                     Container(
                       alignment: Alignment.center,
                       child: Text(
@@ -204,12 +211,14 @@ class _backscreen extends State<weekScreen> {
                         ),
                       ),
                     ),
-                    //SizedBox(width: 10,),
+                    SizedBox(width: 10,),
                     Container(
                       alignment: Alignment.center,
                       child: icon[3],
+                      height: 70,
+                      width: 70,
                     ),
-                    SizedBox(width: 40),
+                    SizedBox(width: 30),
                     Container(
                       alignment: Alignment.center,
                       child: Text(
@@ -235,12 +244,14 @@ class _backscreen extends State<weekScreen> {
                         ),
                       ),
                     ),
-                    //SizedBox(width: 10,),
+                    SizedBox(width: 10,),
                     Container(
                       alignment: Alignment.center,
                       child: icon[4],
+                      height: 70,
+                      width: 70,
                     ),
-                    SizedBox(width: 40),
+                    SizedBox(width: 30),
                     Container(
                       alignment: Alignment.center,
                       child: Text(
@@ -266,12 +277,14 @@ class _backscreen extends State<weekScreen> {
                         ),
                       ),
                     ),
-                    //SizedBox(width: 10,),
+                    SizedBox(width: 10,),
                     Container(
                       alignment: Alignment.center,
                       child: icon[5],
+                      height: 70,
+                      width: 70,
                     ),
-                    SizedBox(width: 40),
+                    SizedBox(width: 30),
                     Container(
                       alignment: Alignment.center,
                       child: Text(
@@ -297,12 +310,14 @@ class _backscreen extends State<weekScreen> {
                         ),
                       ),
                     ),
-                    //SizedBox(width: 10,),
+                    SizedBox(width: 10,),
                     Container(
                       alignment: Alignment.center,
                       child: icon[6],
+                      height: 70,
+                      width: 70,
                     ),
-                    SizedBox(width: 40),
+                    SizedBox(width: 30),
                     Container(
                       alignment: Alignment.center,
                       child: Text(
@@ -328,12 +343,14 @@ class _backscreen extends State<weekScreen> {
                         ),
                       ),
                     ),
-                    //SizedBox(width: 10,),
+                    SizedBox(width: 10,),
                     Container(
                       alignment: Alignment.center,
                       child: icon[7],
+                      height: 70,
+                      width: 70,
                     ),
-                    SizedBox(width: 40),
+                    SizedBox(width: 30),
                     Container(
                       alignment: Alignment.center,
                       child: Text(
