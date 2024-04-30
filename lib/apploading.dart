@@ -294,27 +294,39 @@ class _AppLoadingState extends State<AppLoading> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Colors.lightBlueAccent,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SpinKitWave(
-              color: Colors.white,
-              size: 60.0,
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              '위치 정보 업데이트 중',
-              style: TextStyle(
-                fontSize: 20.0,
-                color: Colors.black87,
+    return Scaffold(
+      //backgroundColor: Colors.lightBlueAccent,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: <Color>[
+              Color(0xffbfd5ff),
+              Color(0xff74d5ff),
+            ],
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SpinKitWave(
+                color: Colors.white,
+                size: 60.0,
               ),
-            )
-          ],
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                '위치 정보 업데이트 중',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  color: Colors.black87,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -5,6 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:hansungcapstone_bugiweather/Daily/main.dart';
 import 'package:hansungcapstone_bugiweather/Daily/weekWeather.dart';
+import 'package:hansungcapstone_bugiweather/Search/loading_screen.dart';
 import 'package:hansungcapstone_bugiweather/favorites.dart';
 import 'package:hansungcapstone_bugiweather/todayweatherscreen.dart';
 import 'package:hansungcapstone_bugiweather/setting.dart';
@@ -89,7 +90,7 @@ class HomeScreenState extends State<HomeScreen> {
       weekScreen(parseWeatherData: widget.dailyWeather,),
       getHSTodayWeatherScreen(),
       LoadingMap(),
-      Favorites(),
+      LoadingScreen(),
     ];
   }
 
@@ -294,7 +295,6 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
       appBar: AppBar(
         elevation: 4,
         centerTitle: true,
@@ -324,37 +324,38 @@ class HomeScreenState extends State<HomeScreen> {
             ),
           ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: '홈',
-          ),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_month),
-            label: '단기 예보',
-          ),
-          BottomNavigationBarItem(
-              icon: Image.asset("assets/bugi.png", width: 24, height: 24),
-              label: "한성대 날씨"),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.map),
-            label: '전국 날씨',
-          ),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.pin_drop_outlined),
-            label: '즐겨찾기',
-          ),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.cloud),
-            label: '대기질 정보',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.grey,
-        backgroundColor: Colors.redAccent,
-        onTap: _onItemTapped,
+      bottomNavigationBar: Container(
+        child: BottomNavigationBar(
+          items: <BottomNavigationBarItem>[
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: '홈',
+            ),
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.calendar_month),
+              label: '단기 예보',
+            ),
+            BottomNavigationBarItem(
+                icon: Image.asset("assets/bugi.png", width: 24, height: 24),
+                label: "한성대 날씨"),
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.map),
+              label: '전국 날씨',
+            ),
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.pin_drop_outlined),
+              label: '즐겨찾기',
+            ),
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.cloud),
+              label: '대기질 정보',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.grey,
+          onTap: _onItemTapped,
+        ),
       ),
       body: SafeArea(
         child: _widgetOptions.elementAt(_selectedIndex),
