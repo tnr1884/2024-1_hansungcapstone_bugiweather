@@ -78,6 +78,7 @@ class _NaverMapAppState extends State<NaverMapApp> {
       child: Center(
         child: Scaffold(
           appBar: AppBar(
+            title: Text("전국 날씨", style: TitleStyle(),),
             elevation: 4,
             centerTitle: true,
             automaticallyImplyLeading: false,
@@ -85,6 +86,18 @@ class _NaverMapAppState extends State<NaverMapApp> {
               icon: const Icon(Icons.menu),
               onPressed: () {},
               iconSize: 30.0,
+            ),
+            flexibleSpace: new Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: <Color>[
+                    Color(0xffbfd5ff),
+                    Color(0xff74d5ff),
+                  ],
+                ),
+              ),
             ),
           ),
           bottomNavigationBar: BottomAppBar(

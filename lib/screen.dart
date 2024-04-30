@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
+import 'package:hansungcapstone_bugiweather/Daily/main.dart';
+import 'package:hansungcapstone_bugiweather/Daily/weekWeather.dart';
 import 'package:hansungcapstone_bugiweather/favorites.dart';
 import 'package:hansungcapstone_bugiweather/todayweatherscreen.dart';
 import 'package:hansungcapstone_bugiweather/setting.dart';
@@ -30,6 +32,7 @@ class HomeScreen extends StatefulWidget {
   final dynamic hssuperShortWeatherData;
   final dynamic currenttodayData;
   final dynamic currenthstodayData;
+  final dynamic dailyWeather;
 
   const HomeScreen({
     super.key,
@@ -43,6 +46,7 @@ class HomeScreen extends StatefulWidget {
     this.hscurrentWeatherData,
     this.superShortWeatherData,
     this.hssuperShortWeatherData,
+    this.dailyWeather,
   });
 
   @override
@@ -58,6 +62,7 @@ class HomeScreenState extends State<HomeScreen> {
   var todayTMX2;
   var hstodayTMN2;
   var hstodayTMX2;
+
 
   // = <Widget>[
   //   TodayWeatherScreen(),
@@ -81,7 +86,7 @@ class HomeScreenState extends State<HomeScreen> {
 
     _widgetOptions = <Widget>[
       getTodayWeatherScreen(),
-      WeekWeather(),
+      weekScreen(parseWeatherData: widget.dailyWeather,),
       getHSTodayWeatherScreen(),
       LoadingMap(),
       Favorites(),
