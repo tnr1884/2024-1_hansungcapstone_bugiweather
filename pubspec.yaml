@@ -67,6 +67,7 @@ flutter:
   assets:
     - assets/weather_icons/
     - assets/weather_background/
+    - assets/aircondition/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
