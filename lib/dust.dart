@@ -118,13 +118,13 @@ class _DustScreenState extends State<DustScreen> {
                     const SizedBox(width: 10),
                   ],
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                // const SizedBox(
+                //   height: 5,
+                // ),
                 Column(
                   children: [
                     const SizedBox(
-                      height: 10,
+                      height: 5,
                     ),
                     Row(
                       children: [
