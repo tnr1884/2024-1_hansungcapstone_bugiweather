@@ -30,6 +30,7 @@ class _backscreen extends State<weekScreen> {
 
   void updateData(dynamic weatherData) {
     for (var dayForecast in weatherData) {
+      //print(dayForecast);
       double mornTemp = (dayForecast['temp']['morn'] as num).toDouble();
       //double mornTemp = dayForecast['temp']['morn'];
       mornTempList.add(kelvinToCelsius(mornTemp));
@@ -43,8 +44,11 @@ class _backscreen extends State<weekScreen> {
       weekDays.add(getWeekDay(date.weekday));
 
       int condition = dayForecast['weather'][0]['id'];
+      //print(dayForecast['weather'][0]['id']);
+     // print(condition);
       Widget? weatherIcon = model.getWeatherIcon(condition);
       if (weatherIcon != null) {
+        print(condition);
         icon.add(weatherIcon); // Only add if not null.
       }
     }
@@ -341,6 +345,7 @@ class _backscreen extends State<weekScreen> {
                   SizedBox(width: 10,),
                   Container(
                     alignment: Alignment.center,
+                    //child: Image.asset("images/sunc_1x.png"),
                     child: icon[7],
                     height: 70,
                     width: 70,
