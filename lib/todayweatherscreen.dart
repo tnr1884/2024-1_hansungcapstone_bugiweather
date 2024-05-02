@@ -4,6 +4,7 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hansungcapstone_bugiweather/NaverMap/font.dart';
 import 'package:hansungcapstone_bugiweather/httpnetwork.dart';
 import 'package:hansungcapstone_bugiweather/weather_icon_icons.dart';
 import 'package:intl/intl.dart';
@@ -167,12 +168,7 @@ class TodayWeatherState extends State<TodayWeatherScreen> {
                     "${widget.currentWeatherData['response']['body']['items']['item'][3]['obsrValue']}°C",
                     textAlign: TextAlign.start,
                     overflow: TextOverflow.clip,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontStyle: FontStyle.normal,
-                      fontSize: 35,
-                      color: Color(0xff000000),
-                    ),
+                    style: TitleStyle(),
                   ),
                   const SizedBox(
                     height: 8,

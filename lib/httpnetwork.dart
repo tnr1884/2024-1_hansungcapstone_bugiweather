@@ -32,7 +32,7 @@ class HttpNetwork {
     if (response.statusCode == 200) {
       String jsonData = response.body;
       var parsingData = jsonDecode(jsonData); // json형식 문자열을 배열 또는 객체로 변환하는 함수
-      print(parsingData);
+      //print(parsingData);
       return parsingData;
     }
   }
@@ -43,7 +43,7 @@ class HttpNetwork {
     if (response.statusCode == 200) {
       String jsonData = response.body;
       var parsingData = jsonDecode(jsonData);
-      print(parsingData);
+      //print(parsingData);
       return parsingData;
     }
   }
@@ -54,7 +54,7 @@ class HttpNetwork {
     if (response.statusCode == 200) {
       String jsonData = response.body;
       var parsingData = jsonDecode(jsonData);
-      print(parsingData);
+      //print(parsingData);
       return parsingData;
     }
   }
@@ -65,7 +65,7 @@ class HttpNetwork {
     if (response.statusCode == 200) {
       String jsonData = response.body;
       var parsingData = jsonDecode(jsonData);
-      print(parsingData);
+      //print(parsingData);
       return parsingData;
     }
   }
@@ -76,7 +76,7 @@ class HttpNetwork {
     if (response.statusCode == 200) {
       String jsonData = response.body;
       var parsingData = jsonDecode(jsonData);
-      print(parsingData);
+      //print(parsingData);
       return parsingData;
     }
   }
