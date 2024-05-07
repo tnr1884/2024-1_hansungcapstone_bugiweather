@@ -350,7 +350,7 @@ class HomeScreenState extends State<HomeScreen> {
             ),
             const BottomNavigationBarItem(
               icon: Icon(Icons.pin_drop_outlined),
-              label: '즐겨찾기',
+              label: '위치검색',
             ),
             const BottomNavigationBarItem(
               icon: Icon(Icons.cloud),

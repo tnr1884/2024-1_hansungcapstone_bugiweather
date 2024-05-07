@@ -40,16 +40,16 @@ class _NaverMapAppState extends State<NaverMapApp> {
     cityName = weatherData[0]['name'];*/
 
     for(int i=0; i<weatherData.length; i++) {
-      double temp=weatherData[i]['main']['temp'].toDouble();
-      String cityName=weatherData[i]['name'];
-      double feelsLike=weatherData[i]['main']['feels_like'].toDouble();
-      double humidity=weatherData[i]['main']['humidity'].toDouble();
-      double minTemp=weatherData[i]['main']['temp_min'].toDouble();
-      double maxTemp=weatherData[i]['main']['temp_max'].toDouble();
-      String condition=weatherData[i]['weather'][0]['main'];
+      double temp=weatherData[i]['current']['temp'].toDouble();
+      //String cityName=weatherData[i]['name'];
+      double feelsLike=weatherData[i]['current']['feels_like'].toDouble();
+      double humidity=weatherData[i]['current']['humidity'].toDouble();
+      double minTemp=weatherData[i]['daily'][0]['temp']['min'].toDouble();
+      double maxTemp=weatherData[i]['daily'][0]['temp']['max'].toDouble();
+      String condition=weatherData[i]['current']['weather'][0]['main'];
 
       tempList.add(temp);
-      cityNameList.add(cityName);
+      //cityNameList.add(cityName);
       feelsLikeList.add(feelsLike);
       humidityList.add(humidity);
       minTempList.add(minTemp);
@@ -82,11 +82,6 @@ class _NaverMapAppState extends State<NaverMapApp> {
             elevation: 4,
             centerTitle: true,
             automaticallyImplyLeading: false,
-            leading: IconButton(
-              icon: const Icon(Icons.menu),
-              onPressed: () {},
-              iconSize: 30.0,
-            ),
             flexibleSpace: new Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -102,7 +97,7 @@ class _NaverMapAppState extends State<NaverMapApp> {
           ),
           bottomNavigationBar: BottomAppBar(
             child: TextButton(
-              child: Text("뒤로가기", style: TextStyle(color: Colors.blue, fontSize: 24,),),
+              child: Text("뒤로가기", style: backStyle(),),
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -691,7 +686,7 @@ class _NaverMapAppState extends State<NaverMapApp> {
                     children: [
                       Row(
                         children: [
-                          Text("${temp.round()}°", style: TitleStyle(),),
+                          Text("${temp.round()}°", style: TempStyle(),),
                         ],
                       ),
                       Row(
@@ -759,6 +754,7 @@ class _NaverMapAppState extends State<NaverMapApp> {
       case "Clouds" :
         return CloudIcon();
       case "Rain" :
+      case "Drizzle":
         return RainIcon();
       /*case "Drizzle" :
         return DrizzleIcon();*/

@@ -89,3 +89,21 @@ Shadow myShadow() {
     blurRadius: 5,
   );
 }
+class backStyle extends TitleStyle {
+  @override
+  // TODO: implement color
+  Color? get color => Colors.black;
+}
+class TempStyle extends TitleStyle {
+  @override
+  // TODO: implement fontSize
+  double? get fontSize => 48;
+}
+class Title54Style extends TitleStyle {
+  @override
+  // TODO: implement color
+  Color? get color => Colors.white;
+  @override
+  // TODO: implement fontSize
+  double? get fontSize => 26;
+}
