@@ -87,6 +87,18 @@ class _backscreen extends State<weekScreen> {
             ),
           ),
         ),
+        Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color(0xFF74D5FF),
+                Color(0xFFBFD5FF),
+              ],
+            ),
+          ),
+        ),
         BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
           child: Container(
@@ -330,38 +342,38 @@ class _backscreen extends State<weekScreen> {
                     ),
                   ]),
                   SizedBox(height: 20),
-                  Row(children: [
-                    SizedBox(width: 30),
-                    Container(
-                      width: 95, // Specify the width
-                      height: 38, // Specify the height
-                      alignment: Alignment.center,
-                      child: Text(
-                        '${weekDays[7]}',
-                        style: TextStyle(
-                          fontSize: 25,
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 10,),
-                    Container(
-                      alignment: Alignment.center,
-                      child: icon[7],
-                      height: 70,
-                      width: 70,
-                    ),
-                    SizedBox(width: 30),
-                    Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        "${mornTempList[7]}/${eveTempList[7]}",
-                        style: TextStyle(fontSize: 30),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                  ]),
+                  // Row(children: [
+                  //   SizedBox(width: 30),
+                  //   Container(
+                  //     width: 95, // Specify the width
+                  //     height: 38, // Specify the height
+                  //     alignment: Alignment.center,
+                  //     child: Text(
+                  //       '${weekDays[7]}',
+                  //       style: TextStyle(
+                  //         fontSize: 25,
+                  //       ),
+                  //     ),
+                  //   ),
+                  //   SizedBox(width: 10,),
+                  //   Container(
+                  //     alignment: Alignment.center,
+                  //     child: icon[7],
+                  //     height: 70,
+                  //     width: 70,
+                  //   ),
+                  //   SizedBox(width: 30),
+                  //   Container(
+                  //     alignment: Alignment.center,
+                  //     child: Text(
+                  //       "${mornTempList[7]}/${eveTempList[7]}",
+                  //       style: TextStyle(fontSize: 30),
+                  //     ),
+                  //   ),
+                  //   SizedBox(
+                  //     width: 10,
+                  //   ),
+                  // ]),
                 ],
               ),
             ),

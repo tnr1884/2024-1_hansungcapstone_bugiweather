@@ -63,7 +63,7 @@ class _ButtonWidgetState extends State<ButtonWidget> {
           // );
         },
         child: Text('Button'),
-      ),
+      )
     );
   }
 }
