@@ -53,7 +53,7 @@ class HSTodayWeatherState extends State<HSTodayWeatherScreen> {
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/hansung_view_.png"),
+            image: AssetImage("assets/Clear.png"),
             fit: BoxFit.cover,
           ),
         ),
