@@ -61,7 +61,7 @@ class MinTempStyle extends TextStyle {
 
   @override
   // TODO: implement color
-  Color? get color => Colors.blueAccent;
+  Color? get color => Colors.blue.shade700;
   List<Shadow>? get shadows => [
     myShadow(),
   ];
@@ -77,7 +77,7 @@ class MaxTempStyle extends TextStyle {
 
   @override
   // TODO: implement color
-  Color? get color => Colors.redAccent;
+  Color? get color => Colors.red.shade700;
   List<Shadow>? get shadows => [
     myShadow(),
   ];
