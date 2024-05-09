@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hansungcapstone_bugiweather/httpnetwork.dart';
+import 'package:hansungcapstone_bugiweather/todayweatherscreen.dart';
 import 'package:hansungcapstone_bugiweather/weather_icon_icons.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:http/http.dart' as http;
+import 'NaverMap/font.dart';
 import 'NaverMap/mylocation.dart';
 
 class HSTodayWeatherScreen extends StatefulWidget {
@@ -33,14 +35,31 @@ class HSTodayWeatherScreen extends StatefulWidget {
   State<StatefulWidget> createState() => HSTodayWeatherState();
 }
 
-class HSTodayWeatherState extends State<HSTodayWeatherScreen> {
+class HSTodayWeatherState extends State<HSTodayWeatherScreen> with SingleTickerProviderStateMixin {
   late DateFormat daysFormat; // 요일 한글로
-
+  String skyStateUrl = "";
+  late AnimationController _animationController;
+  late Animation<double> _animation;
   @override
   void initState() {
     super.initState();
     initializeDateFormatting();
     daysFormat = DateFormat('E', 'ko_KR'); //요일 한글 표현
+    switch (widget.skyState) {
+      case "맑음" :
+        skyStateUrl="assets/Clear.png";
+      default :
+        skyStateUrl="assets/backimg.png";
+    }
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 1),
+    );
+    _animation = Tween<double>(
+      begin: 0,
+      end: 1,
+    ).animate(_animationController);
+    _animationController.forward();
   }
 
   @override
@@ -51,94 +70,88 @@ class HSTodayWeatherState extends State<HSTodayWeatherScreen> {
         padding: EdgeInsets.zero,
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/backimg.png"),
+            image: AssetImage(skyStateUrl),
             fit: BoxFit.cover,
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Flexible(
-              flex: 12,
-              child: Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "${DateFormat('yyyy년 M월 d일 ').format(DateTime.now())}(${daysFormat.format(DateTime.now())})",
-                      textAlign: TextAlign.start,
-                      overflow: TextOverflow.clip,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontStyle: FontStyle.normal,
-                        fontSize: 16,
-                        color: Color(0xff000000),
+        child: FadeTransition(
+          opacity: _animation,
+          child: Column(
+            //mainAxisAlignment: MainAxisAlignment.center,
+            //crossAxisAlignment: CrossAxisAlignment.center,
+            //mainAxisSize: MainAxisSize.max,
+            children: [
+              Flexible(
+                flex: 12,
+                child: Container(
+                  margin: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(image: AssetImage("assets/hansung.png"), opacity: 0.4, scale: 0.6),
+                    borderRadius: BorderRadius.circular(20), // Rounded corners
+                    color: Colors.black.withOpacity(0.2),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset("assets/bugi.png",width: 60,),
+                          Text(
+                            "${DateFormat('yyyy년 M월 d일 ').format(DateTime.now())}(${daysFormat.format(DateTime.now())})",
+                            textAlign: TextAlign.start,
+                            overflow: TextOverflow.clip,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontStyle: FontStyle.normal,
+                              fontSize: 16,
+                              color: Colors.white70,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          Text(
+                            "한성대학교",
+                            textAlign: TextAlign.start,
+                            overflow: TextOverflow.clip,
+                            style: Title54Style(),
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          (widget.skyState == "맑음")
+                              ? Image.asset("images/sun_1x.png", width: 130, height: 130,)
+                              : (widget.skyState == "구름 많음")
+                              ? Image.asset("images/cloud_1x.png", width: 130, height: 130,)
+                              : Image.asset("images/sunc_1x.png", width: 130, height: 130,),
+                          SizedBox(
+                            height: 8,
+                          ),
+                        ],
                       ),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Text(
-                      widget.addrData['documents'][0]['address']
-                              ['region_2depth_name'] +
-                          " " +
-                          widget.addrData['documents'][0]['address']
-                              ['region_3depth_name'],
-                      textAlign: TextAlign.start,
-                      overflow: TextOverflow.clip,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontStyle: FontStyle.normal,
-                        fontSize: 16,
-                        color: Color(0xff000000),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    // 하늘 상태 정보 아이콘
-                    (widget.skyState == "맑음")
-                        ? Icon(
-                            Icons.sunny,
-                            color: Colors.orange,
-                            size: 80,
-                          )
-                        : (widget.skyState == "구름 많음")
-                            ? Icon(
-                                WeatherIcon.clouds,
-                                size: 80,
-                              )
-                            : Icon(
-                                WeatherIcon.cloud_sun,
-                                size: 80,
-                              ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Text(
-                      // "맑음",
-                      widget.skyState,
-                      textAlign: TextAlign.start,
-                      overflow: TextOverflow.clip,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontStyle: FontStyle.normal,
-                        fontSize: 20,
-                        color: Color(0xff000000),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 3,
-                    ),
-                    // 시간당 강수량
-                    (widget.currentWeatherData['response']['body']['items']
-                                ['item'][2]['obsrValue'] ==
-                            "0")
-                        ? const Text(
+
+                      // 하늘 상태 정보 아이콘
+
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            widget.skyState,
+                            textAlign: TextAlign.center,
+                            style: SubStyle(),
+                          ),
+                          SizedBox(
+                            height: 3,
+                          ),
+                          // 시간당 강수량
+                          (widget.currentWeatherData['response']['body']['items']
+                          ['item'][2]['obsrValue'] ==
+                              "0")
+                              ? const Text(
                             "강수없음",
                             textAlign: TextAlign.start,
                             overflow: TextOverflow.clip,
@@ -146,10 +159,10 @@ class HSTodayWeatherState extends State<HSTodayWeatherScreen> {
                               fontWeight: FontWeight.w400,
                               fontStyle: FontStyle.normal,
                               fontSize: 18,
-                              color: Color(0xff000000),
+                              color: Colors.white,
                             ),
                           )
-                        : Text(
+                              : Text(
                             "${widget.currentWeatherData['response']['body']['items']['item'][2]['obsrValue']}mm",
                             textAlign: TextAlign.start,
                             overflow: TextOverflow.clip,
@@ -160,137 +173,97 @@ class HSTodayWeatherState extends State<HSTodayWeatherScreen> {
                               color: Color(0xff000000),
                             ),
                           ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    // 현재 기온
-                    Text(
-                      // "12°C",
-                      "${widget.currentWeatherData['response']['body']['items']['item'][3]['obsrValue']}°C",
-                      textAlign: TextAlign.start,
-                      overflow: TextOverflow.clip,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontStyle: FontStyle.normal,
-                        fontSize: 35,
-                        color: Color(0xff000000),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          // 현재 기온
+                          Text(
+                            "${widget.currentWeatherData['response']['body']['items']['item'][3]['obsrValue']}°C",
+                            textAlign: TextAlign.start,
+                            overflow: TextOverflow.clip,
+                            style: TempStyle(),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "${widget.todayTMN2}°C",
+                                textAlign: TextAlign.start,
+                                overflow: TextOverflow.clip,
+                                style: MinTempStyle(),
+                              ),
+                              const SizedBox(
+                                width: 3,
+                              ),
+                              Text(" / ", style: TextStyle(fontSize: 26, color: Colors.white54),),
+                              Text(
+                                "${widget.todayTMX2}°C",
+                                textAlign: TextAlign.start,
+                                overflow: TextOverflow.clip,
+                                style:MaxTempStyle(),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(DateFormat("h:mm a").format(DateTime.now()),
+                                textAlign: TextAlign.start,
+                                overflow: TextOverflow.clip,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 20,
+                                  color: Colors.white54,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                            ],
+                          )
+                        ],
                       ),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Text(
-                          "최저",
-                          textAlign: TextAlign.start,
-                          overflow: TextOverflow.clip,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 15,
-                            color: Color(0xff000000),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 3,
-                        ),
-                        Text(
-                          // '10°C',
-                          "${widget.todayTMN2}°C",
-                          textAlign: TextAlign.start,
-                          overflow: TextOverflow.clip,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 15,
-                            color: Color(0xff000000),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 16,
-                        ),
-                        Text(
-                          "최고",
-                          textAlign: TextAlign.start,
-                          overflow: TextOverflow.clip,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 15,
-                            color: Color(0xff000000),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 3,
-                        ),
-                        Text(
-                          // "10°C",
-                          "${widget.todayTMX2}°C",
-                          textAlign: TextAlign.start,
-                          overflow: TextOverflow.clip,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 15,
-                            color: Color(0xff000000),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 16,
-                          width: 16,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          DateFormat('M월 d일 ').format(DateTime.now()) +
-                              DateFormat("h:mm a").format(DateTime.now()),
-                          textAlign: TextAlign.start,
-                          overflow: TextOverflow.clip,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 16,
-                            color: Color(0xff000000),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                      ],
-                    )
-                  ],
+
+
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Flexible(
-              flex: 10,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: getListViewItem(widget.currenthstodayData),
+              Flexible(
+                flex: 10,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Container(
+                    margin: EdgeInsets.fromLTRB(0,0,0,10),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.2),
+                      //borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: getListViewItem(widget.currenthstodayData),
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
+
 }
 
-List<Widget> getListViewItem(dynamic currenthstodayData) {
+/*List<Widget> getListViewItem(dynamic currenthstodayData) {
   List<Widget> childs = [];
   var tmp, pop, pcp, sky;
   for (var i = 1;
@@ -461,7 +434,7 @@ List<Widget> getListViewItem(dynamic currenthstodayData) {
     }
   }
   return childs;
-}
+}*/
 
 DateTime getTime(String dateString) {
   //ex 202207081130

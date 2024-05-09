@@ -382,8 +382,9 @@ List<Widget> getListViewItem(dynamic currenttodayData) {
                         fontWeight: FontWeight.w400,
                         fontStyle: FontStyle.normal,
                         fontSize: 25,
+                        fontFamily: 'NanumSquareRoundB',
+                        shadows: [myShadow()],
                         color: Colors.white,
-                        shadows: [myShadow()]
                       ),
                     ),
                   ],
@@ -394,20 +395,19 @@ List<Widget> getListViewItem(dynamic currenttodayData) {
                 // 1시간당 강수량
                 (pcp == "강수없음")
                     ? Text(
-                        "강수없음",
-                        textAlign: TextAlign.start,
-                        overflow: TextOverflow.clip,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontStyle: FontStyle.normal,
-                          fontSize: 18,
-                          fontFamily: 'NanumSquareRoundB',
-                          color: Color(0xff000000),
-                          shadows: [myShadow()]
-                        ),
-                      )
+                  "강수없음",
+                  textAlign: TextAlign.start,
+                  overflow: TextOverflow.clip,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontStyle: FontStyle.normal,
+                    fontSize: 18,
+                    color: Colors.white,
+                    shadows: [myShadow()],
+                  ),
+                )
                     : Text(
-                        "${pcp}mm",
+                        "${pcp}",
                         textAlign: TextAlign.start,
                         overflow: TextOverflow.clip,
                         style: const TextStyle(
