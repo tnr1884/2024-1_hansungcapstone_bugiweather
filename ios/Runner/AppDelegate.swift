@@ -11,6 +11,7 @@ import Flutter
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }
+<<<<<<< Updated upstream
 // if (CLLocationManager.locationServicesEnabled()) {
 //     switch CLLocationManager.authorizationStatus() {
 //     case .denied, .notDetermined, .restricted:
@@ -20,3 +21,14 @@ import Flutter
 //         break
 //     }
 // }
+=======
+//if (CLLocationManager.locationServicesEnabled()) {
+//    switch CLLocationManager.authorizationStatus() {
+//    case .denied, .notDetermined, .restricted:
+//        self.manager.requestAlwaysAuthorization()
+//        break
+//    default:
+//        break
+//    }
+//}
+>>>>>>> Stashed changes

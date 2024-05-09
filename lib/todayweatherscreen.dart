@@ -60,6 +60,7 @@ class TodayWeatherState extends State<TodayWeatherScreen> {
             fit: BoxFit.cover,
           ),
         ),
+<<<<<<< Updated upstream
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -80,6 +81,22 @@ class TodayWeatherState extends State<TodayWeatherScreen> {
                       fontSize: 16,
                       color: Color(0xff000000),
                     ),
+=======
+        child: FadeTransition(
+          opacity: _animation,
+          child: Column(
+            //mainAxisAlignment: MainAxisAlignment.center,
+            //crossAxisAlignment: CrossAxisAlignment.center,
+            //mainAxisSize: MainAxisSize.max,
+            children: [
+              Flexible(
+                flex: 12,
+                child: Container(
+                  margin: EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20), // Rounded corners
+                    color: Colors.black.withOpacity(0.2),
+>>>>>>> Stashed changes
                   ),
                   const SizedBox(
                     height: 8,
