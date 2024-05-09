@@ -3,8 +3,9 @@ import 'dart:ui';
 import 'package:flutter/widgets.dart';
 import 'package:hansungcapstone_bugiweather/Search/location.dart';
 import 'package:hansungcapstone_bugiweather/Search/networking.dart';
+import 'package:geocoding/geocoding.dart' as geocoder;
 
-// https://api.openweathermap.org/data/2.5/forecast?q=Seoul&appid=d85c3f5894dd01de3ea4d4a81f3a73b0&units=metric&lang=kr&cnt=3
+// https://api.openweathermap.org/data/2.5/forecast?q=Seoul&appid=d85c3f5894dd01de3ea4d4a81f3a73b0&units=metric&lang=kr&cnt=4
 
 const apiKey = 'd85c3f5894dd01de3ea4d4a81f3a73b0';
 const openWeatherMapURL = 'https://api.openweathermap.org/data/2.5/weather';
@@ -45,6 +46,18 @@ class WeatherModel {
     var forecastData = await networkHelper.getData();
     return forecastData;
   }
+  Future<String> getAddress() async{
+    Location location = Location();
+    await location.getCurrentLocation();
+    List<geocoder.Placemark> placemarks =
+    await geocoder.placemarkFromCoordinates(location.latitude, location.longitude);
+    geocoder.setLocaleIdentifier('kr');
+    var locality = placemarks[0].locality;
+    var sublocal = placemarks[0].subLocality;
+    var address = "${locality} ${sublocal}";
+    print(address);
+    return address;
+  }
 
   String getWeatherIcon(int condition) {
     if (condition < 300) {
@@ -63,26 +76,6 @@ class WeatherModel {
       return '☁️';
     } else {
       return '🤷‍';
-    }
-  }
-
-  Image getWeatherImage(int condition){
-    if (condition < 300) {
-      return Image.asset('assets/weather_icons/storm.png');
-    } else if (condition < 400) {
-      return Image.asset('assets/weather_icons/rain_2x.png');
-    } else if (condition < 600) {
-      return Image.asset('assets/weather_icons/rain_2x.png');
-    } else if (condition < 700) {
-      return Image.asset('assets/weather_icons/snow_2x.png');
-    } else if (condition < 800) {
-      return Image.asset('assets/weather_icons/ptcl_2x.png');
-    } else if (condition == 800) {
-      return Image.asset('assets/weather_icons/sun_2x.png');
-    } else if (condition <= 804) {
-      return Image.asset('assets/weather_icons/cloud_2x.png');
-    } else {
-      return Image.asset('assets/weather_icons/ptcl_2x.png');
     }
   }
 

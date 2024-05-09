@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:hansungcapstone_bugiweather/Search/weather.dart';
 import 'package:hansungcapstone_bugiweather/Search/constants.dart';
 import 'package:hansungcapstone_bugiweather/Search/city_screen.dart';
@@ -7,7 +8,8 @@ import 'package:hansungcapstone_bugiweather/Search/city_screen.dart';
 class LocationScreen extends StatefulWidget {
   final locationWeather;
   final locationForecast;
-  LocationScreen({this.locationWeather, this.locationForecast});
+  final locationName;
+  LocationScreen({this.locationWeather, this.locationForecast, this.locationName});
   @override
   _LocationScreenState createState() => _LocationScreenState();
 }
@@ -15,6 +17,7 @@ class LocationScreen extends StatefulWidget {
 class _LocationScreenState extends State<LocationScreen> {
   WeatherModel weather = WeatherModel(); // 현재 날씨
   WeatherModel forecast = WeatherModel(); // 일기 예보
+  WeatherModel address = WeatherModel();
 
   late int temperature;
   late String cityName;
@@ -38,7 +41,18 @@ class _LocationScreenState extends State<LocationScreen> {
     super.initState();
     updateUIW(widget.locationWeather);
     updateUIF(widget.locationForecast);
+    //setPlaceName(widget.locationName);
   }
+
+  // void setPlaceName(var address){
+  //   setState(() {
+  //     if(address == null){
+  //       cityName = "?";
+  //       return;
+  //     }
+  //     cityName = address;
+  //   });
+  // }
 
   void updateUIW(var weatherData) {
     setState(() {
@@ -53,7 +67,7 @@ class _LocationScreenState extends State<LocationScreen> {
       temperature = temp.toInt();
       int condition = weatherData['weather'][0]['id'];
       weatherIcon = weather.getWeatherIcon(condition);
-      cityName = weatherData['name'];
+      //cityName = weatherData['name'];
     });
   }
 
