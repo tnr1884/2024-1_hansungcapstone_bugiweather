@@ -90,7 +90,7 @@ class TodayWeatherState extends State<TodayWeatherScreen> with SingleTickerProvi
               Flexible(
                 flex: 12,
                 child: Container(
-                  margin: EdgeInsets.all(10),
+                  margin: EdgeInsets.all(5),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20), // Rounded corners
                     color: Colors.black.withOpacity(0.2),
