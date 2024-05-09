@@ -1,3 +1,4 @@
+
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -118,19 +119,13 @@ class _DustScreenState extends State<DustScreen> {
                     const SizedBox(width: 10),
                   ],
                 ),
-<<<<<<< Updated upstream
-                // const SizedBox(
-                //   height: 5,
-                // ),
-=======
                 const SizedBox(
-                  height: 5,
+                  height: 10,
                 ),
->>>>>>> Stashed changes
                 Column(
                   children: [
                     const SizedBox(
-                      height: 5,
+                      height: 10,
                     ),
                     Row(
                       children: [
@@ -339,7 +334,7 @@ class _DustScreenState extends State<DustScreen> {
                           width: 10,
                         ),
                         const Image(
-                          image: AssetImage("assets/O3_flat.png"),
+                          image: AssetImage("assets/o3.png"),
                           width: 50.0,
                           height: 50.0,
                         ),
@@ -433,7 +428,7 @@ class _DustScreenState extends State<DustScreen> {
                           width: 10,
                         ),
                         const Image(
-                          image: AssetImage("assets/NO2_flat.png"),
+                          image: AssetImage("assets/no2.png"),
                           width: 50.0,
                           height: 50.0,
                         ),
@@ -527,7 +522,7 @@ class _DustScreenState extends State<DustScreen> {
                           width: 10,
                         ),
                         const Image(
-                          image: AssetImage("assets/CO_flat.png"),
+                          image: AssetImage("assets/co.png"),
                           width: 50.0,
                           height: 50.0,
                         ),
@@ -624,7 +619,7 @@ class _DustScreenState extends State<DustScreen> {
                           width: 10,
                         ),
                         const Image(
-                          image: AssetImage("assets/SO2_flat.png"),
+                          image: AssetImage("assets/so2.png"),
                           width: 50.0,
                           height: 50.0,
                         ),
