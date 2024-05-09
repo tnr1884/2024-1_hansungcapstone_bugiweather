@@ -358,7 +358,10 @@ List<Widget> getListViewItem(dynamic currenthstodayData) {
                   ? Image.asset('images/sun_1x.png', width: 60,height: 60,)
                   : (sky == "구름 많음")
                       ? Image.asset('images/cloud_1x.png', width: 60,height: 60,)
-                      : Image.asset('images/ptcl_2x.png', width: 60, height: 60,),
+                      : Icon(
+                          WeatherIcon.cloud_sun,
+                          size: 60,
+                        ),
               const SizedBox(
                 height: 5,
               ),

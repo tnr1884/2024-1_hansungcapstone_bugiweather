@@ -1,5 +1,4 @@
 import 'package:geolocator/geolocator.dart';
-import 'package:geocoding/geocoding.dart';
 
 class Location {
   // late double latitude;
@@ -14,17 +13,9 @@ class Location {
         permission = await Geolocator.requestPermission();
       }
       Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
+          desiredAccuracy: LocationAccuracy.low);
       latitude = position.latitude;
       longitude = position.longitude;
-
-      List<Placemark> placemarks =
-      await placemarkFromCoordinates(latitude, longitude);
-      setLocaleIdentifier('kr');
-      var locality = placemarks[0].locality;
-      var sublocal = placemarks[0].subLocality;
-      String address = "${locality} ${sublocal}";
-      print(address);
     } catch (e) {
       print(e);
     }

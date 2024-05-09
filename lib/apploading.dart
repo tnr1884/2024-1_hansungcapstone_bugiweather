@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:hansungcapstone_bugiweather/CustomRoute.dart';
 import 'package:hansungcapstone_bugiweather/screen.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'NaverMap/mylocation.dart';
-import 'Search/weather.dart';
 import 'httpnetwork.dart';
 import 'package:hansungcapstone_bugiweather/Daily/network.dart' as networkDaily;
 
@@ -183,12 +181,10 @@ class _AppLoadingState extends State<AppLoading> {
     //
     final data = await networkDaily.getJsonData();
     final dailyForecasts = data['daily'] as List<dynamic>;
-    var weatherData = await WeatherModel().getLocationWeather();
-    var forecastData = await WeatherModel().getLocationForecast();
 
     Navigator.push(
       context,
-      CustomRoute(
+      MaterialPageRoute(
         builder: (context) {
           return HomeScreen(
             addrData: addrData,
@@ -202,8 +198,6 @@ class _AppLoadingState extends State<AppLoading> {
             superShortWeatherData: superShortWeatherData,
             hssuperShortWeatherData: hssuperShortWeatherData,
             dailyWeather: dailyForecasts,
-            locationWeather: weatherData,
-            locationForecast: forecastData,
           );
         },
       ),
@@ -328,8 +322,8 @@ class _AppLoadingState extends State<AppLoading> {
               Text(
                 '위치 정보 업데이트 중',
                 style: TextStyle(
-                  fontSize: 25.0,
-                  color: Colors.white54,
+                  fontSize: 20.0,
+                  color: Colors.black87,
                 ),
               )
             ],
@@ -338,20 +332,4 @@ class _AppLoadingState extends State<AppLoading> {
       ),
     );
   }
-}
-Route _createRoute() {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => HomeScreen(),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(1.0, 0.0);
-      const end = Offset.zero;
-      const curve = Curves.ease;
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-      var offsetAnimation = animation.drive(tween);
-      return SlideTransition(
-        position: offsetAnimation,
-        child: child,
-      );
-    },
-  );
 }
