@@ -47,8 +47,12 @@ class _ButtonWidgetState extends State<ButtonWidget> {
     final data = await network.getJsonData();
     final dailyForecasts = data['daily'] as List<dynamic>;
 
-    Navigator.push(context, MaterialPageRoute(builder: (context){
-      return weekScreen(parseWeatherData: dailyForecasts,);
+    final Text = await network.fetchWeatherForecast3();
+    final dailyForecastText = Text['response']['body']['items']['item'][0]['wfSv'];
+
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return weekScreen(
+          parseWeatherData: dailyForecasts, parseWeatherData2: dailyForecastText );
     }));
   }
 

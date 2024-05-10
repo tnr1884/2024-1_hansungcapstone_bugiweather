@@ -1,12 +1,17 @@
 
 import 'dart:ui';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '/model.dart';
+import 'package:hansungcapstone_bugiweather/model.dart';
+import 'package:http/http.dart' as http;
+
+
 
 class weekScreen extends StatefulWidget {
-  weekScreen({this.parseWeatherData});
+  weekScreen({this.parseWeatherData, this.parseWeatherData2});
 
   final dynamic parseWeatherData;
+  final dynamic parseWeatherData2;
 
   @override
   State<weekScreen> createState() => _backscreen();
@@ -20,12 +25,17 @@ class _backscreen extends State<weekScreen> {
   List<int> mornTempList = [];
   List<int> eveTempList = [];
   List<Widget> icon = [];
+  String? textForecast;
 
+  String? text;
+  String? forestText;
   @override
   void initState() {
     super.initState();
     //getLocation();
     updateData(widget.parseWeatherData);
+    updateData2(widget.parseWeatherData2);
+    //loadForecast();
   }
 
   void updateData(dynamic weatherData) {
@@ -48,6 +58,28 @@ class _backscreen extends State<weekScreen> {
         icon.add(weatherIcon); // Only add if not null.
       }
     }
+  }
+  void updateData2(dynamic weatherTextdata){
+    text = weatherTextdata;
+
+    StringBuffer result = StringBuffer();
+    if (text != null) {
+      for (int i = 0; i < text!.length; i++) {
+        if (text![i] == '*') {
+          break;
+        }
+        result.write(text![i]);
+
+        // \n을 찾으면 하나 더 추가
+        if (text![i] == '\n') {
+          result.write('\n');
+        }
+      }
+    }
+
+    setState(() {
+      forestText = result.toString().trim();
+    });
   }
 
   String getWeekDay(int weekday) {
@@ -87,296 +119,276 @@ class _backscreen extends State<weekScreen> {
             ),
           ),
         ),
-        Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Color(0xFF74D5FF),
-                Color(0xFFBFD5FF),
-              ],
-            ),
-          ),
-        ),
-        BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-          child: Container(
-            alignment: Alignment.center,
-            margin: const EdgeInsets.all(16), // Add margin
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20), // Rounded corners
-              color: Colors.white.withOpacity(0.3),
-            ),
-            child: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  Row(children: [
-                    SizedBox(width: 30),
-                    Container(
-                      width: 95,
-                      height: 38,
-                      alignment: Alignment.center,
-                      child: Text(
-                        '${weekDays[0]}',
-                        style: TextStyle(
-                          fontSize: 25,
+        SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20), // Rounded corners
+                  color: Colors.black.withOpacity(0.2),
+                ),
+                padding: EdgeInsets.all(16.0),
+                child: SizedBox(
+                  height: 230,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Text(
+                          '$forestText',
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
                         ),
-                      ),
+                      ],
                     ),
-                    SizedBox(width: 10,),
-                    Container(
-                      alignment: Alignment.center,
-                      child: icon[0],
-                      height: 70,
-                      width: 70,
-                    ),
-                    SizedBox(width: 30),
-                    Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        "${mornTempList[0]}/${eveTempList[0]}",
-                        style: TextStyle(fontSize: 30),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                  ]),
-                  SizedBox(height: 20),
-                  Row(children: [
-                    SizedBox(width: 30),
-                    Container(
-                      width: 95, // Specify the width
-                      height: 38, // Specify the height
-                      alignment: Alignment.center,
-                      child: Text(
-                        '${weekDays[1]}',
-                        style: TextStyle(
-                          fontSize: 25,
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 10,),
-                    Container(
-                      alignment: Alignment.center,
-                      child: icon[1],
-                      height: 70,
-                      width: 70,
-                    ),
-                    SizedBox(width: 30),
-                    Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        "${mornTempList[1]}/${eveTempList[1]}",
-                        style: TextStyle(fontSize: 30),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                  ]),
-                  SizedBox(height: 20),
-                  Row(children: [
-                    SizedBox(width: 30),
-                    Container(
-                      width: 95, // Specify the width
-                      height: 38, // Specify the height
-                      alignment: Alignment.center,
-                      child: Text(
-                        '${weekDays[2]}',
-                        style: TextStyle(
-                          fontSize: 25,
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 10,),
-                    Container(
-                      alignment: Alignment.center,
-                      child: icon[2],
-                      height: 70,
-                      width: 70,
-                    ),
-                    SizedBox(width: 30),
-                    Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        "${mornTempList[2]}/${eveTempList[2]}",
-                        style: TextStyle(fontSize: 30),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                  ]),
-                  SizedBox(height: 20),
-                  Row(children: [
-                    SizedBox(width: 30),
-                    Container(
-                      width: 95, // Specify the width
-                      height: 38, // Specify the height
-                      alignment: Alignment.center,
-                      child: Text(
-                        '${weekDays[3]}',
-                        style: TextStyle(
-                          fontSize: 25,
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 10,),
-                    Container(
-                      alignment: Alignment.center,
-                      child: icon[3],
-                      height: 70,
-                      width: 70,
-                    ),
-                    SizedBox(width: 30),
-                    Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        "${mornTempList[3]}/${eveTempList[3]}",
-                        style: TextStyle(fontSize: 30),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                  ]),
-                  SizedBox(height: 20),
-                  Row(children: [
-                    SizedBox(width: 30),
-                    Container(
-                      width: 95, // Specify the width
-                      height: 38, // Specify the height
-                      alignment: Alignment.center,
-                      child: Text(
-                        '${weekDays[4]}',
-                        style: TextStyle(
-                          fontSize: 25,
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 10,),
-                    Container(
-                      alignment: Alignment.center,
-                      child: icon[4],
-                      height: 70,
-                      width: 70,
-                    ),
-                    SizedBox(width: 30),
-                    Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        "${mornTempList[4]}/${eveTempList[4]}",
-                        style: TextStyle(fontSize: 30),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                  ]),
-                  SizedBox(height: 20),
-                  Row(children: [
-                    SizedBox(width: 30),
-                    Container(
-                      width: 95, // Specify the width
-                      height: 38, // Specify the height
-                      alignment: Alignment.center,
-                      child: Text(
-                        '${weekDays[5]}',
-                        style: TextStyle(
-                          fontSize: 25,
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 10,),
-                    Container(
-                      alignment: Alignment.center,
-                      child: icon[5],
-                      height: 70,
-                      width: 70,
-                    ),
-                    SizedBox(width: 30),
-                    Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        "${mornTempList[5]}/${eveTempList[5]}",
-                        style: TextStyle(fontSize: 30),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                  ]),
-                  SizedBox(height: 20),
-                  Row(children: [
-                    SizedBox(width: 30),
-                    Container(
-                      width: 95, // Specify the width
-                      height: 38, // Specify the height
-                      alignment: Alignment.center,
-                      child: Text(
-                        '${weekDays[6]}',
-                        style: TextStyle(
-                          fontSize: 25,
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 10,),
-                    Container(
-                      alignment: Alignment.center,
-                      child: icon[6],
-                      height: 70,
-                      width: 70,
-                    ),
-                    SizedBox(width: 30),
-                    Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        "${mornTempList[6]}/${eveTempList[6]}",
-                        style: TextStyle(fontSize: 30),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                  ]),
-                  SizedBox(height: 20),
-                  // Row(children: [
-                  //   SizedBox(width: 30),
-                  //   Container(
-                  //     width: 95, // Specify the width
-                  //     height: 38, // Specify the height
-                  //     alignment: Alignment.center,
-                  //     child: Text(
-                  //       '${weekDays[7]}',
-                  //       style: TextStyle(
-                  //         fontSize: 25,
-                  //       ),
-                  //     ),
-                  //   ),
-                  //   SizedBox(width: 10,),
-                  //   Container(
-                  //     alignment: Alignment.center,
-                  //     child: icon[7],
-                  //     height: 70,
-                  //     width: 70,
-                  //   ),
-                  //   SizedBox(width: 30),
-                  //   Container(
-                  //     alignment: Alignment.center,
-                  //     child: Text(
-                  //       "${mornTempList[7]}/${eveTempList[7]}",
-                  //       style: TextStyle(fontSize: 30),
-                  //     ),
-                  //   ),
-                  //   SizedBox(
-                  //     width: 10,
-                  //   ),
-                  // ]),
-                ],
+                  ),
+                ),
               ),
-            ),
+              Container(
+                margin: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20), // Rounded corners
+                  color: Colors.black.withOpacity(0.2),
+                ),
+                child: Column(
+                  children: [
+                    Row(children: [
+                      SizedBox(width: 30),
+                      Container(
+                        width: 95,
+                        height: 38,
+                        alignment: Alignment.center,
+                        child: Text(
+                          '${weekDays[0]}',
+                          style: TextStyle(
+                            fontSize: 25,
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10,),
+                      Container(
+                        alignment: Alignment.center,
+                        child: icon[0],
+                        height: 70,
+                        width: 70,
+                      ),
+                      SizedBox(width: 30),
+                      Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          "${mornTempList[0]}/${eveTempList[0]}",
+                          style: TextStyle(fontSize: 30),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                    ]),
+                    SizedBox(height: 20),
+                    Row(children: [
+                      SizedBox(width: 30),
+                      Container(
+                        width: 95, // Specify the width
+                        height: 38, // Specify the height
+                        alignment: Alignment.center,
+                        child: Text(
+                          '${weekDays[1]}',
+                          style: TextStyle(
+                            fontSize: 25,
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10,),
+                      Container(
+                        alignment: Alignment.center,
+                        child: icon[1],
+                        height: 70,
+                        width: 70,
+                      ),
+                      SizedBox(width: 30),
+                      Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          "${mornTempList[1]}/${eveTempList[1]}",
+                          style: TextStyle(fontSize: 30),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                    ]),
+                    SizedBox(height: 20),
+                    Row(children: [
+                      SizedBox(width: 30),
+                      Container(
+                        width: 95, // Specify the width
+                        height: 38, // Specify the height
+                        alignment: Alignment.center,
+                        child: Text(
+                          '${weekDays[2]}',
+                          style: TextStyle(
+                            fontSize: 25,
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10,),
+                      Container(
+                        alignment: Alignment.center,
+                        child: icon[2],
+                        height: 70,
+                        width: 70,
+                      ),
+                      SizedBox(width: 30),
+                      Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          "${mornTempList[2]}/${eveTempList[2]}",
+                          style: TextStyle(fontSize: 30),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                    ]),
+                    SizedBox(height: 20),
+                    Row(children: [
+                      SizedBox(width: 30),
+                      Container(
+                        width: 95, // Specify the width
+                        height: 38, // Specify the height
+                        alignment: Alignment.center,
+                        child: Text(
+                          '${weekDays[3]}',
+                          style: TextStyle(
+                            fontSize: 25,
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10,),
+                      Container(
+                        alignment: Alignment.center,
+                        child: icon[3],
+                        height: 70,
+                        width: 70,
+                      ),
+                      SizedBox(width: 30),
+                      Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          "${mornTempList[3]}/${eveTempList[3]}",
+                          style: TextStyle(fontSize: 30),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                    ]),
+                    SizedBox(height: 20),
+                    Row(children: [
+                      SizedBox(width: 30),
+                      Container(
+                        width: 95, // Specify the width
+                        height: 38, // Specify the height
+                        alignment: Alignment.center,
+                        child: Text(
+                          '${weekDays[4]}',
+                          style: TextStyle(
+                            fontSize: 25,
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10,),
+                      Container(
+                        alignment: Alignment.center,
+                        child: icon[4],
+                        height: 70,
+                        width: 70,
+                      ),
+                      SizedBox(width: 30),
+                      Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          "${mornTempList[4]}/${eveTempList[4]}",
+                          style: TextStyle(fontSize: 30),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                    ]),
+                    SizedBox(height: 20),
+                    Row(children: [
+                      SizedBox(width: 30),
+                      Container(
+                        width: 95, // Specify the width
+                        height: 38, // Specify the height
+                        alignment: Alignment.center,
+                        child: Text(
+                          '${weekDays[5]}',
+                          style: TextStyle(
+                            fontSize: 25,
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10,),
+                      Container(
+                        alignment: Alignment.center,
+                        child: icon[5],
+                        height: 70,
+                        width: 70,
+                      ),
+                      SizedBox(width: 30),
+                      Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          "${mornTempList[5]}/${eveTempList[5]}",
+                          style: TextStyle(fontSize: 30),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                    ]),
+                    SizedBox(height: 20),
+                    Row(children: [
+                      SizedBox(width: 30),
+                      Container(
+                        width: 95, // Specify the width
+                        height: 38, // Specify the height
+                        alignment: Alignment.center,
+                        child: Text(
+                          '${weekDays[6]}',
+                          style: TextStyle(
+                            fontSize: 25,
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10,),
+                      Container(
+                        alignment: Alignment.center,
+                        child: icon[6],
+                        height: 70,
+                        width: 70,
+                      ),
+                      SizedBox(width: 30),
+                      Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          "${mornTempList[6]}/${eveTempList[6]}",
+                          style: TextStyle(fontSize: 30),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                    ]),
+                    SizedBox(height: 20),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
+            ],
           ),
         )
       ]),
