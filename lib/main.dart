@@ -37,12 +37,12 @@ class _ButtonWidgetState extends State<ButtonWidget> {
   }
 
   void getLocation() async{
-    MyLocation myLocation = MyLocation();
-    await myLocation.getMyCurrentLocation();
-    latitude3 = myLocation.latitude2;
-    longitude3 = myLocation.longitude2;
-    print(latitude3);
-    print(longitude3);
+    // MyLocation myLocation = MyLocation();
+    // await myLocation.getMyCurrentLocation();
+    // latitude3 = myLocation.latitude2;
+    // longitude3 = myLocation.longitude2;
+    // print(latitude3);
+    // print(longitude3);
 
     final data = await network.getJsonData();
     final dailyForecasts = data['daily'] as List<dynamic>;
