@@ -6,8 +6,6 @@ PODS:
   - fluttertoast (0.0.2):
     - Flutter
     - Toast
-  - geocoding_ios (1.0.5):
-    - Flutter
   - geolocator_apple (1.2.0):
     - Flutter
   - NMapsGeometry (1.0.1)
@@ -24,7 +22,6 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_naver_map (from `.symlinks/plugins/flutter_naver_map/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
-  - geocoding_ios (from `.symlinks/plugins/geocoding_ios/ios`)
   - geolocator_apple (from `.symlinks/plugins/geolocator_apple/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
@@ -42,8 +39,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_naver_map/ios"
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
-  geocoding_ios:
-    :path: ".symlinks/plugins/geocoding_ios/ios"
   geolocator_apple:
     :path: ".symlinks/plugins/geolocator_apple/ios"
   path_provider_foundation:
@@ -55,7 +50,6 @@ SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_naver_map: b18663bc83c2caaab484c58dccf239a87ebbed1b
   fluttertoast: 9f2f8e81bb5ce18facb9748d7855bf5a756fe3db
-  geocoding_ios: d7460f56e80e118d57678efe5c2cdc888739ff18
   geolocator_apple: 6cbaf322953988e009e5ecb481f07efece75c450
   NMapsGeometry: 53c573ead66466681cf123f99f698dc8071a4b83
   NMapsMap: a5b909a31b6f3d27a670f6eb2ddc913c38975474

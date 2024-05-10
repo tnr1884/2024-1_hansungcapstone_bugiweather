@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -119,9 +118,9 @@ class _DustScreenState extends State<DustScreen> {
                     const SizedBox(width: 10),
                   ],
                 ),
-                // const SizedBox(
-                //   height: 5,
-                // ),
+                const SizedBox(
+                  height: 5,
+                ),
                 Column(
                   children: [
                     const SizedBox(
@@ -163,10 +162,12 @@ class _DustScreenState extends State<DustScreen> {
                                   .airConditionData['response']
                               ['body']['items'][0]['pm10Value']) <=
                                   30.0)
-                              ? const SizedBox(
+                              ? SizedBox(
                             height: 10,
                             child: LinearProgressIndicator(
-                              value: 1,
+                              value: double.parse(widget
+                                  .airConditionData['response']
+                              ['body']['items'][0]['pm10Value'])/151.0,
                               backgroundColor: Colors.grey,
                               valueColor: AlwaysStoppedAnimation<Color>(
                                   Colors.blue),
@@ -179,10 +180,12 @@ class _DustScreenState extends State<DustScreen> {
                               double.parse(widget
                                   .airConditionData['response']
                               ['body']['items'][0]['pm10Value']) <=
-                                  80.0) ? const SizedBox(
+                                  80.0) ? SizedBox(
                             height: 10,
                             child: LinearProgressIndicator(
-                              value: 1,
+                              value: double.parse(widget
+                                  .airConditionData['response']
+                              ['body']['items'][0]['pm10Value'])/151.0,
                               backgroundColor: Colors.grey,
                               valueColor: AlwaysStoppedAnimation<Color>(
                                   Colors.green),
@@ -194,18 +197,22 @@ class _DustScreenState extends State<DustScreen> {
                               double.parse(widget
                                   .airConditionData['response']
                               ['body']['items'][0]['pm10Value']) <=
-                                  150.0) ? const SizedBox(
+                                  150.0) ? SizedBox(
                             height: 10,
                             child: LinearProgressIndicator(
-                              value: 1,
+                              value: double.parse(widget
+                                  .airConditionData['response']
+                              ['body']['items'][0]['pm10Value'])/151.0,
                               backgroundColor: Colors.grey,
                               valueColor: AlwaysStoppedAnimation<Color>(
                                   Colors.orange),
                             ),
-                          ) : const SizedBox(
+                          ) : SizedBox(
                             height: 10,
                             child: LinearProgressIndicator(
-                              value: 1,
+                              value: double.parse(widget
+                                  .airConditionData['response']
+                              ['body']['items'][0]['pm10Value'])/151.0,
                               backgroundColor: Colors.grey,
                               valueColor: AlwaysStoppedAnimation<Color>(
                                   Colors.red),
@@ -256,10 +263,12 @@ class _DustScreenState extends State<DustScreen> {
                                   .airConditionData['response']
                               ['body']['items'][0]['pm25Value']) <=
                                   15.0)
-                              ? const SizedBox(
+                              ? SizedBox(
                             height: 10,
                             child: LinearProgressIndicator(
-                              value: 1,
+                              value: double.parse(widget
+                                  .airConditionData['response']
+                              ['body']['items'][0]['pm25Value'])/76.0,
                               backgroundColor: Colors.grey,
                               valueColor: AlwaysStoppedAnimation<Color>(
                                   Colors.blue),
@@ -272,10 +281,12 @@ class _DustScreenState extends State<DustScreen> {
                               double.parse(widget
                                   .airConditionData['response']
                               ['body']['items'][0]['pm25Value']) <=
-                                  35.0) ? const SizedBox(
+                                  35.0) ?  SizedBox(
                             height: 10,
                             child: LinearProgressIndicator(
-                              value: 1,
+                              value: double.parse(widget
+                                  .airConditionData['response']
+                              ['body']['items'][0]['pm25Value'])/76.0,
                               backgroundColor: Colors.grey,
                               valueColor: AlwaysStoppedAnimation<Color>(
                                   Colors.green),
@@ -287,18 +298,22 @@ class _DustScreenState extends State<DustScreen> {
                               double.parse(widget
                                   .airConditionData['response']
                               ['body']['items'][0]['pm25Value']) <=
-                                  75.0) ? const SizedBox(
+                                  75.0) ? SizedBox(
                             height: 10,
                             child: LinearProgressIndicator(
-                              value: 1,
+                              value: double.parse(widget
+                                  .airConditionData['response']
+                              ['body']['items'][0]['pm25Value'])/76.0,
                               backgroundColor: Colors.grey,
                               valueColor: AlwaysStoppedAnimation<Color>(
                                   Colors.orange),
                             ),
-                          ) : const SizedBox(
+                          ) : SizedBox(
                             height: 10,
                             child: LinearProgressIndicator(
-                              value: 1,
+                              value: double.parse(widget
+                                  .airConditionData['response']
+                              ['body']['items'][0]['pm25Value'])/76.0,
                               backgroundColor: Colors.grey,
                               valueColor: AlwaysStoppedAnimation<Color>(
                                   Colors.red),
@@ -334,7 +349,8 @@ class _DustScreenState extends State<DustScreen> {
                           width: 10,
                         ),
                         const Image(
-                          image: AssetImage("assets/O3_flat.png"),
+                          // image: AssetImage("assets/o3.png"),
+                          image : AssetImage("assets/O3_3d.png"),
                           width: 50.0,
                           height: 50.0,
                         ),
@@ -350,10 +366,12 @@ class _DustScreenState extends State<DustScreen> {
                                   .airConditionData['response']
                               ['body']['items'][0]['o3Value']) <=
                                   0.03)
-                              ? const SizedBox(
+                              ? SizedBox(
                             height: 10,
                             child: LinearProgressIndicator(
-                              value: 1,
+                              value: double.parse(widget
+                                  .airConditionData['response']
+                              ['body']['items'][0]['o3Value'])/0.151,
                               backgroundColor: Colors.grey,
                               valueColor: AlwaysStoppedAnimation<Color>(
                                   Colors.blue),
@@ -366,10 +384,12 @@ class _DustScreenState extends State<DustScreen> {
                               double.parse(widget
                                   .airConditionData['response']
                               ['body']['items'][0]['o3Value']) <=
-                                  0.09) ? const SizedBox(
+                                  0.09) ? SizedBox(
                             height: 10,
                             child: LinearProgressIndicator(
-                              value: 1,
+                              value: double.parse(widget
+                                  .airConditionData['response']
+                              ['body']['items'][0]['o3Value'])/0.151,
                               backgroundColor: Colors.grey,
                               valueColor: AlwaysStoppedAnimation<Color>(
                                   Colors.green),
@@ -381,18 +401,22 @@ class _DustScreenState extends State<DustScreen> {
                               double.parse(widget
                                   .airConditionData['response']
                               ['body']['items'][0]['o3Value']) <=
-                                  0.15) ? const SizedBox(
+                                  0.15) ? SizedBox(
                             height: 10,
                             child: LinearProgressIndicator(
-                              value: 1,
+                              value:  double.parse(widget
+                                  .airConditionData['response']
+                              ['body']['items'][0]['o3Value'])/0.151,
                               backgroundColor: Colors.grey,
                               valueColor: AlwaysStoppedAnimation<Color>(
                                   Colors.orange),
                             ),
-                          ) : const SizedBox(
+                          ) : SizedBox(
                             height: 10,
                             child: LinearProgressIndicator(
-                              value: 1,
+                              value: double.parse(widget
+                                  .airConditionData['response']
+                              ['body']['items'][0]['o3Value'])/0.151,
                               backgroundColor: Colors.grey,
                               valueColor: AlwaysStoppedAnimation<Color>(
                                   Colors.red),
@@ -428,7 +452,8 @@ class _DustScreenState extends State<DustScreen> {
                           width: 10,
                         ),
                         const Image(
-                          image: AssetImage("assets/NO2_flat.png"),
+                          // image: AssetImage("assets/no2.png"),
+                          image : AssetImage("assets/NO2_3d.png"),
                           width: 50.0,
                           height: 50.0,
                         ),
@@ -444,10 +469,12 @@ class _DustScreenState extends State<DustScreen> {
                                   .airConditionData['response']
                               ['body']['items'][0]['no2Value']) <=
                                   0.03)
-                              ? const SizedBox(
+                              ? SizedBox(
                             height: 10,
                             child: LinearProgressIndicator(
-                              value: 1,
+                              value: double.parse(widget
+                                  .airConditionData['response']
+                              ['body']['items'][0]['no2Value'])/0.201,
                               backgroundColor: Colors.grey,
                               valueColor: AlwaysStoppedAnimation<Color>(
                                   Colors.blue),
@@ -460,10 +487,12 @@ class _DustScreenState extends State<DustScreen> {
                               double.parse(widget
                                   .airConditionData['response']
                               ['body']['items'][0]['no2Value']) <=
-                                  0.06) ? const SizedBox(
+                                  0.06) ? SizedBox(
                             height: 10,
                             child: LinearProgressIndicator(
-                              value: 1,
+                              value: double.parse(widget
+                                  .airConditionData['response']
+                              ['body']['items'][0]['no2Value'])/0.201,
                               backgroundColor: Colors.grey,
                               valueColor: AlwaysStoppedAnimation<Color>(
                                   Colors.green),
@@ -475,18 +504,22 @@ class _DustScreenState extends State<DustScreen> {
                               double.parse(widget
                                   .airConditionData['response']
                               ['body']['items'][0]['no2Value']) <=
-                                  0.2) ? const SizedBox(
+                                  0.2) ? SizedBox(
                             height: 10,
                             child: LinearProgressIndicator(
-                              value: 1,
+                              value: double.parse(widget
+                                  .airConditionData['response']
+                              ['body']['items'][0]['no2Value'])/0.201,
                               backgroundColor: Colors.grey,
                               valueColor: AlwaysStoppedAnimation<Color>(
                                   Colors.orange),
                             ),
-                          ) : const SizedBox(
+                          ) :  SizedBox(
                             height: 10,
                             child: LinearProgressIndicator(
-                              value: 1,
+                              value: double.parse(widget
+                                  .airConditionData['response']
+                              ['body']['items'][0]['no2Value'])/0.201,
                               backgroundColor: Colors.grey,
                               valueColor: AlwaysStoppedAnimation<Color>(
                                   Colors.red),
@@ -522,7 +555,8 @@ class _DustScreenState extends State<DustScreen> {
                           width: 10,
                         ),
                         const Image(
-                          image: AssetImage("assets/CO_flat.png"),
+                          // image: AssetImage("assets/co.png"),
+                          image : AssetImage("assets/CO_3d.png"),
                           width: 50.0,
                           height: 50.0,
                         ),
@@ -540,10 +574,12 @@ class _DustScreenState extends State<DustScreen> {
                                       .airConditionData['response']
                                   ['body']['items'][0]['coValue']) <=
                                       2.0)
-                                  ? const SizedBox(
+                                  ? SizedBox(
                                 height: 10,
                                 child: LinearProgressIndicator(
-                                  value: 1,
+                                  value: double.parse(widget
+                                      .airConditionData['response']
+                                  ['body']['items'][0]['coValue'])/15.01,
                                   backgroundColor: Colors.grey,
                                   valueColor: AlwaysStoppedAnimation<Color>(
                                       Colors.blue),
@@ -556,10 +592,12 @@ class _DustScreenState extends State<DustScreen> {
                                   double.parse(widget
                                       .airConditionData['response']
                                   ['body']['items'][0]['coValue']) <=
-                                      9.0) ? const SizedBox(
+                                      9.0) ? SizedBox(
                                 height: 10,
                                 child: LinearProgressIndicator(
-                                  value: 1,
+                                  value:  double.parse(widget
+                                      .airConditionData['response']
+                                  ['body']['items'][0]['coValue'])/15.01,
                                   backgroundColor: Colors.grey,
                                   valueColor: AlwaysStoppedAnimation<Color>(
                                       Colors.green),
@@ -571,18 +609,22 @@ class _DustScreenState extends State<DustScreen> {
                                   double.parse(widget
                                       .airConditionData['response']
                                   ['body']['items'][0]['coValue']) <=
-                                      15.0) ? const SizedBox(
+                                      15.0) ? SizedBox(
                                 height: 10,
                                 child: LinearProgressIndicator(
-                                  value: 1,
+                                  value: double.parse(widget
+                                      .airConditionData['response']
+                                  ['body']['items'][0]['coValue'])/15.01,
                                   backgroundColor: Colors.grey,
                                   valueColor: AlwaysStoppedAnimation<Color>(
                                       Colors.orange),
                                 ),
-                              ) : const SizedBox(
+                              ) : SizedBox(
                                 height: 10,
                                 child: LinearProgressIndicator(
-                                  value: 1,
+                                  value: double.parse(widget
+                                      .airConditionData['response']
+                                  ['body']['items'][0]['coValue'])/15.01,
                                   backgroundColor: Colors.grey,
                                   valueColor: AlwaysStoppedAnimation<Color>(
                                       Colors.red),
@@ -619,7 +661,8 @@ class _DustScreenState extends State<DustScreen> {
                           width: 10,
                         ),
                         const Image(
-                          image: AssetImage("assets/SO2_flat.png"),
+                          // image: AssetImage("assets/so2.png"),
+                          image : AssetImage("assets/SO2_3d.png"),
                           width: 50.0,
                           height: 50.0,
                         ),
@@ -637,10 +680,12 @@ class _DustScreenState extends State<DustScreen> {
                                       .airConditionData['response']
                                   ['body']['items'][0]['so2Value']) <=
                                       0.02)
-                                  ? const SizedBox(
+                                  ? SizedBox(
                                 height: 10,
                                 child: LinearProgressIndicator(
-                                  value: 1,
+                                  value: double.parse(widget
+                                      .airConditionData['response']
+                                  ['body']['items'][0]['so2Value'])/0.151,
                                   backgroundColor: Colors.grey,
                                   valueColor: AlwaysStoppedAnimation<Color>(
                                       Colors.blue),
@@ -653,10 +698,12 @@ class _DustScreenState extends State<DustScreen> {
                                   double.parse(widget
                                       .airConditionData['response']
                                   ['body']['items'][0]['so2Value']) <=
-                                      0.05) ? const SizedBox(
+                                      0.05) ?  SizedBox(
                                 height: 10,
                                 child: LinearProgressIndicator(
-                                  value: 1,
+                                  value: double.parse(widget
+                                      .airConditionData['response']
+                                  ['body']['items'][0]['so2Value'])/0.151,
                                   backgroundColor: Colors.grey,
                                   valueColor: AlwaysStoppedAnimation<Color>(
                                       Colors.green),
@@ -668,18 +715,22 @@ class _DustScreenState extends State<DustScreen> {
                                   double.parse(widget
                                       .airConditionData['response']
                                   ['body']['items'][0]['so2Value']) <=
-                                      0.15) ? const SizedBox(
+                                      0.15) ? SizedBox(
                                 height: 10,
                                 child: LinearProgressIndicator(
-                                  value: 1,
+                                  value: double.parse(widget
+                                      .airConditionData['response']
+                                  ['body']['items'][0]['so2Value'])/0.151,
                                   backgroundColor: Colors.grey,
                                   valueColor: AlwaysStoppedAnimation<Color>(
                                       Colors.orange),
                                 ),
-                              ) : const SizedBox(
+                              ) : SizedBox(
                                 height: 10,
                                 child: LinearProgressIndicator(
-                                  value: 1,
+                                  value: double.parse(widget
+                                      .airConditionData['response']
+                                  ['body']['items'][0]['so2Value'])/0.151,
                                   backgroundColor: Colors.grey,
                                   valueColor: AlwaysStoppedAnimation<Color>(
                                       Colors.red),
