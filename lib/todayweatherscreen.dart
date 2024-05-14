@@ -134,6 +134,14 @@ class TodayWeatherState extends State<TodayWeatherScreen> with SingleTickerProvi
                           ),
                         ],
                       ),
+                      Container(
+                        height: 300,
+                        child: VerticalDivider(
+                          thickness: 0.5,
+                          color: Colors.white54,
+
+                        ),
+                      ),
 
                       // 하늘 상태 정보 아이콘
 
@@ -179,7 +187,7 @@ class TodayWeatherState extends State<TodayWeatherScreen> with SingleTickerProvi
                           ),
                           // 현재 기온
                           Text(
-                            "${widget.currentWeatherData['response']['body']['items']['item'][3]['obsrValue']}°C",
+                            "${widget.currentWeatherData['response']['body']['items']['item'][3]['obsrValue']}°",
                             textAlign: TextAlign.start,
                             overflow: TextOverflow.clip,
                             style: TempStyle(),
@@ -191,7 +199,7 @@ class TodayWeatherState extends State<TodayWeatherScreen> with SingleTickerProvi
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "${widget.todayTMN2}°C",
+                                "${widget.todayTMN2}°",
                                 textAlign: TextAlign.start,
                                 overflow: TextOverflow.clip,
                                 style: MinTempStyle(),
@@ -201,7 +209,7 @@ class TodayWeatherState extends State<TodayWeatherScreen> with SingleTickerProvi
                               ),
                               Text(" / ", style: TextStyle(fontSize: 26, color: Colors.white54),),
                               Text(
-                                "${widget.todayTMX2}°C",
+                                "${widget.todayTMX2}°",
                                 textAlign: TextAlign.start,
                                 overflow: TextOverflow.clip,
                                 style:MaxTempStyle(),
@@ -398,7 +406,7 @@ List<Widget> getListViewItem(dynamic currenttodayData) {
                     fontWeight: FontWeight.w400,
                     fontStyle: FontStyle.normal,
                     fontSize: 18,
-                    color: Colors.white,
+                    color: Colors.grey.shade700,
                     shadows: [myShadow()],
                   ),
                 )
@@ -406,11 +414,12 @@ List<Widget> getListViewItem(dynamic currenttodayData) {
                         "${pcp}",
                         textAlign: TextAlign.start,
                         overflow: TextOverflow.clip,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontWeight: FontWeight.w400,
                           fontStyle: FontStyle.normal,
                           fontSize: 18,
-                          color: Color(0xff000000),
+                          color: Colors.grey.shade700,
+                          shadows: [myShadow()],
                         ),
                       ),
               ],

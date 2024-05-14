@@ -135,7 +135,14 @@ class HSTodayWeatherState extends State<HSTodayWeatherScreen> with SingleTickerP
                       ),
 
                       // 하늘 상태 정보 아이콘
+                      Container(
+                        height: 300,
+                        child: VerticalDivider(
+                          thickness: 0.5,
+                          color: Colors.white54,
 
+                        ),
+                      ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

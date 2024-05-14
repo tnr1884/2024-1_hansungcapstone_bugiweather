@@ -327,7 +327,7 @@ class HomeScreenState extends State<HomeScreen> {
                 end: Alignment.bottomCenter,
                 colors: <Color>[
                   Color(0xffbfd5ff),
-                  Color(0xff74d5ff),
+                  Color(0xffA1D7F9),
                 ],
               ),
             ),
