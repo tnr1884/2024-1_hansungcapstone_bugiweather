@@ -37,6 +37,7 @@ class HomeScreen extends StatefulWidget {
   final dynamic dailyWeather;
   final dynamic locationWeather;
   final dynamic locationForecast;
+  final dynamic dailyForecastText;
 
   const HomeScreen({
     super.key,
@@ -53,6 +54,7 @@ class HomeScreen extends StatefulWidget {
     this.dailyWeather,
     this.locationWeather,
     this.locationForecast,
+    this.dailyForecastText
 
   });
 
@@ -93,7 +95,7 @@ class HomeScreenState extends State<HomeScreen> {
 
     _widgetOptions = <Widget>[
       getTodayWeatherScreen(),
-      weekScreen(parseWeatherData: widget.dailyWeather,),
+      weekScreen(parseWeatherData: widget.dailyWeather, parseWeatherData2: widget.dailyForecastText,),
       getHSTodayWeatherScreen(),
       LoadingMap(),
       LocationScreen(locationForecast: widget.locationForecast, locationWeather: widget.locationWeather,),

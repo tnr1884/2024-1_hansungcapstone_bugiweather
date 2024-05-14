@@ -186,6 +186,9 @@ class _AppLoadingState extends State<AppLoading> {
     var weatherData = await WeatherModel().getLocationWeather();
     var forecastData = await WeatherModel().getLocationForecast();
 
+    final Text = await networkDaily.fetchWeatherForecast3();
+    final dailyForecastText = Text['response']['body']['items']['item'][0]['wfSv'];
+
     Navigator.push(
       context,
       CustomRoute(
@@ -202,6 +205,7 @@ class _AppLoadingState extends State<AppLoading> {
             superShortWeatherData: superShortWeatherData,
             hssuperShortWeatherData: hssuperShortWeatherData,
             dailyWeather: dailyForecasts,
+            dailyForecastText: dailyForecastText,
             locationWeather: weatherData,
             locationForecast: forecastData,
           );
