@@ -15,7 +15,6 @@ import 'NaverMap/mylocation.dart';
 import 'dust.dart';
 import 'hstodayweatherscreen.dart';
 import 'httpnetwork.dart';
-import 'loading.dart';
 import 'package:hansungcapstone_bugiweather/NaverMap/screens/loading.dart';
 import 'package:hansungcapstone_bugiweather/week_weather.dart';
 import 'package:http/http.dart' as http;
@@ -71,6 +70,7 @@ class HomeScreenState extends State<HomeScreen> {
   var todayTMX2;
   var hstodayTMN2;
   var hstodayTMX2;
+  var skyState;
 
 
   // = <Widget>[
@@ -95,10 +95,10 @@ class HomeScreenState extends State<HomeScreen> {
 
     _widgetOptions = <Widget>[
       getTodayWeatherScreen(),
-      weekScreen(parseWeatherData: widget.dailyWeather, parseWeatherData2: widget.dailyForecastText,),
+      weekScreen(parseWeatherData: widget.dailyWeather, parseWeatherData2: widget.dailyForecastText, skyStateCode: skyState,),
       getHSTodayWeatherScreen(),
       LoadingMap(),
-      LocationScreen(locationForecast: widget.locationForecast, locationWeather: widget.locationWeather,),
+      LocationScreen(locationForecast: widget.locationForecast, locationWeather: widget.locationWeather, skyStateCode: skyState,),
     ];
   }
 
@@ -136,7 +136,7 @@ class HomeScreenState extends State<HomeScreen> {
         }
       }
     }
-    var skyCode, skyState;
+    var skyCode;
     var timeHH = DateFormat('HH00')
         .format(DateTime.now().add(const Duration(minutes: 30))); // 30분후
     // 초단기 예보
@@ -167,7 +167,7 @@ class HomeScreenState extends State<HomeScreen> {
     else if (skyCode == '4') {
       skyState = '흐림';
     }
-
+    print("스카이스테이트" + skyState);
     return TodayWeatherScreen(
       addrData: widget.addrData,
       today2amData: widget.today2amData,
@@ -213,7 +213,7 @@ class HomeScreenState extends State<HomeScreen> {
         }
       }
     }
-    var skyCode, skyState;
+    var skyCode;
     var timeHH = DateFormat('HH00')
         .format(DateTime.now().add(const Duration(minutes: 30))); // 30분후
     // 초단기 예보
@@ -240,6 +240,7 @@ class HomeScreenState extends State<HomeScreen> {
     else if (skyCode == '4') {
       skyState = '흐림';
     }
+    print("스카이스테이트" + skyState);
     return HSTodayWeatherScreen(
       addrData: widget.hsaddrData,
       today2amData: widget.hstoday2amData,
@@ -297,7 +298,7 @@ class HomeScreenState extends State<HomeScreen> {
 
     // 측정소별 실시간 측정 정보 조회 json 응답 데이터
     var airConditionData = await network.getAirConditionData();
-    _widgetOptions.add(DustScreen(airConditionData: airConditionData));
+    _widgetOptions.add(DustScreen(airConditionData: airConditionData, skyStateCode: skyState,));
   }
 
   @override

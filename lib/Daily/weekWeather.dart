@@ -1,13 +1,15 @@
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:hansungcapstone_bugiweather/SkyStateImg.dart';
 import 'model.dart';
 
 class weekScreen extends StatefulWidget {
-  weekScreen({this.parseWeatherData, this.parseWeatherData2});
+  weekScreen({this.parseWeatherData, this.parseWeatherData2, required this.skyStateCode});
 
   final dynamic parseWeatherData;
   final dynamic parseWeatherData2;
+  String skyStateCode;
 
   @override
   State<weekScreen> createState() => _backscreen();
@@ -26,12 +28,14 @@ class _backscreen extends State<weekScreen> {
   String? text;
   String? forestText;
 
+  String skyState="";
   @override
   void initState() {
     super.initState();
     //getLocation();
     updateData(widget.parseWeatherData);
     updateData2(widget.parseWeatherData2);
+    skyState=getSkyState(widget.skyStateCode);
   }
 
   void updateData(dynamic weatherData) {
@@ -54,10 +58,12 @@ class _backscreen extends State<weekScreen> {
      // print(condition);
       Widget? weatherIcon = model.getWeatherIcon(condition);
       if (weatherIcon != null) {
-        print(condition);
+        //print(condition);
         icon.add(weatherIcon); // Only add if not null.
       }
     }
+    print(weatherData[0]['weather'][0]['id']);
+    skyState=getSkyState(weatherData[0]['weather'][0]['id'].toString());
   }
   void updateData2(dynamic weatherTextdata){
     text = weatherTextdata;
@@ -102,22 +108,13 @@ class _backscreen extends State<weekScreen> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-      ),
       body: Stack(children: [
         Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Color(0xFF74D5FF),
-                Color(0xFFBFD5FF),
-              ],
-            ),
+            image: DecorationImage(
+              image: AssetImage(skyState),
+              fit: BoxFit.fill
+            )
           ),
         ),
         SingleChildScrollView(
