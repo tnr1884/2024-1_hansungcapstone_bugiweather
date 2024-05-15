@@ -242,7 +242,7 @@ class _backscreen extends State<weekScreen> with SingleTickerProviderStateMixin 
                             alignment: Alignment.center,
                             child: Text(
                               "${mornTempList[1]}°/${eveTempList[1]}°",
-                              style: TextStyle(fontSize: 30),
+                              style: Title54Style(),
                             ),
                           ),
                           //SizedBox(width: 10,),
@@ -279,7 +279,7 @@ class _backscreen extends State<weekScreen> with SingleTickerProviderStateMixin 
                             alignment: Alignment.center,
                             child: Text(
                               "${mornTempList[2]}°/${eveTempList[2]}°",
-                              style: TextStyle(fontSize: 30),
+                              style: Title54Style(),
                             ),
                           ),
                           SizedBox(
@@ -318,7 +318,7 @@ class _backscreen extends State<weekScreen> with SingleTickerProviderStateMixin 
                             alignment: Alignment.center,
                             child: Text(
                               "${mornTempList[3]}°/${eveTempList[3]}°",
-                              style: TextStyle(fontSize: 30),
+                              style: Title54Style(),
                             ),
                           ),
                           SizedBox(
@@ -376,7 +376,7 @@ class _backscreen extends State<weekScreen> with SingleTickerProviderStateMixin 
                         child: Row(children: [
                           SizedBox(width: 30),
                           Container(
-                            width: 95, // Specify the width
+                            width: 97, // Specify the width
                             height: 38, // Specify the height
                             alignment: Alignment.centerLeft,
                             child: Text(
@@ -435,7 +435,7 @@ class _backscreen extends State<weekScreen> with SingleTickerProviderStateMixin 
                             alignment: Alignment.center,
                             child: Text(
                               "${mornTempList[6]}°/${eveTempList[6]}°",
-                              style: TextStyle(fontSize: 30),
+                              style: Title54Style(),
                             ),
                           ),
                           SizedBox(

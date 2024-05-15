@@ -7,6 +7,7 @@ import 'package:hansungcapstone_bugiweather/Daily/main.dart';
 import 'package:hansungcapstone_bugiweather/Daily/weekWeather.dart';
 import 'package:hansungcapstone_bugiweather/Search/loading_screen.dart';
 import 'package:hansungcapstone_bugiweather/Search/location_screen.dart';
+import 'package:hansungcapstone_bugiweather/SkyStateImg.dart';
 import 'package:hansungcapstone_bugiweather/favorites.dart';
 import 'package:hansungcapstone_bugiweather/todayweatherscreen.dart';
 import 'package:hansungcapstone_bugiweather/setting.dart';
@@ -325,10 +326,7 @@ class HomeScreenState extends State<HomeScreen> {
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: <Color>[
-                  Color(0xffbfd5ff),
-                  Color(0xffA1D7F9),
-                ],
+                colors: getCol(),
               ),
             ),
           ),
@@ -370,5 +368,14 @@ class HomeScreenState extends State<HomeScreen> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
     );
+  }
+  List<Color> getCol () {
+    if (skyState=="맑음")
+      return [Color(0xffbfd5ff), Color(0xffA1D7F9)];
+    else if (skyState=="흐림")
+      return [Color(0xff466372), Color(0xff142739)];
+    else if (skyState=="구름 많음")
+      return [Color(0xff61717B), Color(0xff567A98).withOpacity(0.85)];
+    return [Colors.white];
   }
 }

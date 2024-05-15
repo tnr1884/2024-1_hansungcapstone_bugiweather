@@ -119,7 +119,7 @@ class _DustScreenState extends State<DustScreen> {
                         color: Color(0xff000000),
                       ),
                     ),
-                    const SizedBox(width: 10),
+                    const SizedBox(width: 5),
                   ],
                 ),
                 const SizedBox(

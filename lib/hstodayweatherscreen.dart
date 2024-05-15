@@ -48,6 +48,10 @@ class HSTodayWeatherState extends State<HSTodayWeatherScreen> with SingleTickerP
     switch (widget.skyState) {
       case "맑음" :
         skyStateUrl="assets/Clear.png";
+      case "흐림" :
+        skyStateUrl="assets/Haze.png";
+      case "구름 많음" :
+        skyStateUrl="assets/Clouds.png";
       default :
         skyStateUrl="assets/backimg.png";
     }
@@ -145,6 +149,7 @@ class HSTodayWeatherState extends State<HSTodayWeatherScreen> with SingleTickerP
                       ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             widget.skyState,
@@ -176,8 +181,8 @@ class HSTodayWeatherState extends State<HSTodayWeatherScreen> with SingleTickerP
                             style: const TextStyle(
                               fontWeight: FontWeight.w400,
                               fontStyle: FontStyle.normal,
-                              fontSize: 18,
-                              color: Color(0xff000000),
+                              fontSize: 20,
+                              color: Colors.white54,
                             ),
                           ),
                           const SizedBox(

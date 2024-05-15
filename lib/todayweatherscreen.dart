@@ -147,6 +147,7 @@ class TodayWeatherState extends State<TodayWeatherScreen> with SingleTickerProvi
 
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             widget.skyState,
@@ -175,11 +176,11 @@ class TodayWeatherState extends State<TodayWeatherScreen> with SingleTickerProvi
                             "${widget.currentWeatherData['response']['body']['items']['item'][2]['obsrValue']}mm",
                             textAlign: TextAlign.start,
                             overflow: TextOverflow.clip,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontWeight: FontWeight.w400,
                               fontStyle: FontStyle.normal,
-                              fontSize: 18,
-                              color: Color(0xff000000),
+                              fontSize: 20,
+                              color: Colors.white54,
                             ),
                           ),
                           const SizedBox(
@@ -406,7 +407,7 @@ List<Widget> getListViewItem(dynamic currenttodayData) {
                     fontWeight: FontWeight.w400,
                     fontStyle: FontStyle.normal,
                     fontSize: 18,
-                    color: Colors.grey.shade700,
+                    color: Colors.grey.shade300,
                     shadows: [myShadow()],
                   ),
                 )
@@ -418,7 +419,7 @@ List<Widget> getListViewItem(dynamic currenttodayData) {
                           fontWeight: FontWeight.w400,
                           fontStyle: FontStyle.normal,
                           fontSize: 18,
-                          color: Colors.grey.shade700,
+                          color: Colors.grey.shade300,
                           shadows: [myShadow()],
                         ),
                       ),
