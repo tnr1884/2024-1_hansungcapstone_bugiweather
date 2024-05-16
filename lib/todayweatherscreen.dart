@@ -125,10 +125,34 @@ class TodayWeatherState extends State<TodayWeatherScreen> with SingleTickerProvi
                             height: 8,
                           ),
                           (widget.skyState == "맑음")
-                              ? Image.asset("images/sun_1x.png", width: 130, height: 130,)
+                              ? Image.asset(
+                            "images/sun_1x.png",
+                            width: 130,
+                            height: 130,
+                          )
                               : (widget.skyState == "구름 많음")
-                              ? Image.asset("images/cloud_1x.png", width: 130, height: 130,)
-                              : Image.asset("images/sunc_1x.png", width: 130, height: 130,),
+                              ? Image.asset(
+                            "images/cloud_1x.png",
+                            width: 130,
+                            height: 130,
+                          )
+                              : (widget.skyState == "비")
+                              ? Image.asset(
+                            "images/rain_1x.png",
+                            width: 130,
+                            height: 130,
+                          )
+                              : (widget.skyState == "눈")
+                              ? Image.asset(
+                            "images/snow_1x.png",
+                            width: 130,
+                            height: 130,
+                          )
+                              : Image.asset(
+                            "images/sunc_1x.png",
+                            width: 130,
+                            height: 130,
+                          ),
                           SizedBox(
                             height: 8,
                           ),

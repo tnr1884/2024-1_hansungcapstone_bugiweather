@@ -137,7 +137,7 @@ class HomeScreenState extends State<HomeScreen> {
         }
       }
     }
-    var skyCode;
+    var skyCode, ptyCode, skyState;
     var timeHH = DateFormat('HH00')
         .format(DateTime.now().add(const Duration(minutes: 30))); // 30분후
     // 초단기 예보
@@ -149,6 +149,7 @@ class HomeScreenState extends State<HomeScreen> {
       // PTY 코드값
       if (parsed_json['category'] == 'PTY' &&
           parsed_json['fcstTime'] == timeHH) {
+        ptyCode = parsed_json['fcstValue'];
       }
       // SKY 코드값
       if (parsed_json['category'] == 'SKY' &&
@@ -167,6 +168,13 @@ class HomeScreenState extends State<HomeScreen> {
     // 흐림
     else if (skyCode == '4') {
       skyState = '흐림';
+    }
+    if (ptyCode == '1' || ptyCode == '5') {
+      skyState = '비';
+    }
+    // 눈
+    else if (ptyCode == '3' || ptyCode == '7') {
+      skyState = '눈';
     }
     print("스카이스테이트" + skyState);
     return TodayWeatherScreen(
@@ -376,6 +384,6 @@ class HomeScreenState extends State<HomeScreen> {
       return [Color(0xff466372), Color(0xff142739)];
     else if (skyState=="구름 많음")
       return [Color(0xff61717B), Color(0xff567A98).withOpacity(0.85)];
-    return [Colors.white];
+    return [Color(0xff61717B), Color(0xff567A98).withOpacity(0.85)];
   }
 }
