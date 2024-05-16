@@ -137,7 +137,7 @@ class HomeScreenState extends State<HomeScreen> {
         }
       }
     }
-    var skyCode, ptyCode, skyState;
+    var skyCode, ptyCode;
     var timeHH = DateFormat('HH00')
         .format(DateTime.now().add(const Duration(minutes: 30))); // 30분후
     // 초단기 예보
@@ -222,7 +222,7 @@ class HomeScreenState extends State<HomeScreen> {
         }
       }
     }
-    var skyCode;
+    var skyCode, ptyCode;
     var timeHH = DateFormat('HH00')
         .format(DateTime.now().add(const Duration(minutes: 30))); // 30분후
     // 초단기 예보
@@ -248,6 +248,13 @@ class HomeScreenState extends State<HomeScreen> {
     // 흐림
     else if (skyCode == '4') {
       skyState = '흐림';
+    }
+    if (ptyCode == '1' || ptyCode == '5') {
+      skyState = '비';
+    }
+    // 눈
+    else if (ptyCode == '3' || ptyCode == '7') {
+      skyState = '눈';
     }
     print("스카이스테이트" + skyState);
     return HSTodayWeatherScreen(

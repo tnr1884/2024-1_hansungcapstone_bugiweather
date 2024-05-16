@@ -12,6 +12,9 @@ String getSkyState(String skyState) {
     case "흐림":
       skyStateUrl="assets/Haze.png";
       break;
+    case "비" :
+    case "눈" :
+      skyStateUrl="assets/Rain.png";
     default :
       skyStateUrl="assets/backimg.png";
   }
