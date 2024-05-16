@@ -15,9 +15,11 @@ class LocationScreen extends StatefulWidget {
   _LocationScreenState createState() => _LocationScreenState();
 }
 
-class _LocationScreenState extends State<LocationScreen> {
+class _LocationScreenState extends State<LocationScreen> with SingleTickerProviderStateMixin {
   WeatherModel weather = WeatherModel(); // 현재 날씨
   WeatherModel forecast = WeatherModel(); // 일기 예보
+  late AnimationController _animationController;
+  late Animation<double> _animation;
 
   late int temperature;
   late String cityName;
@@ -43,6 +45,16 @@ class _LocationScreenState extends State<LocationScreen> {
     updateUIW(widget.locationWeather);
     updateUIF(widget.locationForecast);
     skyState=getSkyState(widget.skyStateCode);
+
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 1),
+    );
+    _animation = Tween<double>(
+      begin: 0,
+      end: 1,
+    ).animate(_animationController);
+    _animationController.forward();
   }
 
   void updateUIW(var weatherData) {
@@ -111,116 +123,119 @@ class _LocationScreenState extends State<LocationScreen> {
         ),
 
         child: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            //crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  TextButton(
-                    onPressed: () async {
-                      var weatherData = await weather.getLocationWeather();
-                      updateUIW(weatherData);
-                      var forecastData = await forecast.getLocationForecast();
-                      updateUIF(forecastData);
-                    },
-                    child: const Icon(
-                      Icons.near_me_rounded,
-                      size: 50.0,
-                      color: Colors.indigoAccent,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () async {
-                      var typedName = await Navigator.push(
-                        context,
-                        CupertinoPageRoute(builder: (context) {
-                          return CityScreen();
-                        }),
-                      );
-                      if (typedName != null) {
-                        var weatherData =
-                        await weather.getCityWeather(typedName);
-                        updateUIW(weatherData);
-                        var forecastData =
-                        await forecast.getCityForecast(typedName);
-                        updateUIF(forecastData);
-                      }
-                    },
-                    child: const Icon(
-                      Icons.search_rounded,
-                      size: 50.0,
-                      color: Colors.indigoAccent,
-                    ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child:
-                Column(
+          child: FadeTransition(
+            opacity: _animation,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              //crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text(
-                      cityName,
-                      style: kButtonTextStyle,
+                    TextButton(
+                      onPressed: () async {
+                        var weatherData = await weather.getLocationWeather();
+                        updateUIW(weatherData);
+                        var forecastData = await forecast.getLocationForecast();
+                        updateUIF(forecastData);
+                      },
+                      child: const Icon(
+                        Icons.near_me_rounded,
+                        size: 50.0,
+                        color: Colors.indigoAccent,
+                      ),
                     ),
-                    Text(
-                      '$temperature°',
-                      style: kTempTextStyleNow,
-                    ),
-                    Text(
-                      '$weatherIcon',
-                      style: kConditionTextStyleNow,
+                    TextButton(
+                      onPressed: () async {
+                        var typedName = await Navigator.push(
+                          context,
+                          CupertinoPageRoute(builder: (context) {
+                            return CityScreen();
+                          }),
+                        );
+                        if (typedName != null) {
+                          var weatherData =
+                          await weather.getCityWeather(typedName);
+                          updateUIW(weatherData);
+                          var forecastData =
+                          await forecast.getCityForecast(typedName);
+                          updateUIF(forecastData);
+                        }
+                      },
+                      child: const Icon(
+                        Icons.search_rounded,
+                        size: 50.0,
+                        color: Colors.indigoAccent,
+                      ),
                     ),
                   ],
                 ),
-              ),
-              SizedBox(height: 30),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child:
                   Column(
-                    children: [
+                    children: <Widget>[
                       Text(
-                          '$foreTemp1°',
-                        style: kTempTextStyleFore,
+                        cityName,
+                        style: kButtonTextStyle,
                       ),
                       Text(
-                          forecastIcon1,
-                        style: kConditionTextStyleFore,
-                      )
-                    ],
-                  ),
-                  SizedBox(width: 40),
-                  Column(
-                    children: [
-                      Text(
-                        '$foreTemp2°',
-                        style: kTempTextStyleFore,
+                        '$temperature°',
+                        style: kTempTextStyleNow,
                       ),
                       Text(
-                        forecastIcon2,
-                        style: kConditionTextStyleFore,
-                      )
-                    ],
-                  ),
-                  SizedBox(width: 40),
-                  Column(
-                    children: [
-                      Text(
-                        '$foreTemp3°',
-                        style: kTempTextStyleFore,
+                        '$weatherIcon',
+                        style: kConditionTextStyleNow,
                       ),
-                      Text(
-                        forecastIcon3,
-                        style: kConditionTextStyleFore,
-                      )
                     ],
                   ),
-                ],
-              )
-            ],
+                ),
+                SizedBox(height: 30),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Column(
+                      children: [
+                        Text(
+                            '$foreTemp1°',
+                          style: kTempTextStyleFore,
+                        ),
+                        Text(
+                            forecastIcon1,
+                          style: kConditionTextStyleFore,
+                        )
+                      ],
+                    ),
+                    SizedBox(width: 40),
+                    Column(
+                      children: [
+                        Text(
+                          '$foreTemp2°',
+                          style: kTempTextStyleFore,
+                        ),
+                        Text(
+                          forecastIcon2,
+                          style: kConditionTextStyleFore,
+                        )
+                      ],
+                    ),
+                    SizedBox(width: 40),
+                    Column(
+                      children: [
+                        Text(
+                          '$foreTemp3°',
+                          style: kTempTextStyleFore,
+                        ),
+                        Text(
+                          forecastIcon3,
+                          style: kConditionTextStyleFore,
+                        )
+                      ],
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
