@@ -250,12 +250,7 @@ class TodayWeatherState extends State<TodayWeatherScreen> with SingleTickerProvi
                               Text(DateFormat("h:mm a").format(DateTime.now()),
                                 textAlign: TextAlign.start,
                                 overflow: TextOverflow.clip,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 20,
-                                  color: Colors.white54,
-                                ),
+                                style: DateStyle(),
                               ),
                               const SizedBox(
                                 width: 5,
@@ -356,15 +351,29 @@ List<Widget> getListViewItem(dynamic currenttodayData) {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 // 예보 시간
-                Text("${DateFormat("h:mm a").format(getTime(currenttodayData['response']['body']['items']['item'][i]['fcstDate'] + currenttodayData['response']['body']['items']['item'][i]['fcstTime']))}",
+                Text("${DateFormat('M/d').format(getTime(currenttodayData['response']['body']['items']['item'][i]['fcstDate'] + currenttodayData['response']['body']['items']['item'][i]['fcstTime']))}" +
+                    " (${DateFormat('E', 'ko_KR').format(getTime(currenttodayData['response']['body']['items']['item'][i]['fcstDate'] + currenttodayData['response']['body']['items']['item'][i]['fcstTime']))})",
                   textAlign: TextAlign.start,
                   overflow: TextOverflow.clip,
                   style: TextStyle(
+                    fontFamily: 'NanumSquareRoundB',
                     fontWeight: FontWeight.w400,
                     fontStyle: FontStyle.normal,
                     fontSize: 20,
                     shadows: [myShadow()],
-                    color: Colors.white70,
+                    color: Colors.white,
+                  ),
+                ),
+                Text("${DateFormat("h:mm a").format(getTime(currenttodayData['response']['body']['items']['item'][i]['fcstDate'] + currenttodayData['response']['body']['items']['item'][i]['fcstTime']))}",
+                  textAlign: TextAlign.start,
+                  overflow: TextOverflow.clip,
+                  style: TextStyle(
+                    fontFamily: 'NanumSquareRoundL',
+                    fontWeight: FontWeight.w400,
+                    fontStyle: FontStyle.normal,
+                    fontSize: 18,
+                    shadows: [myShadow()],
+                    color: Colors.white,
                   ),
                 ),
                 const SizedBox(

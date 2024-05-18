@@ -252,12 +252,7 @@ class HSTodayWeatherState extends State<HSTodayWeatherScreen> with SingleTickerP
                               Text(DateFormat("h:mm a").format(DateTime.now()),
                                 textAlign: TextAlign.start,
                                 overflow: TextOverflow.clip,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 20,
-                                  color: Colors.white54,
-                                ),
+                                style: DateStyle(),
                               ),
                               const SizedBox(
                                 width: 5,
