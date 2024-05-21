@@ -172,7 +172,7 @@ class _backscreen extends State<weekScreen> with SingleTickerProviderStateMixin 
                   child: Text("주간 날씨", style: TitleStyle(),),
                 ),
                 Container(
-                  margin: EdgeInsets.all(10),
+                  margin: EdgeInsets.all(5),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20), // Rounded corners
                     color: Colors.black.withOpacity(0.2),

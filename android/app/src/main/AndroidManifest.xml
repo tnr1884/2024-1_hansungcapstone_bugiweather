@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <application
-        android:label="hansungcapstone_bugiweather"
+        android:label="부기날씨"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
