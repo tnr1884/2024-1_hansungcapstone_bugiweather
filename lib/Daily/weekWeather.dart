@@ -137,6 +137,10 @@ class _backscreen extends State<weekScreen> with SingleTickerProviderStateMixin 
               children: <Widget>[
                 Container(
                   margin: EdgeInsets.all(10),
+                  child: Text("단기 예보", style: TitleStyle(),),
+                ),
+                Container(
+                  margin: EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20), // Rounded corners
                     color: Colors.black.withOpacity(0.2),
@@ -162,6 +166,10 @@ class _backscreen extends State<weekScreen> with SingleTickerProviderStateMixin 
                       thickness: 1,
                       color: Colors.grey.shade400,
                     )
+                ),
+                Container(
+                  margin: EdgeInsets.all(10),
+                  child: Text("주간 날씨", style: TitleStyle(),),
                 ),
                 Container(
                   margin: EdgeInsets.all(10),

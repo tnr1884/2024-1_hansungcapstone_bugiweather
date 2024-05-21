@@ -692,7 +692,7 @@ class _NaverMapAppState extends State<NaverMapApp> {
               ),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: EdgeInsets.all(15.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

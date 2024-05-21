@@ -242,7 +242,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                 width: 20,
                               ),
                               Container(
-                                width: 70,
+                                width: 75,
                                 alignment: Alignment.center,
                                 child: Text(widget.airConditionData['response']
                                 ['body']['items'][0]['pm10Value'],
@@ -311,7 +311,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                     value: double.parse(widget
                                         .airConditionData['response']
                                     ['body']['items'][0]['pm25Value'])/76.0,
-                                    backgroundColor: Colors.grey,
+                                    backgroundColor: Colors.white70,
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                         Colors.green),
                                   ),
@@ -328,7 +328,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                     value: double.parse(widget
                                         .airConditionData['response']
                                     ['body']['items'][0]['pm25Value'])/76.0,
-                                    backgroundColor: Colors.grey,
+                                    backgroundColor: Colors.white70,
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                         Colors.orange),
                                   ),
@@ -338,7 +338,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                     value: double.parse(widget
                                         .airConditionData['response']
                                     ['body']['items'][0]['pm25Value'])/76.0,
-                                    backgroundColor: Colors.grey,
+                                    backgroundColor: Colors.white70,
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                         Colors.red),
                                   ),
@@ -347,7 +347,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                               const SizedBox(
                                 width: 20,
                               ),
-                              Container(width: 70,
+                              Container(width: 75,
                                 alignment: Alignment.center,
                                 child: Text(widget.airConditionData['response']
                                 ['body']['items'][0]['pm25Value'],
@@ -456,7 +456,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                 width: 20,
                               ),
                               Container(
-                                width: 70,
+                                width: 75,
                                 alignment: Alignment.center,
                                 child: Text(widget.airConditionData['response']
                                 ['body']['items'][0]['o3Value'],
@@ -565,7 +565,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                 width: 20,
                               ),
                               Container(
-                                width: 70,
+                                width: 75,
                                 child: Text(widget.airConditionData['response']
                                 ['body']['items'][0]['no2Value'],
                                   style: SubStyle(),
@@ -677,7 +677,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                 width: 20,
                               ),
                               Container(
-                                width: 70,
+                                width: 75,
                                 alignment: Alignment.center,
                                 child: Text(widget.airConditionData['response']
                                 ['body']['items'][0]['coValue'],
@@ -789,7 +789,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                 width: 20,
                               ),
                               Container(
-                                width: 70,
+                                width: 75,
                                 child: Text(widget.airConditionData['response']
                                 ['body']['items'][0]['so2Value'],
                                   style: SubStyle(),
