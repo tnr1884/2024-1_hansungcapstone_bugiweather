@@ -247,7 +247,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                 alignment: Alignment.center,
                                 child: Text(widget.airConditionData['response']
                                 ['body']['items'][0]['pm10Value'],
-                                  style: SubStyle(),
+                                  style: getDustStyleInt('pm10Value'),
                                 ),
                               ),
                               const SizedBox(
@@ -355,7 +355,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                 alignment: Alignment.center,
                                 child: Text(widget.airConditionData['response']
                                 ['body']['items'][0]['pm25Value'],
-                                  style: SubStyle(),
+                                  style: getDustStyleInt('pm25Value'),
                                 ),
                               ),
                               const SizedBox(
@@ -465,7 +465,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                 alignment: Alignment.center,
                                 child: Text(widget.airConditionData['response']
                                 ['body']['items'][0]['o3Value'],
-                                  style: SubStyle(),
+                                  style: getDustStyleDouble('o3Value'),
                                 ),
                               ),
                               const SizedBox(
@@ -575,7 +575,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                 alignment: Alignment.center,
                                 child: Text(widget.airConditionData['response']
                                 ['body']['items'][0]['no2Value'],
-                                  style: SubStyle(),
+                                  style: getDustStyleDouble("no2Value"),
                                 ),
                               ),
                               const SizedBox(
@@ -689,7 +689,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                 alignment: Alignment.center,
                                 child: Text(widget.airConditionData['response']
                                 ['body']['items'][0]['coValue'],
-                                  style:SubStyle(),
+                                  style:getDustStyleDouble('coValue'),
                                 ),
                               ),
                               const SizedBox(
@@ -802,7 +802,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                 alignment: Alignment.center,
                                 child: Text(widget.airConditionData['response']
                                 ['body']['items'][0]['so2Value'],
-                                  style: SubStyle(),
+                                  style: getDustStyleDouble('so2Value'),
                                 ),
                               ),
                               const SizedBox(
@@ -910,28 +910,55 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
     int airCondition = int.parse(widget.airConditionData['response']['body']['items'][0][dustType]);
     if (dustType=='pm10Value') {
       if (airCondition <= 30) {
-        return TitleStyleBlue();
+        return DustStyleBlue();
       }
       else {
-        return TitleStyleGreen();
+        return DustStyleGreen();
       }
     }
     else if (dustType=='pm25Value') {
       if(airCondition <=15) {
-        return TitleStyleBlue();
+        return DustStyleBlue();
       }
       else {
-        return TitleStyleGreen();
+        return DustStyleGreen();
       }
     }
-    getDustStyleDouble(String dustType) {
-      double airCondition = double.parse(widget.airConditionData['response']['body']['items'][0][dustType]);
-      if (dustType=='o3Value') {
-        if (airCondition <=0.03) {
-          return TitleStyleBlue();
-        }
-      }
-    }
+  }
 
+  getDustStyleDouble(String dustType) {
+    double airCondition = double.parse(widget.airConditionData['response']['body']['items'][0][dustType]);
+    if (dustType=='o3Value') {
+      if (airCondition <=0.03) {
+        return DustStyleBlue();
+      }
+      else {
+        return DustStyleGreen();
+      }
+    }
+    else if (dustType=='no2Value') {
+      if (airCondition <=0.03) {
+        return DustStyleBlue();
+      }
+      else {
+        return DustStyleGreen();
+      }
+    }
+    else if (dustType=='coValue') {
+      if (airCondition <=2) {
+        return DustStyleBlue();
+      }
+      else {
+        return DustStyleGreen();
+      }
+    }
+    else if (dustType=='so2Value') {
+      if (airCondition <=0.02) {
+        return DustStyleBlue();
+      }
+      else {
+        return DustStyleGreen();
+      }
+    }
   }
 }
