@@ -80,7 +80,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                         double.parse(widget
                             .airConditionData['response']
                         ['body']['items'][0]['pm25Value']) <=
-                            35.0) ? const Icon(Icons.mood_outlined, size: 50)
+                            35.0) ? const Icon(Icons.mood_outlined, size: 50, color: Colors.white,)
                         : (double.parse(widget.airConditionData['response']
                     ['body']['items'][0]['pm25Value']) >=
                         36.0 &&
@@ -105,7 +105,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                         double.parse(widget
                             .airConditionData['response']
                         ['body']['items'][0]['pm25Value']) <=
-                            35.0) ? const Text('보통', style: TextStyle(fontSize: 30))
+                            35.0) ? Text('보통', style: TitleStyle())
                         : (double.parse(widget.airConditionData['response']
                     ['body']['items'][0]['pm25Value']) >=
                         36.0 &&
@@ -113,8 +113,8 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                             .airConditionData['response']
                         ['body']['items'][0]['pm25Value']) <=
                             75.0)
-                        ? const Text('나쁨', style: TextStyle(fontSize: 30))
-                        : const Text('매우 나쁨', style: TextStyle(fontSize: 30))
+                        ? Text('나쁨', style: TitleStyle())
+                        : Text('매우 나쁨', style: TitleStyle())
                   ],
                 ),
                 Column(
@@ -205,7 +205,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                     value: double.parse(widget
                                         .airConditionData['response']
                                     ['body']['items'][0]['pm10Value'])/151.0,
-                                    backgroundColor: Colors.grey,
+                                    backgroundColor: Colors.white70,
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                         Colors.green),
                                   ),
@@ -222,7 +222,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                     value: double.parse(widget
                                         .airConditionData['response']
                                     ['body']['items'][0]['pm10Value'])/151.0,
-                                    backgroundColor: Colors.grey,
+                                    backgroundColor: Colors.white70,
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                         Colors.orange),
                                   ),
@@ -232,7 +232,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                     value: double.parse(widget
                                         .airConditionData['response']
                                     ['body']['items'][0]['pm10Value'])/151.0,
-                                    backgroundColor: Colors.grey,
+                                    backgroundColor: Colors.white70,
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                         Colors.red),
                                   ),
@@ -436,7 +436,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                     value:  double.parse(widget
                                         .airConditionData['response']
                                     ['body']['items'][0]['o3Value'])/0.151,
-                                    backgroundColor: Colors.grey,
+                                    backgroundColor: Colors.white70,
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                         Colors.orange),
                                   ),
@@ -446,7 +446,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                     value: double.parse(widget
                                         .airConditionData['response']
                                     ['body']['items'][0]['o3Value'])/0.151,
-                                    backgroundColor: Colors.grey,
+                                    backgroundColor: Colors.white70,
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                         Colors.red),
                                   ),
@@ -638,7 +638,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                         value:  double.parse(widget
                                             .airConditionData['response']
                                         ['body']['items'][0]['coValue'])/15.01,
-                                        backgroundColor: Colors.grey,
+                                        backgroundColor: Colors.white,
                                         valueColor: AlwaysStoppedAnimation<Color>(
                                             Colors.green),
                                       ),
@@ -655,7 +655,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                         value: double.parse(widget
                                             .airConditionData['response']
                                         ['body']['items'][0]['coValue'])/15.01,
-                                        backgroundColor: Colors.grey,
+                                        backgroundColor: Colors.white70,
                                         valueColor: AlwaysStoppedAnimation<Color>(
                                             Colors.orange),
                                       ),
@@ -665,7 +665,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                         value: double.parse(widget
                                             .airConditionData['response']
                                         ['body']['items'][0]['coValue'])/15.01,
-                                        backgroundColor: Colors.grey,
+                                        backgroundColor: Colors.white70,
                                         valueColor: AlwaysStoppedAnimation<Color>(
                                             Colors.red),
                                       ),
