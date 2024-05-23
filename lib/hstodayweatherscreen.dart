@@ -214,7 +214,7 @@ class HSTodayWeatherState extends State<HSTodayWeatherScreen> with SingleTickerP
                           ),
                           // 현재 기온
                           Text(
-                            "${widget.currentWeatherData['response']['body']['items']['item'][3]['obsrValue']}°C",
+                            "${widget.currentWeatherData['response']['body']['items']['item'][3]['obsrValue']}°",
                             textAlign: TextAlign.start,
                             overflow: TextOverflow.clip,
                             style: TempStyle(),
@@ -226,7 +226,7 @@ class HSTodayWeatherState extends State<HSTodayWeatherScreen> with SingleTickerP
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "${widget.todayTMN2}°C",
+                                "${widget.todayTMN2}°",
                                 textAlign: TextAlign.start,
                                 overflow: TextOverflow.clip,
                                 style: MinTempStyle(),
@@ -236,7 +236,7 @@ class HSTodayWeatherState extends State<HSTodayWeatherScreen> with SingleTickerP
                               ),
                               Text(" / ", style: TextStyle(fontSize: 26, color: Colors.white54),),
                               Text(
-                                "${widget.todayTMX2}°C",
+                                "${widget.todayTMX2}°",
                                 textAlign: TextAlign.start,
                                 overflow: TextOverflow.clip,
                                 style:MaxTempStyle(),

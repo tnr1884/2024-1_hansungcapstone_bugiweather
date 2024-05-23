@@ -110,3 +110,13 @@ class Title54Style extends TitleStyle {
   // TODO: implement fontSize
   double? get fontSize => 26;
 }
+class TitleStyleBlue extends TitleStyle {
+  @override
+  // TODO: implement color
+  Color? get color => Colors.blue.shade600;
+}
+class TitleStyleGreen extends TitleStyle {
+  @override
+  // TODO: implement color
+  Color? get color => Colors.green.shade600;
+}

@@ -170,6 +170,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                               const Icon(
                                 Icons.masks_outlined,
                                 size: 50,
+                                color: Colors.white,
                               ),
                               const SizedBox(
                                 width: 10,
@@ -246,7 +247,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                 alignment: Alignment.center,
                                 child: Text(widget.airConditionData['response']
                                 ['body']['items'][0]['pm10Value'],
-                                  style: TitleStyle(),
+                                  style: SubStyle(),
                                 ),
                               ),
                               const SizedBox(
@@ -258,11 +259,13 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                             height: 10,
                           ),
                           Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               const SizedBox(
                                 width: 70,
                               ),
-                              Text('초미세먼지 (PM 2.5)', style: DateStyle(),),
+                              Text('초미세먼지 ', style: SubStyle(),),
+                              Text('(PM 2.5)', style: DateStyle(),),
                               const SizedBox(width: 10),
                             ],
                           ),
@@ -274,6 +277,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                               const Icon(
                                 Icons.masks_rounded,
                                 size: 50,
+                                color: Colors.white,
                               ),
                               const SizedBox(
                                 width: 10,
@@ -351,7 +355,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                 alignment: Alignment.center,
                                 child: Text(widget.airConditionData['response']
                                 ['body']['items'][0]['pm25Value'],
-                                  style: TitleStyle(),
+                                  style: SubStyle(),
                                 ),
                               ),
                               const SizedBox(
@@ -382,6 +386,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                 image : AssetImage("assets/O3_3d.png"),
                                 width: 50.0,
                                 height: 50.0,
+                                color: Colors.white,
                               ),
                               const SizedBox(
                                 width: 10,
@@ -491,6 +496,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                 image : AssetImage("assets/NO2_3d.png"),
                                 width: 50.0,
                                 height: 50.0,
+                                color: Colors.white,
                               ),
                               const SizedBox(
                                 width: 10,
@@ -566,6 +572,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                               ),
                               Container(
                                 width: 75,
+                                alignment: Alignment.center,
                                 child: Text(widget.airConditionData['response']
                                 ['body']['items'][0]['no2Value'],
                                   style: SubStyle(),
@@ -599,6 +606,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                 image : AssetImage("assets/CO_3d.png"),
                                 width: 50.0,
                                 height: 50.0,
+                                color: Colors.white,
                               ),
                               const SizedBox(
                                 width: 10,
@@ -712,6 +720,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                 image : AssetImage("assets/SO2_3d.png"),
                                 width: 50.0,
                                 height: 50.0,
+                                color: Colors.white,
                               ),
                               const SizedBox(
                                 width: 10,
@@ -790,6 +799,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                               ),
                               Container(
                                 width: 75,
+                                alignment: Alignment.center,
                                 child: Text(widget.airConditionData['response']
                                 ['body']['items'][0]['so2Value'],
                                   style: SubStyle(),
@@ -821,7 +831,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                 "좋음", // 텍스트 내용
                                 style: TextStyle(
                                   fontSize: 16, // 텍스트 크기
-                                  color: Colors.black, // 텍스트 색상
+                                  color: Colors.white, // 텍스트 색상
                                 ),
                               ),
                               const SizedBox(
@@ -840,7 +850,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                 "보통", // 텍스트 내용
                                 style: TextStyle(
                                   fontSize: 16, // 텍스트 크기
-                                  color: Colors.black, // 텍스트 색상
+                                  color: Colors.white, // 텍스트 색상
                                 ),
                               ),
                               const SizedBox(
@@ -859,7 +869,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                 "나쁨", // 텍스트 내용
                                 style: TextStyle(
                                   fontSize: 16, // 텍스트 크기
-                                  color: Colors.black, // 텍스트 색상
+                                  color: Colors.white, // 텍스트 색상
                                 ),
                               ),
                               const SizedBox(
@@ -878,7 +888,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                 "매우나쁨", // 텍스트 내용
                                 style: TextStyle(
                                   fontSize: 16, // 텍스트 크기
-                                  color: Colors.black, // 텍스트 색상
+                                  color: Colors.white, // 텍스트 색상
                                 ),
                               ),
                             ],
@@ -894,5 +904,34 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
         ),
       ),
     );
+  }
+
+  getDustStyleInt(String dustType) {
+    int airCondition = int.parse(widget.airConditionData['response']['body']['items'][0][dustType]);
+    if (dustType=='pm10Value') {
+      if (airCondition <= 30) {
+        return TitleStyleBlue();
+      }
+      else {
+        return TitleStyleGreen();
+      }
+    }
+    else if (dustType=='pm25Value') {
+      if(airCondition <=15) {
+        return TitleStyleBlue();
+      }
+      else {
+        return TitleStyleGreen();
+      }
+    }
+    getDustStyleDouble(String dustType) {
+      double airCondition = double.parse(widget.airConditionData['response']['body']['items'][0][dustType]);
+      if (dustType=='o3Value') {
+        if (airCondition <=0.03) {
+          return TitleStyleBlue();
+        }
+      }
+    }
+
   }
 }

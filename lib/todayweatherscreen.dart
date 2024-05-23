@@ -393,7 +393,7 @@ List<Widget> getListViewItem(dynamic currenttodayData) {
                 ),
                 // 시간별 기온
                 Text(
-                  "$tmp°C",
+                  "$tmp°",
                   textAlign: TextAlign.start,
                   overflow: TextOverflow.clip,
                   style: TextStyle(
