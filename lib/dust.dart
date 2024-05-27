@@ -13,23 +13,26 @@ class DustScreen extends StatefulWidget {
   final dynamic airConditionData;
   final String skyStateCode;
 
-  const DustScreen({super.key, this.airConditionData, required this.skyStateCode });
+  const DustScreen(
+      {super.key, this.airConditionData, required this.skyStateCode });
 
   @override
   State<DustScreen> createState() => _DustScreenState();
 }
 
-class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateMixin{
+class _DustScreenState extends State<DustScreen>
+    with SingleTickerProviderStateMixin {
   late DateFormat daysFormat;
   String skyState = "";
   late AnimationController _animationController;
   late Animation<double> _animation;
+
   @override
   void initState() {
     super.initState();
     initializeDateFormatting();
     daysFormat = DateFormat('E', 'ko_KR'); //요일 한글 표현
-    skyState=getSkyState(widget.skyStateCode);
+    skyState = getSkyState(widget.skyStateCode);
     _animationController = AnimationController(
       vsync: this,
       duration: Duration(seconds: 1),
@@ -47,8 +50,14 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
       body: Container(
         margin: EdgeInsets.zero,
         padding: EdgeInsets.zero,
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
+        width: MediaQuery
+            .of(context)
+            .size
+            .width,
+        height: MediaQuery
+            .of(context)
+            .size
+            .height,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(skyState),
@@ -72,7 +81,8 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                             .airConditionData['response']
                         ['body']['items'][0]['pm25Value']) <=
                             15.0)
-                        ? const Icon(Icons.mood_outlined, size: 50, color: Colors.white,)
+                        ? const Icon(
+                      Icons.mood_outlined, size: 50, color: Colors.blue,)
                         : (double.parse(widget
                         .airConditionData['response']
                     ['body']['items'][0]['pm25Value']) >=
@@ -80,15 +90,19 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                         double.parse(widget
                             .airConditionData['response']
                         ['body']['items'][0]['pm25Value']) <=
-                            35.0) ? const Icon(Icons.mood_outlined, size: 50, color: Colors.white,)
+                            35.0) ? const Icon(
+                      Icons.mood_outlined, size: 50, color: Colors.green,)
                         : (double.parse(widget.airConditionData['response']
                     ['body']['items'][0]['pm25Value']) >=
                         36.0 &&
                         double.parse(widget
                             .airConditionData['response']
                         ['body']['items'][0]['pm25Value']) <=
-                            75.0) ? const Icon(Icons.mood_bad, size: 50) : const Icon(
-                        Icons.mood_bad, size: 50),
+                            75.0)
+                        ? const Icon(
+                      Icons.mood_bad, size: 50, color: Colors.orange,)
+                        : const Icon(
+                      Icons.mood_bad, size: 50, color: Colors.red,),
                     (double.parse(widget
                         .airConditionData['response']
                     ['body']['items'][0]['pm25Value']) >=
@@ -97,7 +111,12 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                             .airConditionData['response']
                         ['body']['items'][0]['pm25Value']) <=
                             15.0)
-                        ? Text('좋음', style: TitleStyle())
+                        ? Text('좋음',
+                      style: TextStyle(color: Colors.blue,
+                        fontSize: 32,
+                        fontFamily: 'NanumSquareRoundB',
+                      ),
+                    )
                         : (double.parse(widget
                         .airConditionData['response']
                     ['body']['items'][0]['pm25Value']) >=
@@ -105,7 +124,12 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                         double.parse(widget
                             .airConditionData['response']
                         ['body']['items'][0]['pm25Value']) <=
-                            35.0) ? Text('보통', style: TitleStyle())
+                            35.0) ? Text(
+                      '보통', style: TextStyle(color: Colors.green,
+                      fontSize: 32,
+                      fontFamily: 'NanumSquareRoundB',
+                    ),
+                    )
                         : (double.parse(widget.airConditionData['response']
                     ['body']['items'][0]['pm25Value']) >=
                         36.0 &&
@@ -113,8 +137,18 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                             .airConditionData['response']
                         ['body']['items'][0]['pm25Value']) <=
                             75.0)
-                        ? Text('나쁨', style: TitleStyle())
-                        : Text('매우 나쁨', style: TitleStyle())
+                        ? Text('나쁨',
+                      style: TextStyle(color: Colors.orange,
+                        fontSize: 32,
+                        fontFamily: 'NanumSquareRoundB',
+                      ),
+                    )
+                        : Text('매우 나쁨',
+                      style: TextStyle(color: Colors.red,
+                        fontSize: 32,
+                        fontFamily: 'NanumSquareRoundB',
+                      ),
+                    )
                   ],
                 ),
                 Column(
@@ -137,7 +171,8 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                     ),
                     Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20), // Rounded corners
+                        borderRadius: BorderRadius.circular(20),
+                        // Rounded corners
                         color: Colors.black.withOpacity(0.2),
                       ),
                       padding: EdgeInsets.all(10),
@@ -176,7 +211,8 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                 width: 10,
                               ),
                               Expanded(
-                                child: (double.parse(widget.airConditionData['response']['body']['items'][0]['pm10Value']) >=
+                                child: (double.parse(widget
+                                    .airConditionData['response']['body']['items'][0]['pm10Value']) >=
                                     0.0 &&
                                     double.parse(widget
                                         .airConditionData['response']
@@ -187,7 +223,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                   child: LinearProgressIndicator(
                                     value: double.parse(widget
                                         .airConditionData['response']
-                                    ['body']['items'][0]['pm10Value'])/151.0,
+                                    ['body']['items'][0]['pm10Value']) / 151.0,
                                     backgroundColor: Colors.white70,
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                         Colors.blue),
@@ -205,7 +241,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                   child: LinearProgressIndicator(
                                     value: double.parse(widget
                                         .airConditionData['response']
-                                    ['body']['items'][0]['pm10Value'])/151.0,
+                                    ['body']['items'][0]['pm10Value']) / 151.0,
                                     backgroundColor: Colors.white70,
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                         Colors.green),
@@ -222,7 +258,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                   child: LinearProgressIndicator(
                                     value: double.parse(widget
                                         .airConditionData['response']
-                                    ['body']['items'][0]['pm10Value'])/151.0,
+                                    ['body']['items'][0]['pm10Value']) / 151.0,
                                     backgroundColor: Colors.white70,
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                         Colors.orange),
@@ -232,7 +268,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                   child: LinearProgressIndicator(
                                     value: double.parse(widget
                                         .airConditionData['response']
-                                    ['body']['items'][0]['pm10Value'])/151.0,
+                                    ['body']['items'][0]['pm10Value']) / 151.0,
                                     backgroundColor: Colors.white70,
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                         Colors.red),
@@ -296,7 +332,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                   child: LinearProgressIndicator(
                                     value: double.parse(widget
                                         .airConditionData['response']
-                                    ['body']['items'][0]['pm25Value'])/76.0,
+                                    ['body']['items'][0]['pm25Value']) / 76.0,
                                     backgroundColor: Colors.white70,
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                         Colors.blue),
@@ -309,12 +345,12 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                     double.parse(widget
                                         .airConditionData['response']
                                     ['body']['items'][0]['pm25Value']) <=
-                                        35.0) ?  SizedBox(
+                                        35.0) ? SizedBox(
                                   height: 10,
                                   child: LinearProgressIndicator(
                                     value: double.parse(widget
                                         .airConditionData['response']
-                                    ['body']['items'][0]['pm25Value'])/76.0,
+                                    ['body']['items'][0]['pm25Value']) / 76.0,
                                     backgroundColor: Colors.white70,
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                         Colors.green),
@@ -331,7 +367,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                   child: LinearProgressIndicator(
                                     value: double.parse(widget
                                         .airConditionData['response']
-                                    ['body']['items'][0]['pm25Value'])/76.0,
+                                    ['body']['items'][0]['pm25Value']) / 76.0,
                                     backgroundColor: Colors.white70,
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                         Colors.orange),
@@ -341,7 +377,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                   child: LinearProgressIndicator(
                                     value: double.parse(widget
                                         .airConditionData['response']
-                                    ['body']['items'][0]['pm25Value'])/76.0,
+                                    ['body']['items'][0]['pm25Value']) / 76.0,
                                     backgroundColor: Colors.white70,
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                         Colors.red),
@@ -383,7 +419,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                               ),
                               const Image(
                                 // image: AssetImage("assets/o3.png"),
-                                image : AssetImage("assets/O3_3d.png"),
+                                image: AssetImage("assets/O3_3d.png"),
                                 width: 50.0,
                                 height: 50.0,
                                 color: Colors.white,
@@ -405,7 +441,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                   child: LinearProgressIndicator(
                                     value: double.parse(widget
                                         .airConditionData['response']
-                                    ['body']['items'][0]['o3Value'])/0.151,
+                                    ['body']['items'][0]['o3Value']) / 0.151,
                                     backgroundColor: Colors.white70,
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                         Colors.blue),
@@ -423,7 +459,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                   child: LinearProgressIndicator(
                                     value: double.parse(widget
                                         .airConditionData['response']
-                                    ['body']['items'][0]['o3Value'])/0.151,
+                                    ['body']['items'][0]['o3Value']) / 0.151,
                                     backgroundColor: Colors.white70,
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                         Colors.green),
@@ -438,9 +474,9 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                         0.15) ? SizedBox(
                                   height: 10,
                                   child: LinearProgressIndicator(
-                                    value:  double.parse(widget
+                                    value: double.parse(widget
                                         .airConditionData['response']
-                                    ['body']['items'][0]['o3Value'])/0.151,
+                                    ['body']['items'][0]['o3Value']) / 0.151,
                                     backgroundColor: Colors.white70,
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                         Colors.orange),
@@ -450,7 +486,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                   child: LinearProgressIndicator(
                                     value: double.parse(widget
                                         .airConditionData['response']
-                                    ['body']['items'][0]['o3Value'])/0.151,
+                                    ['body']['items'][0]['o3Value']) / 0.151,
                                     backgroundColor: Colors.white70,
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                         Colors.red),
@@ -493,7 +529,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                               ),
                               const Image(
                                 // image: AssetImage("assets/no2.png"),
-                                image : AssetImage("assets/NO2_3d.png"),
+                                image: AssetImage("assets/NO2_3d.png"),
                                 width: 50.0,
                                 height: 50.0,
                                 color: Colors.white,
@@ -515,7 +551,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                   child: LinearProgressIndicator(
                                     value: double.parse(widget
                                         .airConditionData['response']
-                                    ['body']['items'][0]['no2Value'])/0.201,
+                                    ['body']['items'][0]['no2Value']) / 0.201,
                                     backgroundColor: Colors.white70,
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                         Colors.blue),
@@ -533,7 +569,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                   child: LinearProgressIndicator(
                                     value: double.parse(widget
                                         .airConditionData['response']
-                                    ['body']['items'][0]['no2Value'])/0.201,
+                                    ['body']['items'][0]['no2Value']) / 0.201,
                                     backgroundColor: Colors.grey,
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                         Colors.green),
@@ -550,17 +586,17 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                   child: LinearProgressIndicator(
                                     value: double.parse(widget
                                         .airConditionData['response']
-                                    ['body']['items'][0]['no2Value'])/0.201,
+                                    ['body']['items'][0]['no2Value']) / 0.201,
                                     backgroundColor: Colors.grey,
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                         Colors.orange),
                                   ),
-                                ) :  SizedBox(
+                                ) : SizedBox(
                                   height: 10,
                                   child: LinearProgressIndicator(
                                     value: double.parse(widget
                                         .airConditionData['response']
-                                    ['body']['items'][0]['no2Value'])/0.201,
+                                    ['body']['items'][0]['no2Value']) / 0.201,
                                     backgroundColor: Colors.grey,
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                         Colors.red),
@@ -603,7 +639,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                               ),
                               const Image(
                                 // image: AssetImage("assets/co.png"),
-                                image : AssetImage("assets/CO_3d.png"),
+                                image: AssetImage("assets/CO_3d.png"),
                                 width: 50.0,
                                 height: 50.0,
                                 color: Colors.white,
@@ -627,9 +663,11 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                       child: LinearProgressIndicator(
                                         value: double.parse(widget
                                             .airConditionData['response']
-                                        ['body']['items'][0]['coValue'])/15.01,
+                                        ['body']['items'][0]['coValue']) /
+                                            15.01,
                                         backgroundColor: Colors.white70,
-                                        valueColor: AlwaysStoppedAnimation<Color>(
+                                        valueColor: AlwaysStoppedAnimation<
+                                            Color>(
                                             Colors.blue),
                                       ),
                                     )
@@ -643,11 +681,13 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                             9.0) ? SizedBox(
                                       height: 10,
                                       child: LinearProgressIndicator(
-                                        value:  double.parse(widget
+                                        value: double.parse(widget
                                             .airConditionData['response']
-                                        ['body']['items'][0]['coValue'])/15.01,
+                                        ['body']['items'][0]['coValue']) /
+                                            15.01,
                                         backgroundColor: Colors.white,
-                                        valueColor: AlwaysStoppedAnimation<Color>(
+                                        valueColor: AlwaysStoppedAnimation<
+                                            Color>(
                                             Colors.green),
                                       ),
                                     ) : (double.parse(widget
@@ -662,9 +702,11 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                       child: LinearProgressIndicator(
                                         value: double.parse(widget
                                             .airConditionData['response']
-                                        ['body']['items'][0]['coValue'])/15.01,
+                                        ['body']['items'][0]['coValue']) /
+                                            15.01,
                                         backgroundColor: Colors.white70,
-                                        valueColor: AlwaysStoppedAnimation<Color>(
+                                        valueColor: AlwaysStoppedAnimation<
+                                            Color>(
                                             Colors.orange),
                                       ),
                                     ) : SizedBox(
@@ -672,9 +714,11 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                       child: LinearProgressIndicator(
                                         value: double.parse(widget
                                             .airConditionData['response']
-                                        ['body']['items'][0]['coValue'])/15.01,
+                                        ['body']['items'][0]['coValue']) /
+                                            15.01,
                                         backgroundColor: Colors.white70,
-                                        valueColor: AlwaysStoppedAnimation<Color>(
+                                        valueColor: AlwaysStoppedAnimation<
+                                            Color>(
                                             Colors.red),
                                       ),
                                     ),
@@ -689,7 +733,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                 alignment: Alignment.center,
                                 child: Text(widget.airConditionData['response']
                                 ['body']['items'][0]['coValue'],
-                                  style:getDustStyleDouble('coValue'),
+                                  style: getDustStyleDouble('coValue'),
                                 ),
                               ),
                               const SizedBox(
@@ -717,7 +761,7 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                               ),
                               const Image(
                                 // image: AssetImage("assets/so2.png"),
-                                image : AssetImage("assets/SO2_3d.png"),
+                                image: AssetImage("assets/SO2_3d.png"),
                                 width: 50.0,
                                 height: 50.0,
                                 color: Colors.white,
@@ -741,9 +785,11 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                       child: LinearProgressIndicator(
                                         value: double.parse(widget
                                             .airConditionData['response']
-                                        ['body']['items'][0]['so2Value'])/0.151,
+                                        ['body']['items'][0]['so2Value']) /
+                                            0.151,
                                         backgroundColor: Colors.white70,
-                                        valueColor: AlwaysStoppedAnimation<Color>(
+                                        valueColor: AlwaysStoppedAnimation<
+                                            Color>(
                                             Colors.blue),
                                       ),
                                     )
@@ -754,14 +800,16 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                         double.parse(widget
                                             .airConditionData['response']
                                         ['body']['items'][0]['so2Value']) <=
-                                            0.05) ?  SizedBox(
+                                            0.05) ? SizedBox(
                                       height: 10,
                                       child: LinearProgressIndicator(
                                         value: double.parse(widget
                                             .airConditionData['response']
-                                        ['body']['items'][0]['so2Value'])/0.151,
+                                        ['body']['items'][0]['so2Value']) /
+                                            0.151,
                                         backgroundColor: Colors.grey,
-                                        valueColor: AlwaysStoppedAnimation<Color>(
+                                        valueColor: AlwaysStoppedAnimation<
+                                            Color>(
                                             Colors.green),
                                       ),
                                     ) : (double.parse(widget
@@ -776,9 +824,11 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                       child: LinearProgressIndicator(
                                         value: double.parse(widget
                                             .airConditionData['response']
-                                        ['body']['items'][0]['so2Value'])/0.151,
+                                        ['body']['items'][0]['so2Value']) /
+                                            0.151,
                                         backgroundColor: Colors.grey,
-                                        valueColor: AlwaysStoppedAnimation<Color>(
+                                        valueColor: AlwaysStoppedAnimation<
+                                            Color>(
                                             Colors.orange),
                                       ),
                                     ) : SizedBox(
@@ -786,9 +836,11 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                                       child: LinearProgressIndicator(
                                         value: double.parse(widget
                                             .airConditionData['response']
-                                        ['body']['items'][0]['so2Value'])/0.151,
+                                        ['body']['items'][0]['so2Value']) /
+                                            0.151,
                                         backgroundColor: Colors.grey,
-                                        valueColor: AlwaysStoppedAnimation<Color>(
+                                        valueColor: AlwaysStoppedAnimation<
+                                            Color>(
                                             Colors.red),
                                       ),
                                     ),
@@ -814,10 +866,8 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
                             height: 30,
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const SizedBox(
-                                width: 30,
-                              ),
                               Container(
                                 width: 20, // 원의 너비
                                 height: 20, // 원의 높이
@@ -907,8 +957,9 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
   }
 
   getDustStyleInt(String dustType) {
-    int airCondition = int.parse(widget.airConditionData['response']['body']['items'][0][dustType]);
-    if (dustType=='pm10Value') {
+    int airCondition = int.parse(
+        widget.airConditionData['response']['body']['items'][0][dustType]);
+    if (dustType == 'pm10Value') {
       if (airCondition <= 30) {
         return DustStyleBlue();
       }
@@ -916,8 +967,8 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
         return DustStyleGreen();
       }
     }
-    else if (dustType=='pm25Value') {
-      if(airCondition <=15) {
+    else if (dustType == 'pm25Value') {
+      if (airCondition <= 15) {
         return DustStyleBlue();
       }
       else {
@@ -927,33 +978,34 @@ class _DustScreenState extends State<DustScreen> with SingleTickerProviderStateM
   }
 
   getDustStyleDouble(String dustType) {
-    double airCondition = double.parse(widget.airConditionData['response']['body']['items'][0][dustType]);
-    if (dustType=='o3Value') {
-      if (airCondition <=0.03) {
+    double airCondition = double.parse(
+        widget.airConditionData['response']['body']['items'][0][dustType]);
+    if (dustType == 'o3Value') {
+      if (airCondition <= 0.03) {
         return DustStyleBlue();
       }
       else {
         return DustStyleGreen();
       }
     }
-    else if (dustType=='no2Value') {
-      if (airCondition <=0.03) {
+    else if (dustType == 'no2Value') {
+      if (airCondition <= 0.03) {
         return DustStyleBlue();
       }
       else {
         return DustStyleGreen();
       }
     }
-    else if (dustType=='coValue') {
-      if (airCondition <=2) {
+    else if (dustType == 'coValue') {
+      if (airCondition <= 2) {
         return DustStyleBlue();
       }
       else {
         return DustStyleGreen();
       }
     }
-    else if (dustType=='so2Value') {
-      if (airCondition <=0.02) {
+    else if (dustType == 'so2Value') {
+      if (airCondition <= 0.02) {
         return DustStyleBlue();
       }
       else {

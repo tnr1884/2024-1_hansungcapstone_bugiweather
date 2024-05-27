@@ -56,6 +56,7 @@ Future<dynamic> fetchWeatherForecast3() async {
   if (response.statusCode == 200) {
     String xmlData = response.body;
     var document = jsonDecode(xmlData);
+    print("${year} ${month} ${day} ${hour} ${minute}");
     return document;
   } else {
     throw Exception('Failed to load weather forecast text');
