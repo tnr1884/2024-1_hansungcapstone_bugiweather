@@ -305,8 +305,10 @@ class HomeScreenState extends State<HomeScreen> {
       //print(obsJson);
     }
     obs = obsJson['response']['body']['items'][0]['stationName'];
-    //print('측정소: $obs');
+    print('측정소: $obs');
     // 측정소별 실시간 측정정보 조회
+    if (obs=="종로구")
+      obs="종로";
     String airConditon =
         'https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?stationName=$obs&dataTerm=DAILY&pageNo=1&ver=1.0&numOfRows=1&returnType=json&serviceKey=$apiKey';
 

@@ -570,7 +570,7 @@ class _DustScreenState extends State<DustScreen>
                                     value: double.parse(widget
                                         .airConditionData['response']
                                     ['body']['items'][0]['no2Value']) / 0.201,
-                                    backgroundColor: Colors.grey,
+                                    backgroundColor: Colors.white70,
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                         Colors.green),
                                   ),
@@ -587,7 +587,7 @@ class _DustScreenState extends State<DustScreen>
                                     value: double.parse(widget
                                         .airConditionData['response']
                                     ['body']['items'][0]['no2Value']) / 0.201,
-                                    backgroundColor: Colors.grey,
+                                    backgroundColor: Colors.white70,
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                         Colors.orange),
                                   ),
